@@ -1,0 +1,6 @@
+Confidential/
+__pycache__/
+
+# My virtual environment
+myenv
+/myenv
