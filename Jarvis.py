@@ -7,6 +7,7 @@ from page.dashboard import dashboard
 
 st.set_option("client.showSidebarNavigation", True)
 
+
 if __name__ == '__main__':
     data = []
     menu = ["Dashboard", "Login", "SignUp"]
@@ -17,6 +18,11 @@ if __name__ == '__main__':
         data = login()
     elif choice == 'SignUp':
         signup()
-        
-    if data != []:
+
+    # Simplified Conditional Check: Used if data: instead of if data != []: for checking if data is not empty.
+    if data:
         main(data)
+
+
+if __name__ == '__main__':
+    main_app()

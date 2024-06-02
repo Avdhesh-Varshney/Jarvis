@@ -4,6 +4,7 @@ import sys
 # core files
 from page.functions import load_functions
 
+
 # code files
 sys.path.insert(1, './source/')
 from source.Basic_Functions.English import Speak
@@ -35,3 +36,8 @@ def main(data):
             Speak("Login Successfully!")
     else:
         st.info(f"Hello {data[0]}, Start your work!", icon="ℹ️")
+    
+if __name__ == '__main__':
+    # Sample user data for testing
+    sample_data = ("User", "Admin")  # replace this with actual data fetching logic
+    main(sample_data)
