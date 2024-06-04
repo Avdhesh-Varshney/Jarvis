@@ -31,7 +31,7 @@ def main(data):
         
         if choice2 != None:
             from source.Basic_Functions.Greeting import GreetUser
-            Speak(f"{GreetUser()}, It's Jarvis...")
+            Speak(f"{GreetUser(data[0])}, It's Jarvis...")
             Speak("Login Successfully!")
     else:
         st.info(f"Hello {data[0]}, Start your work!", icon="ℹ️")
