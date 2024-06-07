@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions
+    url: https://discord.gg/tSqtvHUJzE
+    about: You can join the discussions on Discord.
+  - name: Login does not work
+    url: https://github.com/Avdhesh-Varshney/Jarvis/blob/main/Contributing.md
+    about: Before opening a new issue, please make sure to read Contributing.md
