@@ -6,7 +6,7 @@ from page.functions import load_functions
 
 # code files
 sys.path.insert(1, './source/')
-from source.Basic_Functions.English import Speak
+from source.basicFunctions.English import Speak
 
 st.set_option("client.showSidebarNavigation", True)
 
@@ -30,7 +30,7 @@ def main(data):
         choice2 = st.selectbox('Programs:', main_list)
         
         if choice2 != None:
-            from source.Basic_Functions.Greeting import GreetUser
+            from source.basicFunctions.Greeting import GreetUser
             Speak(f"{GreetUser(data[0])}, It's Jarvis...")
             Speak("Login Successfully!")
     else:
