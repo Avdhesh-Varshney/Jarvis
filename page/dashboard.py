@@ -20,6 +20,7 @@ def dashboard():
 		### Required Libraries
 	''')
     st.code('''
+        Argon2
 		Pyttsx3
 		Speech Recognition
 		Datetime

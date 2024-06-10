@@ -6,7 +6,7 @@ st.set_option("client.showSidebarNavigation", True)
 def login():
     st.sidebar.subheader("Login")
     text = st.sidebar.text_input("Username/Email:")
-    password = st.sidebar.text_input("Password:", type="password")
+    password = str(st.sidebar.text_input("Password:", type="password"))
     if st.sidebar.checkbox("Login"):
         conn = create_connection()
         create_usertable(conn)
