@@ -30,6 +30,7 @@ def signup():
     with col3:
         new_password = str(st.text_input("🔑 Enter password:", type='password'))
         new_password_hashed = secure_password(new_password)
+        del new_password # The plaintext password is deleted.
     with col4:
         new_repeat_password = str(st.text_input('🔑 Re-type your password:', type='password'))
 
@@ -51,13 +52,14 @@ def signup():
     st.markdown("---")
     if st.button("Signup"):
         if check_password(new_repeat_password, new_password_hashed):
+            del new_repeat_password # The plaintext password is deleted.
             if valid_email(new_email):
                 if valid_username(new_user):
                     conn = create_connection()
                     create_usertable(conn)
                     if check_user(conn, new_email) != None:
                         if check_user(conn, new_user) != None:
-                            add_userdata(conn, new_user, new_name, new_roles, new_gender, new_age, new_email, new_password)
+                            add_userdata(conn, new_user, new_name, new_roles, new_gender, new_age, new_email, new_password_hashed)
                             st.success("You have successfully created a valid account!", icon="✅")
                             st.info("Go to Login Menu to login!", icon="ℹ️")
                         else:

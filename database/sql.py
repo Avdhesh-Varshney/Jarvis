@@ -51,8 +51,7 @@ def login_user(conn, text, password):
         data = c.fetchall()
         return data
 
-def get_password(conn, text):
-    c = conn
+def get_password(c, text):
     if valid_email(text):
         res = c.execute('SELECT password FROM users_data WHERE email = ?', (text,))
     elif valid_username(text):
@@ -60,7 +59,7 @@ def get_password(conn, text):
     try:
         data = res.fetchone()[0]
     except:
-        data = b""
+        data = ""
     return data
 
 def check_user(conn, text):
