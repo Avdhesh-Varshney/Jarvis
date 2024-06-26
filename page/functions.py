@@ -3,10 +3,11 @@ def load_functions():
                  "Super Admin Programs": [],
                  "Basic Programs": [],
                  "API Programs": [],
+                 "Healthcare Programs": []
     }
 
     # Admin Functions
-    functions['Admin Programs'].append(['Code',
+    functions['Admin Programs'].append(['Code'
                                         ]
                                     )
 
@@ -37,6 +38,11 @@ def load_functions():
                                       'About Actors',
                                       ]
                                     )
+
+    #Healthcare Functions
+    functions['Healthcare Programs'].append(['Diabetes Test'
+                                              ]
+                                            )
 
     # Return all the functions
     return functions
