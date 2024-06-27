@@ -1,7 +1,7 @@
 import tensorflow as tf
 import streamlit as st
 import numpy as np
-from utils.english import Speak
+from src.utils.english import Speak
 
 @st.cache_resource
 def load_model():
@@ -31,17 +31,15 @@ def do_diabetes_test(input):
     return 0
 
 def diabetes_test():
-  st.write("Enter all details for better results")
+  st.markdown("#### Enter all details for better results")
   diabetes_testset,db_btn = diabetesTestForm()
   diabetes_testset = np.array(diabetes_testset)
   diabetes_testset = diabetes_testset.reshape(-1,7)
   diabetes_res = do_diabetes_test(diabetes_testset)
   if db_btn== True :
     if diabetes_res == 0:
-      Speak(f'Congrats {st.session_state.name}, You are not diagnosed with diabetes')
       st.success(f'Congrats {st.session_state.name},\n You are not diagnosed with diabetes')
+      Speak(f'Congrats {st.session_state.name}, You are not diagnosed with diabetes')
     if diabetes_res==1:
-      Speak(f'Hi {st.session_state.name}, You are diagnosed with diabetes. Please consult a doctor.')
       st.error(f'Hi {st.session_state.name},\nYou are diagnosed with diabetes.\nPlease consult a doctor.')
-
-diabetes_test()
+      Speak(f'Hi {st.session_state.name}, You are diagnosed with diabetes. Please consult a doctor.')
