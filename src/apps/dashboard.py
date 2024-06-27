@@ -23,19 +23,19 @@ def dashboard():
 	''')
 
 	st.code('''
-		argon2-cffi==23.1.0
-		jupyterlab==4.2.2
-		keras==3.4.0
-		notebook==7.2.1
-		numpy==1.26.4
-		pandas==2.2.2
-		pillow==10.3.0
-		pyttsx3==2.90
-		requests==2.31.0
-		setuptools==70.1.1
-		SpeechRecognition==3.10.3
-		streamlit==1.36.0
-		tensorflow==2.16.1
+		argon2-cffi
+		jupyterlab
+		keras
+		notebook
+		numpy
+		pandas
+		pillow
+		pyttsx3
+		requests
+		setuptools
+		SpeechRecognition
+		streamlit
+		tensorflow
 	''')
 
 dashboard()
