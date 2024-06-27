@@ -1,4 +1,0 @@
-def code():
-    pass
-
-# code()
