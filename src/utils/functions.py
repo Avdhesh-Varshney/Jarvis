@@ -14,12 +14,13 @@ sign_up_page = st.Page("src/auth/signup.py", title="Sign up", icon=":material/pe
 # /apps
 dashboard = st.Page("src/apps/dashboard.py", title="Dashboard", icon=":material/dashboard:")
 
-# /apps/pages/models/healthCareModels
+# /apps/pages/models
 healthCareModels = st.Page("src/apps/pages/models/healthCareModel.py", title="Health Care Models", icon=":material/health_and_safety:")
 chatBotModels = st.Page("src/apps/pages/models/chatBotModel.py", title="Chat Bot Models", icon=":material/smart_toy:")
 
-# /apps/pages/programs/casualPrograms
+# /apps/pages/programs
 casualPrograms = st.Page("src/apps/pages/programs/casualProgram.py", title="Casual Programs", icon=":material/emoji_objects:")
+apiPrograms = st.Page("src/apps/pages/programs/apiProgram.py", title="API Programs", icon=":material/api:")
 
 # /apps/pages/contributors
 contributors = st.Page("src/apps/pages/contributors.py", title="Contributors", icon=":material/people:")
@@ -29,7 +30,7 @@ def load_functions():
     "": [dashboard],
     "Account": [logout_page],
     "Models": [healthCareModels, chatBotModels],
-    "Programs": [casualPrograms],
+    "Programs": [casualPrograms, apiPrograms],
     "Contributors": [contributors],
   }
 
