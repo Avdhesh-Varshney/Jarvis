@@ -21,12 +21,16 @@ chatBotModels = st.Page("src/apps/pages/models/chatBotModel.py", title="Chat Bot
 # /apps/pages/programs/casualPrograms
 casualPrograms = st.Page("src/apps/pages/programs/casualProgram.py", title="Casual Programs", icon=":material/emoji_objects:")
 
+# /apps/pages/contributors
+contributors = st.Page("src/apps/pages/contributors.py", title="Contributors", icon=":material/people:")
+
 def load_functions():
   pages = {
     "": [dashboard],
     "Account": [logout_page],
     "Models": [healthCareModels, chatBotModels],
     "Programs": [casualPrograms],
+    "Contributors": [contributors],
   }
 
   return pages
