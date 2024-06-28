@@ -4,7 +4,7 @@ import string
 import pyperclip
 
 def password_generator_app():
-    def generate_password(length, use_upper, use_lower, use_digits, use_special):
+    def generate_password(length, use_upper, use_lower, use_digits, use_special):   
         characters = ''
         if use_upper:
             characters += string.ascii_uppercase
@@ -22,17 +22,18 @@ def password_generator_app():
         password = ''.join(random.choice(characters) for _ in range(length))
         return password
 
-    # Streamlit app
+    # app
     st.title("Password Generator")
 
-    st.sidebar.header("Settings")
-    length = st.sidebar.slider("Password length", min_value=6, max_value=24, value=12)
-    use_upper = st.sidebar.checkbox("Include A-Z", value=True)
-    use_lower = st.sidebar.checkbox("Include a-z", value=True)
-    use_digits = st.sidebar.checkbox("Include 0-9", value=True)
-    use_special = st.sidebar.checkbox("Include special characters", value=True)
 
-    if 'password' not in st.session_state:
+    length = st.slider("Password length", min_value=6, max_value=24, value=12)
+    use_upper = st.checkbox("Include A-Z", value=True)
+    use_lower = st.checkbox("Include a-z", value=True)
+    use_digits = st.checkbox("Include 0-9", value=True)
+    use_special = st.checkbox("Include special characters", value=True)
+
+    # store settings in session state
+    if 'password' not in st.session_state:  
         st.session_state.password = ""
         st.session_state.last_settings = {
             "length": length,
@@ -42,14 +43,14 @@ def password_generator_app():
             "use_special": use_special
         }
 
-    def settings_changed():
+    def settings_changed(): 
         return (length != st.session_state.last_settings["length"] or
                 use_upper != st.session_state.last_settings["use_upper"] or
                 use_lower != st.session_state.last_settings["use_lower"] or
                 use_digits != st.session_state.last_settings["use_digits"] or
                 use_special != st.session_state.last_settings["use_special"])
 
-    if st.sidebar.button("Generate Password"):
+    if st.button("Generate Password"):  
         st.session_state.password = generate_password(length, use_upper, use_lower, use_digits, use_special)
         st.session_state.last_settings = {
             "length": length,
@@ -67,3 +68,5 @@ def password_generator_app():
             st.success("Password copied to clipboard!")
     else:
         st.write("No password generated yet. Please adjust the settings and click 'Generate Password'.")
+
+password_generator_app()
