@@ -19,8 +19,9 @@ healthCareModels = st.Page("src/apps/pages/models/healthCareModel.py", title="He
 chatBotModels = st.Page("src/apps/pages/models/chatBotModel.py", title="Chat Bot Models", icon=":material/smart_toy:")
 
 # /apps/pages/programs
-casualPrograms = st.Page("src/apps/pages/programs/casualProgram.py", title="Casual Programs", icon=":material/emoji_objects:")
+simplePrograms = st.Page("src/apps/pages/programs/simpleProgram.py", title="Simple Programs", icon=":material/emoji_objects:")
 apiPrograms = st.Page("src/apps/pages/programs/apiProgram.py", title="API Programs", icon=":material/api:")
+imagePrograms = st.Page("src/apps/pages/programs/imageProgram.py", title="Image Programs", icon=":material/image:")
 
 # /apps/pages/contributors
 contributors = st.Page("src/apps/pages/contributors.py", title="Contributors", icon=":material/people:")
@@ -30,7 +31,7 @@ def load_functions():
     "": [dashboard],
     "Account": [logout_page],
     "Models": [healthCareModels, chatBotModels],
-    "Programs": [casualPrograms, apiPrograms],
+    "Programs": [simplePrograms, apiPrograms, imagePrograms],
     "Contributors": [contributors],
   }
 
