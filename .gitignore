@@ -4,3 +4,6 @@ __pycache__/
 # My virtual environment
 myenv
 /myenv
+
+# Gemini 1.5 Flash API Key file
+source/features/chatbots/secrets/.env
