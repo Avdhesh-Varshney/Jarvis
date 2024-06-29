@@ -3,7 +3,7 @@ import random
 import string
 import pyperclip
 
-def password_generator_app():
+def passwordGeneratorApp():
     def generate_password(length, use_upper, use_lower, use_digits, use_special):
         characters = ''
         if use_upper:
@@ -44,5 +44,3 @@ def password_generator_app():
         if st.button("Copy to Clipboard"):
             pyperclip.copy(st.session_state.generated_password)
             st.success("Password copied to clipboard!")
-
-password_generator_app()

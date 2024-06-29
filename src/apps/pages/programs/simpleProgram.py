@@ -1,18 +1,18 @@
 import streamlit as st
 
-def casualPrograms():
-  st.title('Casual Programs')
+def simplePrograms():
+  st.title('Simple Programs')
   choice = st.selectbox('Select a program to execute', [None, 'Timer', 'Password Generator'])
 
   st.markdown('---')
 
   if choice == 'Timer':
-    from src.apps.pages.programs.CasualPrograms.timer import timer
+    from src.apps.pages.programs.SimplePrograms.timer import timer
     timer()
   elif choice == 'Password Generator':
-    from src.apps.pages.programs.CasualPrograms.password_generator import password_generator_app
-    password_generator_app()
+    from src.apps.pages.programs.SimplePrograms.passwordGenerator import passwordGeneratorApp
+    passwordGeneratorApp()
   else:
     st.info("Star this project on [GitHub](https://github.com/Avdhesh-Varshney/Jarvis), if you like it!", icon='⭐')
 
-casualPrograms()
+simplePrograms()
