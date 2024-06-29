@@ -30,6 +30,7 @@ def dashboard():
 		numpy
 		pandas
 		pillow
+		pyperclip
 		pyttsx3
 		requests
 		setuptools
