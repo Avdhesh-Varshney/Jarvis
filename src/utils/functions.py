@@ -32,7 +32,7 @@ def load_functions():
     "": [dashboard],
     "Account": [logout_page],
     "Models": [healthCareModels, chatBotModels],
-    "Programs": [simplePrograms, apiPrograms, imagePrograms],
+    "Programs": [simplePrograms, apiPrograms, imagePrograms, games],
     "Contributors": [contributors],
   }
 
