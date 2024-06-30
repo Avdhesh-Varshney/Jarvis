@@ -31,6 +31,7 @@ def dashboard():
 		pandas
 		pillow
 		pyperclip
+		python-barcode		
 		pyttsx3
 		requests
 		setuptools
