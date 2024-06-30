@@ -37,3 +37,4 @@ def load_functions():
   }
 
   return pages
+
