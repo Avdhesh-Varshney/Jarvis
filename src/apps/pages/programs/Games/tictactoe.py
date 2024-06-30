@@ -53,8 +53,7 @@ def jarvis_move():
 # Main Tic Tac Toe game function
 def tictactoe():
     st.title("🎮 Tic Tac Toe Game 🎮")
-
-    # Inject custom CSS for gamey elements
+#css
     st.markdown(
         """
         <style>
@@ -168,7 +167,7 @@ def tictactoe():
             turn_message = "Your turn" if st.session_state.current_turn == "player" else "Jarvis's turn"
             st.write(turn_message)
 
-    # Add a button to restart the game
+    # button to restart the game
     if st.button("Restart Game"):
         initialize_game()
 
