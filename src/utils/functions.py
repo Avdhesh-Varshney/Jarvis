@@ -22,7 +22,7 @@ chatBotModels = st.Page("src/apps/pages/models/chatBotModel.py", title="Chat Bot
 simplePrograms = st.Page("src/apps/pages/programs/simpleProgram.py", title="Simple Programs", icon=":material/emoji_objects:")
 apiPrograms = st.Page("src/apps/pages/programs/apiProgram.py", title="API Programs", icon=":material/api:")
 imagePrograms = st.Page("src/apps/pages/programs/imageProgram.py", title="Image Programs", icon=":material/image:")
-games = st.Page("src/apps/pages/programs/tictactoe.py",title="Games",icon=":material/casino:")
+games = st.Page("src/apps/pages/programs/Games/tictactoe.py",title="Games",icon=":material/casino:")
 
 # /apps/pages/contributors
 contributors = st.Page("src/apps/pages/contributors.py", title="Contributors", icon=":material/people:")
