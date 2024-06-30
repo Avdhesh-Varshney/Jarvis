@@ -25,15 +25,73 @@ def checkWin(board):
             return result
     return checkDiagonals(board)
 
+# Function to check if the board is full
+def checkDraw(board):
+    return not any("." in row for row in board)
+
+# Function to randomly decide who starts the game
+def decide_start():
+    return random.choice(["player", "jarvis"])
+
+# Function for Jarvis to make a move
+def jarvis_move():
+    if not st.session_state.winner and not st.session_state.draw:
+        # Simulate Jarvis's move
+        empty_cells = [(i, j) for i in range(3) for j in range(3) if st.session_state.board[i, j] == "."]
+        if empty_cells:
+            i, j = random.choice(empty_cells)
+            st.session_state.board[i, j] = st.session_state.jarvis_symbol
+            winner = checkWin(st.session_state.board)
+            if winner:
+                st.session_state.winner = winner
+            elif checkDraw(st.session_state.board):
+                st.session_state.draw = True
+            else:
+                st.session_state.current_turn = "player"
+                st.session_state.next_player = st.session_state.player_symbol
+
 # Main Tic Tac Toe game function
 def tictactoe():
-    st.title("🎮 Streamlit Tic Tac Toe Game 🎮")
+    st.title("🎮 Tic Tac Toe Game 🎮")
+
+    # Inject custom CSS for gamey elements
+    st.markdown(
+        """
+        <style>
+        .main {
+            background-color: #f0f0f0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        .css-1aumxhk, .css-1aumxhk:disabled, .css-1aumxhk:focus {
+            height: 100px !important;
+            width: 100px !important;
+            font-size: 40px !important;
+            border: 2px solid #444 !important;
+            background-color: #fff !important;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .css-1aumxhk:hover {
+            background-color: #e0e0e0 !important;
+            transform: scale(1.05) !important;
+        }
+        .stButton>button {
+            color: #333 !important;
+            font-weight: bold !important;
+        }
+        .st-bq {
+            color: #d9534f !important;
+            font-weight: bold !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
     # Initialize board and game state in Streamlit session state
     if "board" not in st.session_state:
         st.session_state.board = np.full((3, 3), ".", dtype=str)
-        st.session_state.next_player = "X"
         st.session_state.winner = None
+        st.session_state.draw = False
 
         # Randomly assign symbols to player and Jarvis
         symbols = ["X", "O"]
@@ -41,30 +99,31 @@ def tictactoe():
         st.session_state.player_symbol = symbols[0]
         st.session_state.jarvis_symbol = symbols[1]
 
+        # Randomly decide who starts
+        st.session_state.current_turn = decide_start()
+        if st.session_state.current_turn == "player":
+            st.session_state.next_player = st.session_state.player_symbol
+        else:
+            st.session_state.next_player = st.session_state.jarvis_symbol
+            jarvis_move()
+
     # Function to handle button click and game logic
     def handle_click(i, j):
-        if not st.session_state.winner and st.session_state.board[i, j] == ".":
+        if not st.session_state.winner and not st.session_state.draw and st.session_state.board[i, j] == ".":
             st.session_state.board[i, j] = st.session_state.next_player
-            st.session_state.next_player = st.session_state.jarvis_symbol if st.session_state.next_player == st.session_state.player_symbol else st.session_state.player_symbol
             winner = checkWin(st.session_state.board)
             if winner:
                 st.session_state.winner = winner
+            elif checkDraw(st.session_state.board):
+                st.session_state.draw = True
             else:
-                # Jarvis makes a move
-                jarvis_move()
-
-    # Function for Jarvis to make a move
-    def jarvis_move():
-        if not st.session_state.winner:
-            # Simulate Jarvis's move - you can modify this logic for smarter AI
-            empty_cells = [(i, j) for i in range(3) for j in range(3) if st.session_state.board[i, j] == "."]
-            if empty_cells:
-                i, j = random.choice(empty_cells)
-                st.session_state.board[i, j] = st.session_state.jarvis_symbol
-                st.session_state.next_player = st.session_state.player_symbol
-                winner = checkWin(st.session_state.board)
-                if winner:
-                    st.session_state.winner = winner
+                if st.session_state.current_turn == "player":
+                    st.session_state.current_turn = "jarvis"
+                    st.session_state.next_player = st.session_state.jarvis_symbol
+                    jarvis_move()
+                else:
+                    st.session_state.current_turn = "player"
+                    st.session_state.next_player = st.session_state.player_symbol
 
     # Display player symbols outside the game area
     st.write(f"You: {st.session_state.player_symbol} | Jarvis: {st.session_state.jarvis_symbol}")
@@ -98,9 +157,12 @@ def tictactoe():
         st.subheader("Game Status")
         if st.session_state.winner:
             st.success(f"🎉 Congratulations! {st.session_state.winner} won the game! 🎉")
+        elif st.session_state.draw:
+            st.warning("It's a draw! 🤝")
         else:
-            st.write(f"Next Player: {st.session_state.next_player}")
+            turn_message = "Your turn" if st.session_state.current_turn == "player" else "Jarvis's turn"
+            st.write(turn_message)
 
-# Run the Tic Tac Toe game if this script is executed directly
 if __name__ == "__main__":
     tictactoe()
+
