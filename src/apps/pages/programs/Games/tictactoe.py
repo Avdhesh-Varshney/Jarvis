@@ -59,7 +59,7 @@ def tictactoe():
         """
         <style>
         .main {
-            background-color: #f0f0f0;
+            background-color: #ffffff;
             font-family: 'Comic Sans MS', cursive, sans-serif;
         }
         .css-1aumxhk, .css-1aumxhk:disabled, .css-1aumxhk:focus {
@@ -68,6 +68,7 @@ def tictactoe():
             font-size: 40px !important;
             border: 2px solid #444 !important;
             background-color: #fff !important;
+            color: #000 !important;  /* Ensure text color is black */
             transition: background-color 0.3s, transform 0.3s;
         }
         .css-1aumxhk:hover {
@@ -75,7 +76,7 @@ def tictactoe():
             transform: scale(1.05) !important;
         }
         .stButton>button {
-            color: #333 !important;
+            color: #000 !important; /* Ensure text color is black */
             font-weight: bold !important;
         }
         .st-bq {
@@ -87,8 +88,8 @@ def tictactoe():
         unsafe_allow_html=True
     )
 
-    # Initialize board and game state in Streamlit session state
-    if "board" not in st.session_state:
+    # Function to initialize or reset the game
+    def initialize_game():
         st.session_state.board = np.full((3, 3), ".", dtype=str)
         st.session_state.winner = None
         st.session_state.draw = False
@@ -106,6 +107,10 @@ def tictactoe():
         else:
             st.session_state.next_player = st.session_state.jarvis_symbol
             jarvis_move()
+
+    # Initialize board and game state in Streamlit session state if not already initialized
+    if "board" not in st.session_state:
+        initialize_game()
 
     # Function to handle button click and game logic
     def handle_click(i, j):
@@ -162,6 +167,10 @@ def tictactoe():
         else:
             turn_message = "Your turn" if st.session_state.current_turn == "player" else "Jarvis's turn"
             st.write(turn_message)
+
+    # Add a button to restart the game
+    if st.button("Restart Game"):
+        initialize_game()
 
 if __name__ == "__main__":
     tictactoe()
