@@ -4,3 +4,6 @@ __pycache__/
 # My virtual environment
 myenv
 /myenv
+
+# Gemini API Key
+src/apps/pages/programs/ApiPrograms/secrets/.env
