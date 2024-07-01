@@ -5,5 +5,3 @@ __pycache__/
 myenv
 /myenv
 
-# Gemini API Key
-src/apps/pages/programs/ApiPrograms/secrets/.env
