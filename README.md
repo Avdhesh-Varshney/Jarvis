@@ -29,14 +29,16 @@ To create a seamless, user-friendly application that allows users to control mul
 ### Setting Up Your Environment 🛠️
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/user-name/Jarvis.git
    cd Jarvis
    ```
 
 2. **Create a virtual environment:**
+
    ```bash
-   python -m venv env
+   python -m venv myenv
    source env/bin/activate  # On Windows, use `env\Scripts\activate`
    ```
 
@@ -48,6 +50,7 @@ To create a seamless, user-friendly application that allows users to control mul
 ### Running the Application 🎯
 
 1. **Start the application:**
+
    ```bash
    streamlit run Jarvis.py
    ```
@@ -59,7 +62,7 @@ To create a seamless, user-friendly application that allows users to control mul
 
 - **User Roles:** The application supports multiple roles (User, Admin, Super Admin), each with specific access to services.
 - **Login Credentials:** Ensure you have your ID and password ready for authentication.
-- **For Testing/Developing Purpose:** 
+- **For Testing/Developing Purpose:**
   - **User:**
     - **ID:** user@user.com
     - **Password:** user_Password
@@ -73,6 +76,7 @@ To create a seamless, user-friendly application that allows users to control mul
 ## :zap: Roadmap 🛣️
 
 1. **Phase 1:**
+
    - Implement basic voice command functionality.
    - Develop a user-friendly interface.
    - Integrate basic customer support features.
