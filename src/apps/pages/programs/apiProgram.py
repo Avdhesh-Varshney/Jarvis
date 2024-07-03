@@ -2,11 +2,14 @@ import streamlit as st
 
 def apiPrograms():
   st.title('API Programs')
-  choice = st.selectbox('Select a program to execute', [None, "Jokes", "Gemini ChatBot"])
+  choice = st.selectbox('Select a program to execute', [None, "Jokes", "General Facts", "Gemini ChatBot"])
   st.markdown('---')
   if choice == "Jokes":
     from src.apps.pages.programs.ApiPrograms.joke import play_joke
     play_joke()
+  elif choice == "General Facts":
+    from src.apps.pages.programs.ApiPrograms.fact import play_fact
+    play_fact()
   elif choice == "Gemini ChatBot":
     from src.apps.pages.programs.ApiPrograms.genAIChatbot import chatBot
     chatBot()
