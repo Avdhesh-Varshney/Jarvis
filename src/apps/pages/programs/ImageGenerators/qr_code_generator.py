@@ -3,7 +3,7 @@ import qrcode
 from PIL import Image
 import io
 
-def main():
+def qrCodeGenerator():
     st.title("QR Code Generator")
     
     input_data = st.text_input("Enter data for the QR Code (text, link, number, etc.):")
