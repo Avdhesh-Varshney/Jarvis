@@ -11,7 +11,7 @@ def imagePrograms():
 
   st.markdown('---')
   if choice == "QR Code Generator":
-    from src.apps.pages.programs.ImageGenerators.qr_code_generator import main
-    main()
+    from src.apps.pages.programs.ImageGenerators.qr_code_generator import qrCodeGenerator
+    qrCodeGenerator()
     
 imagePrograms()
