@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def calculator():
     st.title("Calculator")
 
