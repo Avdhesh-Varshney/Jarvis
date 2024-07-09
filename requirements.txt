@@ -19,4 +19,4 @@ setuptools==70.1.1
 SpeechRecognition==3.10.3
 streamlit==1.36.0
 tensorflow==2.16.1
-qrcode[pil]
+qrcode=7.4.2

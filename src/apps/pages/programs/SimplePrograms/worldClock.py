@@ -31,6 +31,3 @@ def display_world_clock():
             time_placeholder.markdown(f"# {city_time}")
             date_placeholder.markdown(f"## {city_date}")
             time.sleep(1)
-
-if __name__ == "__main__":
-    display_world_clock()
