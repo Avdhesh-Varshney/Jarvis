@@ -39,7 +39,7 @@ To create a seamless, user-friendly application that allows users to control mul
 
    ```bash
    python -m venv myenv
-   source env/bin/activate  # On Windows, use `env\Scripts\activate`
+   source myenv/bin/activate  # On Windows, use `env\Scripts\activate`
    ```
 
 3. **Install the dependencies:**
