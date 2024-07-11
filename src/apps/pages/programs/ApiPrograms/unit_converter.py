@@ -47,5 +47,3 @@ def units_convert():
         else:
             st.error(f"Conversion failed: {error}")
 
-if __name__ == "__main__":
-    units_convert()
