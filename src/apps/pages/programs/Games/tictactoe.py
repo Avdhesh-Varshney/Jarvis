@@ -170,7 +170,3 @@ def tictactoe():
     # button to restart the game
     if st.button("Restart Game"):
         initialize_game()
-
-if __name__ == "__main__":
-    tictactoe()
-

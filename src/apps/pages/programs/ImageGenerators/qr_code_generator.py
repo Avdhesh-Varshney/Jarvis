@@ -1,6 +1,5 @@
 import streamlit as st
 import qrcode
-from PIL import Image
 import io
 
 def qrCodeGenerator():
@@ -58,4 +57,4 @@ def qrCodeGenerator():
         </style>
         """,
             unsafe_allow_html=True,
-        ) 
+        )

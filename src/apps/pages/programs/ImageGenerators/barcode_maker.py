@@ -6,7 +6,6 @@ import base64
 # Set barcode type
 BARCODE_TYPE = {"EAN-13": [13, EAN13], "EAN-8": [8, EAN8], "UPCA": [12, UPCA]}
 
-
 def gen_barcode():
     box = st.container() # To keep everything inside one container
     with box:

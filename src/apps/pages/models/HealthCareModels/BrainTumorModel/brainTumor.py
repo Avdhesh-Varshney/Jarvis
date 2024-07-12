@@ -29,23 +29,24 @@ def do_test(img):
   return res
 
 def brain_tumor_test():
-   st.write("Please Upload MRI Scan of Brain")
-   codn,img = get_mri()
-   res = None
-   if codn!=False:
-    res = do_test(img)
-   if res!=None:     
-     if res == 0:
-       st.error(f'Hi {st.session_state.name},\nYou are diagnosed with Glioma.\nPlease consult a doctor.')
-       Speak(f'Hi {st.session_state.name},You are diagnosed with Glioma. Please consult a doctor.')
-     elif res == 1:
-       st.error(f'Hi {st.session_state.name},\nYou are diagnosed with Meningioma.\nPlease consult a doctor.')
-       Speak(f'Hi {st.session_state.name},You are diagnosed with Meningioma. Please consult a doctor.')
-     elif res == 2:
-       st.success(f'Congrats {st.session_state.name}, You are not diagnosed with brain tumor.')
-       Speak(f'Congrats {st.session_state.name}, You are not diagnosed with brain tumor.')
-     elif res == 3:
-       st.error(f'Hi {st.session_state.name},\nYou are diagnosed with Pituitary tumor. Please consult a doctor.')
-       Speak(f'Hi {st.session_state.name},You are diagnosed with Pituitary tumor. Please consult a doctor.')
-     codn = False
+  st.write("Please Upload MRI Scan of Brain")
+  codn,img = get_mri()
+  res = None
 
+  if codn!=False:
+    res = do_test(img)
+
+  if res!=None:     
+    if res == 0:
+      st.error(f'Hi {st.session_state.name},\nYou are diagnosed with Glioma.\nPlease consult a doctor.')
+      Speak(f'Hi {st.session_state.name},You are diagnosed with Glioma. Please consult a doctor.')
+    elif res == 1:
+      st.error(f'Hi {st.session_state.name},\nYou are diagnosed with Meningioma.\nPlease consult a doctor.')
+      Speak(f'Hi {st.session_state.name},You are diagnosed with Meningioma. Please consult a doctor.')
+    elif res == 2:
+      st.success(f'Congrats {st.session_state.name}, You are not diagnosed with brain tumor.')
+      Speak(f'Congrats {st.session_state.name}, You are not diagnosed with brain tumor.')
+    elif res == 3:
+      st.error(f'Hi {st.session_state.name},\nYou are diagnosed with Pituitary tumor. Please consult a doctor.')
+      Speak(f'Hi {st.session_state.name},You are diagnosed with Pituitary tumor. Please consult a doctor.')
+    codn = False
