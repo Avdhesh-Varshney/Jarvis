@@ -2,7 +2,7 @@ import streamlit as st
 
 def apiPrograms():
   st.title('API Programs')
-  choice = st.selectbox('Select a program to execute', [None, "Jokes", "General Facts", "Gemini ChatBot", "Quote of the Day", "Currency Convertor", "Unit Convertor", "Horoscope", "Temperature Details"])
+  choice = st.selectbox('Select a program to execute', [None, "Jokes", "General Facts", "Gemini ChatBot", "Quote of the Day", "Currency Convertor", "Unit Convertor", "Horoscope", "Weather Details"])
 
   st.markdown('---')
 
@@ -27,7 +27,7 @@ def apiPrograms():
   elif choice == "Horoscope":
     from src.apps.pages.programs.ApiPrograms.horoscope import horoscope
     horoscope()
-  elif choice == "Temperature Details":
+  elif choice == "Weather Details":
     from src.apps.pages.programs.ApiPrograms.temperature import get_temperature
     get_temperature()
 
