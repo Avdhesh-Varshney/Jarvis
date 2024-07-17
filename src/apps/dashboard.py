@@ -15,6 +15,7 @@ def dashboard():
 		- Perform a variety of tasks,
 			- Opening websites
 			- Playing music
+			- Correct the spellings
 			- Searching Wikipedia
 			- Getting the time
 			- Opening code editors

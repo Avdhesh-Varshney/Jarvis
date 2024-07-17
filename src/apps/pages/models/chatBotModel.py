@@ -1,9 +1,14 @@
 import streamlit as st
+from src.apps.pages.models.ChatBotModels.SpellChecker.lstm_spell_checker import lstm_spelling_correction
 
-def chatBotModels():
-  st.title('ChatBot Models')
-  choice = st.selectbox('Choose any model', [None])
+def main():
+    st.title('ChatBot Models')
+    choice = st.selectbox('Choose any model', ['LSTM Spelling Correction'])
 
-  st.markdown('---')
+    st.markdown('---')
 
-chatBotModels()
+    if choice == 'LSTM Spelling Correction':
+        lstm_spelling_correction()
+
+if __name__ == "__main__":
+    main()
