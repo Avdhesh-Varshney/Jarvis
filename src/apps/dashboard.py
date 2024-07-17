@@ -15,6 +15,7 @@ def dashboard():
 		- Perform a variety of tasks,
 			- Opening websites
 			- Playing music
+   			- Spell Correction
 			- Searching Wikipedia
 			- Getting the time
 			- Opening code editors
@@ -31,7 +32,8 @@ def dashboard():
 		pandas
 		pillow
 		pyperclip
-		python-barcode		
+		python-barcode
+  		tensorflow
 		pyttsx3
 		requests
 		setuptools
