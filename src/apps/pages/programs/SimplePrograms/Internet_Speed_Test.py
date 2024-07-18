@@ -1,36 +1,41 @@
-# A simple program to test speed of internet
 import streamlit as st
 import speedtest
 
-# Creating the function for the app
-def Internet_Speed_Test():
-    def int_st(choice):
-        sp_test = speedtest.Speedtest()  
-        sp_test.get_best_server()
-        if choice == "Download Speed":
-            return sp_test.download() / 1000000  # Converting speed from bps to mbps
-        elif choice == "Upload Speed":
-            return sp_test.upload() / 1000000
-        elif choice == "Ping":
-            return sp_test.results.ping  # in milliseconds
-        else:
-            st.error("Invalid choice")
-            return None
-    
-    # Streamlit app code
-    st.title("INTERNET SPEED TEST")
-    with st.form("Int_st form"):
-        choice = st.selectbox("Choose the Speed test type", ["Download Speed", "Upload Speed", "Ping"])
-        submitted = st.form_submit_button("Run Speed Test")
-        if submitted:
-            res = int_st(choice)
-            if res is not None:
-                if choice == "Download Speed":
-                    st.write(f"Download Speed: {res:.2f} Mbps")
-                elif choice == "Upload Speed":
-                    st.write(f"Upload Speed: {res:.2f} Mbps")
-                elif choice == "Ping":
-                    st.write(f"Ping: {res:.2f} ms")
+# Function to perform internet speed test
+def perform_speed_test(choice):
+    st.subheader("Running Speed Test...")
+    st.write("Please wait while the speed test completes...")
 
+    # Initialize speedtest object
+    st_test = speedtest.Speedtest()
+    st_test.get_best_server()
 
+    # Perform speed test based on user choice
+    if choice == "Download Speed":
+        speed = st_test.download() / 1_000_000  # Convert from bits/s to Mbps
+        st.write(f"Download Speed: {speed:.2f} Mbps")
+    elif choice == "Upload Speed":
+        speed = st_test.upload() / 1_000_000  # Convert from bits/s to Mbps
+        st.write(f"Upload Speed: {speed:.2f} Mbps")
+    elif choice == "Ping":
+        speed = st_test.results.ping  # Ping in milliseconds
+        st.write(f"Ping: {speed:.2f} ms")
+    else:
+        st.error("Invalid choice")
+        return
 
+# Main function for Streamlit app
+def main():
+    st.title("Internet Speed Test")
+
+    with st.form("SpeedTestForm"):
+        st.write("Select the type of speed test:")
+        choice = st.selectbox("", ["Download Speed", "Upload Speed", "Ping"])
+        submit_button = st.form_submit_button("Run Speed Test")
+
+        if submit_button:
+            perform_speed_test(choice)
+
+# Run the main function
+if __name__ == "__main__":
+    main()
