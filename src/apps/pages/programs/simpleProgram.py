@@ -2,7 +2,7 @@ import streamlit as st
 
 def simplePrograms():
   st.title('Simple Programs')
-  choice = st.selectbox('Select a program to execute', [None, 'Timer', 'Password Generator','Caeser Cipher', 'Calculator', 'World Clock', 'Internet Speed Test'])
+  choice = st.selectbox('Select a program to execute', [None, 'Timer', 'Password Generator','Caeser Cipher', 'Calculator', 'World Clock', 'Internet Speed Test',"Alarm Program"])
 
   st.markdown('---')
 
@@ -24,6 +24,10 @@ def simplePrograms():
   elif choice == 'Internet Speed Test':
     from src.apps.pages.programs.SimplePrograms.Internet_Speed_Test import Internet_Speed_Test
     Internet_Speed_Test()
+  elif choice == 'Alarm Program':
+    from src.apps.pages.programs.SimplePrograms.alarm_program import Alarm_App
+    Alarm_App()
+    
   else:
     st.info("Star this project on [GitHub](https://github.com/Avdhesh-Varshney/Jarvis), if you like it!", icon='⭐')
 
