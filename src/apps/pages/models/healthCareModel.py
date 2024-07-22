@@ -2,7 +2,7 @@ import streamlit as st
 
 def healthCareModels():
   st.title('Health Care Models')
-  choice = st.selectbox('Choose any model', [None, 'Diabetes Test','Brain Tumor Test'])
+  choice = st.selectbox('Choose any model', [None, 'Diabetes Test','Brain Tumor Test','Real Time Mask Detection'])
 
   st.markdown('---')
 
@@ -13,6 +13,10 @@ def healthCareModels():
   elif choice == 'Brain Tumor Test':
     from src.apps.pages.models.HealthCareModels.BrainTumorModel.brainTumor import brain_tumor_test
     brain_tumor_test()
+
+  elif choice == 'Real Time Mask Detection':
+    from src.apps.pages.models.HealthCareModels.MaskDetectionModel.maskcheck import detect_mask
+    detect_mask()
     
   else:
     st.info("Star this project on [GitHub](https://github.com/Avdhesh-Varshney/Jarvis) if you like it!", icon='⭐')
