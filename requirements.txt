@@ -10,6 +10,7 @@ librosa==0.10.2
 Markdown==3.6
 notebook==7.2.1
 numpy==1.26.4
+opencv-python==4.8.0.76
 pandas==2.2.2
 pillow==10.3.0
 pint==0.24.2
