@@ -7,25 +7,15 @@ BASE_DIR = os.path.dirname(__file__)
 COMMON_MODULE_PATH = os.path.join(BASE_DIR, 'Games')
 MODULES = getModules(COMMON_MODULE_PATH)
 
-# debugging
-st.write("Base Directory => ", BASE_DIR)
-st.write("Common Module Path => ", COMMON_MODULE_PATH)
-st.write("Modules => ", MODULES)
-
 def games():
   st.title('🎮 Games 🕹️')
-
   choice = st.selectbox('Select a program to execute', [None] + list(MODULES.keys()))
-  module_name = MODULES[choice]
-  st.write("Choice => ", choice)
-  st.write("Module Name => ", module_name)
-  
   st.markdown('---')
 
   if choice in MODULES:
+    module_name = MODULES[choice]
     try:
       module = importlib.import_module(f"src.apps.pages.programs.Games.{module_name}")
-      st.write("Module => ", module)
       func = getattr(module, module_name)
       func()
     except ModuleNotFoundError:
