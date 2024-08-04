@@ -51,43 +51,9 @@ def jarvis_move():
                 st.session_state.next_player = st.session_state.player_symbol
 
 # Main Tic Tac Toe game function
-def tictactoe():
+def ticTacToe():
     st.title("🎮 Tic Tac Toe Game 🎮")
-#css
-    st.markdown(
-        """
-        <style>
-        .main {
-            background-color: #ffffff;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-        }
-        .css-1aumxhk, .css-1aumxhk:disabled, .css-1aumxhk:focus {
-            height: 100px !important;
-            width: 100px !important;
-            font-size: 40px !important;
-            border: 2px solid #444 !important;
-            background-color: #fff !important;
-            color: #000 !important;  /* Ensure text color is black */
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .css-1aumxhk:hover {
-            background-color: #e0e0e0 !important;
-            transform: scale(1.05) !important;
-        }
-        .stButton>button {
-            color: #000 !important; /* Ensure text color is black */
-            font-weight: bold !important;
-        }
-        .st-bq {
-            color: #d9534f !important;
-            font-weight: bold !important;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
 
-    # Function to initialize or reset the game
     def initialize_game():
         st.session_state.board = np.full((3, 3), ".", dtype=str)
         st.session_state.winner = None
