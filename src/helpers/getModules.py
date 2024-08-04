@@ -9,9 +9,13 @@ def getModules(COMMON_MODULE_PATH):
     st.error("The specified directory does not exist.")
     return {}
   
+  st.write("Files => ", files)
+  
   modules = {}
   for file in files:
     module_name = file[:-3]
     readable_name = camelToReadable(module_name)
+    st.write("Module Name => ", module_name)
+    st.write("Readable Name => ", readable_name)
     modules[readable_name] = module_name
   return modules
