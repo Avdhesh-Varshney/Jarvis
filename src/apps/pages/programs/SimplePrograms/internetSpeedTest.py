@@ -1,23 +1,20 @@
-# A simple program to test speed of internet
 import streamlit as st
 import speedtest
 
-# Creating the function for the app
-def Internet_Speed_Test():
+def internetSpeedTest():
     def int_st(choice):
         sp_test = speedtest.Speedtest()  
         sp_test.get_best_server()
         if choice == "Download Speed":
-            return sp_test.download() / 1000000  # Converting speed from bps to mbps
+            return sp_test.download() / 1000000
         elif choice == "Upload Speed":
             return sp_test.upload() / 1000000
         elif choice == "Ping":
-            return sp_test.results.ping  # in milliseconds
+            return sp_test.results.ping
         else:
             st.error("Invalid choice")
             return None
     
-    # Streamlit app code
     st.title("INTERNET SPEED TEST")
     with st.form("Int_st form"):
         choice = st.selectbox("Choose the Speed test type", ["Download Speed", "Upload Speed", "Ping"])
@@ -31,6 +28,3 @@ def Internet_Speed_Test():
                     st.write(f"Upload Speed: {res:.2f} Mbps")
                 elif choice == "Ping":
                     st.write(f"Ping: {res:.2f} ms")
-
-
-

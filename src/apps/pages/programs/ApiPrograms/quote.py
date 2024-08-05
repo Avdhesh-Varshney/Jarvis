@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-def show_quote():
+def quote():
     def get_quote():
         response = requests.get("https://zenquotes.io/api/today")
         if response.status_code == 200:

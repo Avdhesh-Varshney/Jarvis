@@ -48,7 +48,7 @@ def display_history():
     with st.chat_message(message["role"]):
       st.write(message["content"])
 
-def chatBot():
+def genAIChatbot():
   if API_exists():
     GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
     genai.configure(api_key=GOOGLE_API_KEY)

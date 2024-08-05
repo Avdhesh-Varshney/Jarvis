@@ -1,7 +1,7 @@
 import streamlit as st
 from pint import UnitRegistry
 
-def units_convert():
+def unitsConvertor():
     ureg = UnitRegistry()
     Q_ = ureg.Quantity
 

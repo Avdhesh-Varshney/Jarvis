@@ -3,7 +3,7 @@ import random
 import string
 import pyperclip
 
-def passwordGeneratorApp():
+def passwordGenerator():
     def generate_password(length, use_upper, use_lower, use_digits, use_special):
         characters = ''
         if use_upper:

@@ -1,8 +1,7 @@
 import streamlit as st
 import requests
 
-def get_temperature():
-# function to get weather data
+def weatherApp():
     def get_weather(api_key, city):
         try:
             url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}"
@@ -59,3 +58,4 @@ def get_temperature():
                 st.error(f"Error: {error}")
         else:
             st.error("Please provide both API Key and City Name.")
+

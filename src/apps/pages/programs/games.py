@@ -3,19 +3,20 @@ import importlib
 import streamlit as st
 from src.helpers.getModules import getModules
 
+MAIN_DIR = 'Games'
 BASE_DIR = os.path.dirname(__file__)
-COMMON_MODULE_PATH = os.path.join(BASE_DIR, 'Games')
+COMMON_MODULE_PATH = os.path.join(BASE_DIR, MAIN_DIR)
 MODULES = getModules(COMMON_MODULE_PATH)
 
 def games():
-  st.title('🎮 Games 🕹️')
+  st.title('Games')
   choice = st.selectbox('Select a program to execute', [None] + list(MODULES.keys()))
   st.markdown('---')
 
   if choice in MODULES:
     module_name = MODULES[choice]
     try:
-      module = importlib.import_module(f"src.apps.pages.programs.Games.{module_name}")
+      module = importlib.import_module(f"src.apps.pages.programs.{MAIN_DIR}.{module_name}")
       func = getattr(module, module_name)
       func()
     except ModuleNotFoundError:
