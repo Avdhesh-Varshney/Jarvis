@@ -8,6 +8,7 @@ jupyterlab==4.2.2
 keras==3.4.0
 librosa==0.10.2
 Markdown==3.6
+matplotlib==3.9.0
 notebook==7.2.1
 numpy==1.26.4
 opencv-python==4.8.0.76
