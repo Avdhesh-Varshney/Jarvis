@@ -5,14 +5,12 @@ import librosa
 import matplotlib.pyplot as plt
 from src.utils.english import Speak
 
-
 @st.cache_resource
 def load_model():
   model = tf.keras.models.load_model("src/apps/pages/models/HealthCareModels/DepressionDetectionModel/DepressionDetect.keras")
   return model
 
-
-def detect_depression():
+def depressionDetectionModel():
   model = load_model()
   st.write("Depression Detection Test Using Audio")
   uploaded_file = st.file_uploader("Upload file in .wav format",type="wav")

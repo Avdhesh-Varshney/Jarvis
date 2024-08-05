@@ -1,29 +1,32 @@
+import os
+import importlib
 import streamlit as st
+from src.helpers.getFolders import getFolders
+
+MAIN_DIR = 'HealthCareModels'
+BASE_DIR = os.path.dirname(__file__)
+COMMON_MODULE_PATH = os.path.join(BASE_DIR, MAIN_DIR)
+MODULES = getFolders(COMMON_MODULE_PATH)
 
 def healthCareModels():
   st.title('Health Care Models')
-  choice = st.selectbox('Choose any model', [None, 'Diabetes Test','Brain Tumor Test','Real Time Mask Detection','Depression Detection'])
-
+  choice = st.selectbox('Select a model to execute', [None] + list(MODULES.keys()))
   st.markdown('---')
 
-  if choice == 'Diabetes Test':
-    from src.apps.pages.models.HealthCareModels.DiabetesModel.diabetes import diabetes_test
-    diabetes_test()
-    
-  elif choice == 'Brain Tumor Test':
-    from src.apps.pages.models.HealthCareModels.BrainTumorModel.brainTumor import brain_tumor_test
-    brain_tumor_test()
-
-  elif choice == 'Real Time Mask Detection':
-    from src.apps.pages.models.HealthCareModels.MaskDetectionModel.maskcheck import detect_mask
-    detect_mask()
-
-  elif choice == 'Depression Detection':
-    from src.apps.pages.models.HealthCareModels.DepressionDetectionModel.depression import detect_depression
-    detect_depression()
-
-    
+  if choice in MODULES:
+    module_name = MODULES[choice]
+    file_name = module_name[0].lower() + module_name[1:]
+    try:
+      module = importlib.import_module(f"src.apps.pages.models.{MAIN_DIR}.{module_name}.{file_name}")
+      func = getattr(module, file_name)
+      func()
+    except ModuleNotFoundError:
+      st.error(f"Module '{file_name}.py' could not be found.")
+    except AttributeError:
+      st.error(f"Function '{file_name}' could not be found in '{file_name}.py'.")
+    except Exception as e:
+      st.error(f"An error occurred: {e}")
   else:
-    st.info("Star this project on [GitHub](https://github.com/Avdhesh-Varshney/Jarvis) if you like it!", icon='⭐')
+    st.info("Star this project on [GitHub](https://github.com/Avdhesh-Varshney/Jarvis), if you like it!", icon='⭐')
 
 healthCareModels()

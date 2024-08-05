@@ -7,7 +7,6 @@ import cv2
 from datetime import datetime
 import streamlit as st
 
-
 @st.cache_resource
 def load_model():
   model = tf.keras.models.load_model('src/apps/pages/models/HealthCareModels/MaskDetectionModel/maskcheck.keras')
@@ -18,14 +17,11 @@ def hardware():
         option = st.selectbox("What are you using",("Laptop camera", "External camera"))
         btn = st.form_submit_button("Submit")
         if option == "Laptop camera":
-            return 0,btn
+            return 0, btn
         else:
-            return 1,btn
-          
+            return 1, btn
 
-
-def detect_mask():
-
+def maskDetectionModel():
   cnn = load_model()
   modelFile = "src/apps/pages/models/HealthCareModels/MaskDetectionModel/res10_300x300_ssd_iter_140000.caffemodel"
   configFile = "src/apps/pages/models/HealthCareModels/MaskDetectionModel/deploy.prototxt"
@@ -71,6 +67,5 @@ def detect_mask():
         
         if cv2.waitKey(1) == ord('q'):
             break
-
 
     cv2.destroyAllWindows()

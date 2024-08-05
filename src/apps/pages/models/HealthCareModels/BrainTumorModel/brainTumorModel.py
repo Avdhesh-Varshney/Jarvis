@@ -28,7 +28,7 @@ def do_test(img):
   res = np.argmax(model.predict(img))
   return res
 
-def brain_tumor_test():
+def brainTumorModel():
   st.write("Please Upload MRI Scan of Brain")
   codn,img = get_mri()
   res = None

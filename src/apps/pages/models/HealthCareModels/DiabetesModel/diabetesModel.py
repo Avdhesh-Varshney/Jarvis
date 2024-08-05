@@ -30,7 +30,7 @@ def do_diabetes_test(input):
   else:
     return 0
 
-def diabetes_test():
+def diabetesModel():
   st.markdown("#### Enter all details for better results")
   diabetes_testset,db_btn = diabetesTestForm()
   diabetes_testset = np.array(diabetes_testset)
