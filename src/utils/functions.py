@@ -15,6 +15,7 @@ sign_up_page = st.Page("src/auth/signup.py", title="Sign up", icon=":material/pe
 dashboard = st.Page("src/apps/dashboard.py", title="Dashboard", icon=":material/dashboard:")
 
 # /apps/pages/automations
+websites = st.Page("src/apps/pages/automations/website.py", title="Websites", icon=":material/web:")
 
 # /apps/pages/models
 chatBotModels = st.Page("src/apps/pages/models/chatBotModel.py", title="Chat Bot Models", icon=":material/smart_toy:")
@@ -25,6 +26,7 @@ simplePrograms = st.Page("src/apps/pages/programs/simpleProgram.py", title="Simp
 apiPrograms = st.Page("src/apps/pages/programs/apiProgram.py", title="API Programs", icon=":material/api:")
 imagePrograms = st.Page("src/apps/pages/programs/imageProgram.py", title="Image Programs", icon=":material/image:")
 games = st.Page("src/apps/pages/programs/games.py",title="Games",icon=":material/casino:")
+studyPrograms = st.Page("src/apps/pages/programs/studyProgram.py", title="Study Programs", icon=":material/school:")
 
 # /apps/pages/contributors
 contributors = st.Page("src/apps/pages/contributors.py", title="Contributors", icon=":material/people:")
@@ -33,9 +35,9 @@ def load_functions():
   pages = {
     "": [dashboard],
     "Account": [logout_page],
-    "Automations": [],
+    "Automations": [websites],
     "Models": [chatBotModels, healthCareModels],
-    "Programs": [apiPrograms, games, imagePrograms, simplePrograms],
+    "Programs": [apiPrograms, games, imagePrograms, simplePrograms, studyPrograms],
     "Contributors": [contributors],
   }
 

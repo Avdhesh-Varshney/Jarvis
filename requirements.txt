@@ -19,6 +19,8 @@ plotly==5.23.0
 pyperclip==1.9.0
 python-barcode==0.15.1
 pyttsx3==2.90
+pywhatkit==5.4
+pywikihow==0.5.7
 qrcode==7.4.2
 requests==2.31.0
 setuptools==70.1.1
