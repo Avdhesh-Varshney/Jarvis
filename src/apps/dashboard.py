@@ -1,13 +1,13 @@
 import streamlit as st
 
-def read_requirements(file_path):
-    try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            lines = file.readlines()
-            libraries = [line.split('==')[0].strip() for line in lines]
-            return libraries
-    except FileNotFoundError:
-        return ["requirements.txt not found"]
+def readPackages(filePath):
+	try:
+		with open(filePath, 'r', encoding='utf-8') as file:
+			lines = file.readlines()
+			libraries = [line.split('==')[0].strip() for line in lines]
+			return libraries
+	except FileNotFoundError:
+		return ["requirements.txt not found"]
 
 def dashboard():
 	st.title("Jarvis - A Virtual AI Assistant!")
@@ -17,36 +17,10 @@ def dashboard():
 		Jarvis is a simple Python program that can be used to control your computer using voice commands. The program can perform a variety of tasks, such as opening websites, playing music, searching Wikipedia, getting the time, opening code editors, and sending emails.
 	''')
 
-	st.markdown('''
-		### The objectives of Jarvis
-		- To create a simple Python program.
-		- To control a computer using voice commands.
-		- Perform a variety of tasks,
-			- Opening websites
-			- Playing music
-			- Searching Wikipedia
-			- Getting the time
-			- Opening code editors
-			- Sending emails, etc.
-		### Required Libraries
-	''')
+	st.video('https://youtu.be/kjIH9qo8dX4')
 
-	st.code('''
-		argon2-cffi
-		jupyterlab
-		keras
-		notebook
-		numpy
-		pandas
-		pillow
-		pyperclip
-		python-barcode		
-		pyttsx3
-		requests
-		setuptools
-		SpeechRecognition
-		streamlit
-		tensorflow
-	''')
+	st.markdown('''### Required Libraries''')
+	packages = readPackages('requirements.txt')
+	st.write(packages)
 
 dashboard()
