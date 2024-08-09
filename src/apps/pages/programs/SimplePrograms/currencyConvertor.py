@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-def currency():
+def currencyConvertor():
     def get_exchange_rates():
         url = "https://api.frankfurter.app/currencies"
         response = requests.get(url)

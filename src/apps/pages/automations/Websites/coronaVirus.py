@@ -3,7 +3,6 @@ import requests
 import bs4
 import plotly.graph_objs as go
 
-@st.cache_resource
 def getCountries():
   url = "https://www.worldometers.info/coronavirus/"
   result = requests.get(url)
