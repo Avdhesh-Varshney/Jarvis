@@ -39,8 +39,8 @@ def signup():
     new_repeat_password = st.text_input('🔑 Re-type your password:', type='password')
 
   # Handle Role-Based Key Inputs
-  admin_key = "Admin"
-  super_admin_key = "SuperAdmin"
+  admin_key = os.environ.get("ADMIN_KEY")
+  super_admin_key = os.environ.get("SUPER_ADMIN_KEY")
 
   if new_roles == 'Admin':
     pass_key = st.text_input('🔑 Enter your Admin key:')
