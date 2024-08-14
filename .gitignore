@@ -5,3 +5,7 @@ __pycache__/
 myenv
 /myenv
 
+# Confidential files
+*.streamlit
+*.toml
+config.toml
