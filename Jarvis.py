@@ -1,4 +1,10 @@
 import streamlit as st
+from streamlit.components.v1 import html
+
+html(f'''
+     <script defer src="https://cloud.umami.is/script.js" data-website-id={st.secrets["UMAMI_WEBSITE_ID"]}></script>
+     ''', width=0, height=0, scrolling=False
+    )
 
 if "logged_in" not in st.session_state:
   st.session_state.logged_in = False
