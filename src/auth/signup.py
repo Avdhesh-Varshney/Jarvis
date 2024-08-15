@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 from database.encrypt import secure_password
 from database.mongodb import valid_email, valid_username, create_connection, add_userdata, check_user
 
@@ -39,8 +38,8 @@ def signup():
     new_repeat_password = st.text_input('🔑 Re-type your password:', type='password')
 
   # Handle Role-Based Key Inputs
-  admin_key = os.environ.get("ADMIN_KEY")
-  super_admin_key = os.environ.get("SUPER_ADMIN_KEY")
+  admin_key = st.secrets["ADMIN_KEY"]
+  super_admin_key = st.secrets["SUPER_ADMIN_KEY"]
 
   if new_roles == 'Admin':
     pass_key = st.text_input('🔑 Enter your Admin key:')

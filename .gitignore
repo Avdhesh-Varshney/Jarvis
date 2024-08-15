@@ -1,11 +1,9 @@
-Confidential/
+# Confidential files
+secrets.toml
+
+# Byte-compiled / optimized / DLL files
 __pycache__/
 
-# My virtual environment
+# Virtual environment
 myenv
 /myenv
-
-# Confidential files
-*.streamlit
-*.toml
-config.toml

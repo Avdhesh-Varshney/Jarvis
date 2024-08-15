@@ -9,8 +9,10 @@ if 'page' not in st.session_state:
   st.session_state.page = 1
 
 def API_Exists():
-  if os.environ.get("TMDB_API_KEY") != "":
-    return "TMDB_API_KEY" in os.environ
+  if "TMDB_API_KEY" in st.secrets and st.secrets["TMDB_API_KEY"]:
+    return True
+  elif "TMDB_API_KEY" in os.environ and os.environ["TMDB_API_KEY"]:
+    return True
   return False
 
 def showInstructions():
@@ -74,7 +76,7 @@ def movies():
     showInstructions()
     return
   
-  TMDB_API_KEY = os.environ.get("TMDB_API_KEY")
+  TMDB_API_KEY = (os.environ.get("TMDB_API_KEY") or st.secrets["TMDB_API_KEY"])
   choice = st.selectbox("Select an option", [None, "Trending Movies"])
   if choice == "Trending Movies":
     trendingMovies(TMDB_API_KEY)

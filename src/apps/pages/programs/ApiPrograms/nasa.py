@@ -5,8 +5,10 @@ import datetime
 import os
 
 def API_Exists():
-  if os.environ.get("NASA_API_KEY") != "":
-    return "NASA_API_KEY" in os.environ
+  if "NASA_API_KEY" in st.secrets and st.secrets["NASA_API_KEY"]:
+    return True
+  elif "NASA_API_KEY" in os.environ and os.environ["NASA_API_KEY"]:
+    return True
   return False
 
 def showInstructions():
@@ -222,7 +224,7 @@ def nasa():
     return
 
   choice = st.selectbox("What Would You Like To Know?", [None, "Nasa News", "Mars Image", "Asteroids", "Solar Bodies"])
-  NASA_API_KEY = os.environ.get("NASA_API_KEY", "")
+  NASA_API_KEY = (os.environ.get("NASA_API_KEY", "") or st.secrets["NASA_API_KEY"])
 
   if choice == "Nasa News":
     NasaNews(NASA_API_KEY)

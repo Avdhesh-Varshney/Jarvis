@@ -79,8 +79,10 @@ SORTBY = {
 }
 
 def API_Exists():
-  if os.environ.get("NEWS_API_KEY") != "":
-    return "NEWS_API_KEY" in os.environ
+  if "NEWS_API_KEY" in st.secrets and st.secrets["NEWS_API_KEY"]:
+    return True
+  elif "NEWS_API_KEY" in os.environ and os.environ["NEWS_API_KEY"]:
+    return True
   return False
 
 def showInstructions():
@@ -101,9 +103,8 @@ def formatISODate(iso_date_str):
   return date
 
 # TODO: Show more headlines of next page on button click
-def showHeadlines(required, country, category):
+def showHeadlines(API, required, country, category):
   news_headlines = []
-  API = os.environ["NEWS_API_KEY"]
   URL = f'https://newsapi.org/v2/{REQUIRED[required]}?country={COUNTRIES[country].lower()}&apiKey={API}&category={CATEGORIES[category]}'
   try:
     response = requests.get(URL)
@@ -119,8 +120,7 @@ def showHeadlines(required, country, category):
   except Exception as e:
     st.error(str(e))
 
-def showNews(required, query, sortby):
-  API = os.environ["NEWS_API_KEY"]
+def showNews(API, required, query, sortby):
   URL = f'https://newsapi.org/v2/{REQUIRED[required]}?q={query}&sortBy={SORTBY[sortby]}&apiKey={API}'
   try:
     response = requests.get(URL)
@@ -153,28 +153,29 @@ def latestNews():
 
   if not API_Exists():
     showInstructions()
-  else:
-    required = st.selectbox("Required", [None] + list(REQUIRED.keys()))
+    return
 
-    if required == "Top Headlines":
-      col1, col2, col3 = st.columns(3)
-      with col1:
-        country = st.selectbox("Country", [None] + list(COUNTRIES.keys()))
-      with col2:
-        category = st.selectbox("Category", [None] + list(CATEGORIES.keys()))
-      if st.button("Get News"):
-        if country == None or category == None:
-          st.error("Please select all the options")
-        else:
-          showHeadlines(required, country, category)
-    elif required == "Everything":
-      col1, col2 = st.columns(2)
-      with col1:
-        query = st.text_input("Enter your topic")
-      with col2:
-        sortby = st.selectbox("Sort By", [None] + list(SORTBY.keys()))
-      if st.button("Get News") and query != "" and sortby != None:
-        query = query.replace(" ", "+")
-        showNews(required, query, sortby)
+  required = st.selectbox("Required", [None] + list(REQUIRED.keys()))
+  API = (st.secrets["NEWS_API_KEY"] or os.environ["NEWS_API_KEY"])
+  if required == "Top Headlines":
+    col1, col2, col3 = st.columns(3)
+    with col1:
+      country = st.selectbox("Country", [None] + list(COUNTRIES.keys()))
+    with col2:
+      category = st.selectbox("Category", [None] + list(CATEGORIES.keys()))
+    if st.button("Get News"):
+      if country == None or category == None:
+        st.error("Please select all the options")
       else:
-        st.error("Please enter a topic and select a sort by option")
+        showHeadlines(API, required, country, category)
+  elif required == "Everything":
+    col1, col2 = st.columns(2)
+    with col1:
+      query = st.text_input("Enter your topic")
+    with col2:
+      sortby = st.selectbox("Sort By", [None] + list(SORTBY.keys()))
+    if st.button("Get News") and query != "" and sortby != None:
+      query = query.replace(" ", "+")
+      showNews(API, required, query, sortby)
+    else:
+      st.error("Please enter a topic and select a sort by option")

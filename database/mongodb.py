@@ -1,12 +1,12 @@
 from database.encrypt import check_password
 from pymongo import MongoClient
+import streamlit as st
 import pandas as pd
 import re
-import os
 
 def URI_Exist():
-  if os.environ.get("MONGODB_URI") != "":
-    return "MONGODB_URI" in os.environ
+  if st.secrets["MONGODB_URI"] != "":
+    return True
   return False
 
 ######################### Checking validations #########################
@@ -21,7 +21,7 @@ def valid_email(email):
 
 def create_connection():
   if URI_Exist():
-    MONGODB_URI = os.environ["MONGODB_URI"]
+    MONGODB_URI = st.secrets["MONGODB_URI"]
   else:
     MONGODB_URI = "mongodb://localhost:27017/"
   client = MongoClient(MONGODB_URI)

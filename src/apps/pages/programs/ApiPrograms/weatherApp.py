@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import os
 
-def get_weather(api_key, city):
+def getWeather(api_key, city):
 	try:
 		url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}"
 		response = requests.get(url)
@@ -27,8 +27,10 @@ def get_weather(api_key, city):
 		return None, str(e)
 
 def API_Exists():
-  if os.environ.get("WEATHER_API_KEY") != "":
-    return "WEATHER_API_KEY" in os.environ
+  if "WEATHER_API_KEY" in st.secrets and st.secrets["WEATHER_API_KEY"]:
+    return True
+  elif "WEATHER_API_KEY" in os.environ and os.environ["WEATHER_API_KEY"]:
+    return True
   return False
 
 def showInstructions():
@@ -46,13 +48,13 @@ def showInstructions():
 
 def weatherApp():
 	if API_Exists():
-		api_key = os.environ.get("WEATHER_API_KEY")
+		api_key = (os.environ.get("WEATHER_API_KEY") or st.secrets["WEATHER_API_KEY"])
 		st.markdown("### Weather App")
 		city = st.text_input("Enter City Name")
 
 		if st.button("Get Weather"):
 			if api_key and city:
-				weather, error = get_weather(api_key, city)
+				weather, error = getWeather(api_key, city)
 				if weather:
 					st.subheader(f"Weather in {weather['city']}, {weather['country']}")
 					col1, col2 = st.columns(2)
