@@ -1,14 +1,35 @@
 import streamlit as st
 import requests
+import os
+
+URL="https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLPUts_2rBVRVTrLlcB54Hwi6Ws51UWLXU"
+BLOG_URL="https://avdhesh-portfolio.netlify.app/blog/fetch-youtube-playlist-in-reactjs"
 
 def API_Exist():
-  if st.secrets["YOUTUBE_API_KEY"] != "":
+  if "YOUTUBE_API_KEY" in st.secrets and st.secrets["YOUTUBE_API_KEY"]:
+    return True
+  elif "YOUTUBE_API_KEY" in os.environ and os.environ["YOUTUBE_API_KEY"]:
     return True
   return False
 
-def youtubePlaylistVideos(API_KEY, playlist_id):
-  url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={playlist_id}&key={API_KEY}"
-  response = requests.get(url)
+def showInstructions():
+  st.markdown("### Instructions:")
+  st.markdown("""
+  1. Go to the [Google Developers Console](https://console.developers.google.com/).
+  2. Create a new project or select an existing project.
+  3. In the left sidebar, click on 'Credentials'.
+  4. Click on 'Create Credentials' and select 'API key'.
+  5. Copy the generated API key and paste it in the text box below.
+  6. Click on 'Submit' to save the API key.
+  """)
+  api_key = st.text_input("Enter your YouTube API key")
+  if st.button("Submit") and api_key != "":
+    os.environ["YOUTUBE_API_KEY"] = api_key
+    st.rerun()
+
+def youtubePlaylistVideos(API_KEY):
+  URL2 = f"{URL}&key={API_KEY}"
+  response = requests.get(URL2)
   videos = response.json().get('items', [])
   return videos
 
@@ -29,11 +50,13 @@ def youtubePlaylist():
   st.markdown("Explore the latest videos from the Jarvis YouTube playlist. Watch tutorials, feature demonstrations, and more to get started with Jarvis.")
   
   if API_Exist():
-    API_KEY = st.secrets["YOUTUBE_API_KEY"]
-    playlistId = "PLPUts_2rBVRVTrLlcB54Hwi6Ws51UWLXU"
-    videos = youtubePlaylistVideos(API_KEY, playlistId)
-    displayVideos(videos)
+    API_KEY = (st.secrets["YOUTUBE_API_KEY"] or os.environ["YOUTUBE_API_KEY"])
+    if st.button("Show Videos"):
+      videos = youtubePlaylistVideos(API_KEY)
+      displayVideos(videos)
   else:
+    showInstructions()
+    st.info(f"You can also go through my [blog post]({BLOG_URL}) for a detailed guide on how to get the YouTube API key.", icon="📝")
     st.error("YouTube API key not found. Please add your API key to the secrets manager.", icon="🚨")
 
 youtubePlaylist()

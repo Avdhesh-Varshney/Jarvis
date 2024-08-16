@@ -1,9 +1,13 @@
 import streamlit as st
-from database.mongodb import show_data
 
 def userData():
   st.title("📦 User Data")
-  data = show_data()
-  st.dataframe(data)
+  key = st.text_input("Enter the Super Admin key", type="password")
+  if st.button("Show Data") and key == st.secrets["SUPER_ADMIN_KEY"]:
+    from database.mongodb import show_data
+    data = show_data()
+    st.dataframe(data)
+  else:
+    st.info("Provide the correct key to view the data", icon="ℹ️")
 
 userData()
