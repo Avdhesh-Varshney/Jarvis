@@ -91,6 +91,6 @@ def view_all_users(conn):
 def show_data():
   conn = create_connection()
   users = view_all_users(conn)
-  df = pd.DataFrame(users, columns=['_id', 'username', 'name', 'role', 'gender', 'age', 'email', 'about', 'password'])
+  df = pd.DataFrame(users, columns=['_id', 'username', 'first_name', 'last_name', 'role', 'gender', 'age', 'email', 'about', 'password'])
   df['_id'] = df['_id'].astype(str)
   return df

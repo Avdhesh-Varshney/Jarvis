@@ -13,7 +13,7 @@ def fetchData():
       data["Contribution"].append(contributor["contributions"])
   return data
 
-def create_card(username, contribution, github, avatar_url):
+def createCard(username, contribution, github, avatar_url):
   card_html = f"""
   <div style="border: 1px solid #e1e1e1; border-radius: 10px; padding: 10px; margin: 10px; width: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
     <img src="{avatar_url}" alt="{username}" style="border-radius: 50%; width: 150px; height: 150px; display: block; margin-left: auto; margin-right: auto;"/>
@@ -38,7 +38,7 @@ def contributors():
     cols = st.columns(num_cols)
     for j in range(num_cols):
       if i + j < num_contributors:
-        card_html = create_card(
+        card_html = createCard(
           contributorsData["UserName"][i + j],
           contributorsData["Contribution"][i + j],
           contributorsData["GitHub"][i + j],

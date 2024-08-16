@@ -11,8 +11,9 @@ def logout():
 logout_page = st.Page(logout, title="My Profile", icon=":material/account_circle:")
 sign_up_page = st.Page("src/auth/signup.py", title="Sign up", icon=":material/person_add:")
 
-# /apps
-dashboard = st.Page("src/apps/dashboard.py", title="Dashboard", icon=":material/dashboard:")
+# /apps/public
+dashboard = st.Page("src/apps/public/dashboard.py", title="Dashboard", icon=":material/dashboard:")
+youtubePlaylist = st.Page("src/apps/public/youtubePlaylist.py", title="Jarvis Videos", icon=":material/ondemand_video:")
 
 # /apps/pages/automations
 websites = st.Page("src/apps/pages/automations/website.py", title="Websites", icon=":material/web:")
@@ -28,17 +29,26 @@ imagePrograms = st.Page("src/apps/pages/programs/imageProgram.py", title="Image 
 games = st.Page("src/apps/pages/programs/games.py",title="Games",icon=":material/casino:")
 studyPrograms = st.Page("src/apps/pages/programs/studyProgram.py", title="Study Programs", icon=":material/school:")
 
-# /apps/pages/contributors
-contributors = st.Page("src/apps/pages/contributors.py", title="Contributors", icon=":material/people:")
+# /apps/pages/adminTools/contributors
+contributors = st.Page("src/apps/pages/adminTools/contributors.py", title="Contributors", icon=":material/people:")
+packageUsed = st.Page("src/apps/pages/adminTools/packageUsed.py", title="Package Used", icon=":material/extension:")
+
+# /apps/pages/superAdminControls/userData
+userData = st.Page("src/apps/pages/superAdminControls/userData.py", title="Users Data", icon=":material/data_usage:")
 
 def load_functions():
   pages = {
-    "": [dashboard],
+    "": [dashboard, youtubePlaylist],
     "Account": [logout_page],
     "Automations": [websites],
     "Models": [chatBotModels, healthCareModels],
     "Programs": [apiPrograms, games, imagePrograms, simplePrograms, studyPrograms],
-    "Contributors": [contributors],
   }
+
+  if st.session_state.user["role"] == "Admin" or st.session_state.user["role"] == "Super Admin":
+    pages["Admin Tools"] = [contributors, packageUsed]
+  
+  if st.session_state.user["role"] == "Super Admin":
+    pages["Super Admin Controls"] = [userData]
 
   return pages
