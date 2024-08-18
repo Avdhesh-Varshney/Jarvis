@@ -17,6 +17,7 @@ youtubePlaylist = st.Page("src/apps/public/youtubePlaylist.py", title="Jarvis Vi
 
 # /apps/pages/automations
 websites = st.Page("src/apps/pages/automations/website.py", title="Websites", icon=":material/web:")
+messenger = st.Page("src/apps/pages/automations/messenger.py", title="Messenger", icon=":material/email:")
 
 # /apps/pages/models
 chatBotModels = st.Page("src/apps/pages/models/chatBotModel.py", title="Chat Bot Models", icon=":material/smart_toy:")
@@ -40,7 +41,7 @@ def load_functions():
   pages = {
     "": [dashboard, youtubePlaylist],
     "Account": [logout_page],
-    "Automations": [websites],
+    "Automations": [websites, messenger],
     "Models": [chatBotModels, healthCareModels],
     "Programs": [apiPrograms, games, imagePrograms, simplePrograms, studyPrograms],
   }
