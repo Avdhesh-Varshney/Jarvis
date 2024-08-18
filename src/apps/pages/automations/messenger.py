@@ -18,7 +18,6 @@ def messenger():
     try:
       module = importlib.import_module(f"src.apps.pages.automations.{MAIN_DIR}.{module_name}")
       func = getattr(module, module_name)
-      st.write(func)
       func()
     except ModuleNotFoundError:
       st.error(f"Module '{module_name}.py' could not be found.")

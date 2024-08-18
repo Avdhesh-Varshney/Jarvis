@@ -1,11 +1,11 @@
-import pywhatkit
+import streamlit as st
 import pandas as pd
+import pywhatkit
 import pyautogui
 import time
-import streamlit as st
 
 def whatsApp():
-  st.title('WhatsApp Automation 📨')
+  st.markdown('### WhatsApp Automation 📨')
   st.write('This app sends a WhatsApp message to all the contacts in the CSV file.')
 
   csv_file = st.file_uploader('Upload your CSV file', type=['csv'])
