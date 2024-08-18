@@ -9,7 +9,7 @@ COMMON_MODULE_PATH = os.path.join(BASE_DIR, MAIN_DIR)
 MODULES = getModules(COMMON_MODULE_PATH)
 
 def messenger():
-  st.title('Messanger Programs')
+  st.title('Messenger Programs')
   choice = st.selectbox('Select a program to execute', [None] + list(MODULES.keys()))
   st.markdown('---')
 
@@ -18,6 +18,7 @@ def messenger():
     try:
       module = importlib.import_module(f"src.apps.pages.automations.{MAIN_DIR}.{module_name}")
       func = getattr(module, module_name)
+      st.write(func)
       func()
     except ModuleNotFoundError:
       st.error(f"Module '{module_name}.py' could not be found.")
