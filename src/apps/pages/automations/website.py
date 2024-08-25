@@ -9,7 +9,7 @@ COMMON_MODULE_PATH = os.path.join(BASE_DIR, MAIN_DIR)
 MODULES = getModules(COMMON_MODULE_PATH)
 
 def website():
-  st.title('Automation Programs of Websites')
+  st.title('Website Programs')
   choice = st.selectbox('Select a program to execute', [None] + list(MODULES.keys()))
   st.markdown('---')
 
