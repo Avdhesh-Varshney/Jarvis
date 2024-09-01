@@ -1,6 +1,11 @@
-import streamlit as st
-from database.encrypt import secure_password
 from database.mongodb import valid_email, valid_username, create_connection, add_userdata, check_user
+from database.encrypt import secure_password
+from database.localStorageServer import server
+from datetime import datetime, timedelta
+import streamlit as st
+import pyautogui
+
+today = datetime.now()
 
 def signup():
   st.title("🔐 Signup Form")
@@ -27,7 +32,7 @@ def signup():
   with col2:
     new_roles = st.selectbox("👔 Select your role:", ["User", "Admin", "Super Admin"])
 
-  new_age = st.slider('🎂 Enter your age:', 5, 80, 22)
+  new_age = st.slider('🎂 Enter your age:', 5, 100, today.year-2002)
 
   # Password Section
   st.markdown("## Password")
@@ -52,6 +57,8 @@ def signup():
     if pass_key != super_admin_key:
       st.warning("Invalid super admin key!", icon="⚠️")
       return
+
+  remember_me = st.checkbox("Remember me for 30 days", value=False, key="remember_me_key")
 
   st.markdown("---")
   if st.button("Signup"):
@@ -82,7 +89,16 @@ def signup():
       return
 
     add_userdata(conn, new_user, first_name, last_name, new_roles, new_gender, new_age, new_email, new_about, new_password_hashed)
+
+    user = [new_user, new_email, first_name, last_name, new_roles, new_gender, new_age, new_about]
+    conn = server()
+    conn.setLocalStorageVal("user", user)
+    conn.setLocalStorageVal("password", new_password)
+    conn.setLocalStorageVal("expiration_date", (today + timedelta(days=(30 if remember_me else 1))).isoformat())
+    conn.setLocalStorageVal("verified", True)
+
     st.success("You have successfully created a valid account!", icon="✅")
     st.info("Go to Login Menu to login!", icon="ℹ️")
+    pyautogui.hotkey('ctrl', 'r')
 
 signup()

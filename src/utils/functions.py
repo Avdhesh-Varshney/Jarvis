@@ -1,18 +1,35 @@
-import streamlit as st
+from streamlit_ws_localstorage import injectWebsocketCode
+from datetime import datetime, timedelta
 from src.auth.profile import profile
+import streamlit as st
+import pyautogui
+import uuid
+
+today = datetime.now()
+
+def server():
+  return injectWebsocketCode(hostPort='wsauthserver.supergroup.ai', uid=str(uuid.uuid1()))
 
 def logout():
-  if st.session_state.logged_in:
+  if st.session_state['user'] != []:
     profile()
     if st.button("Log out"):
-      st.session_state.logged_in = False
-      st.rerun()
+      conn = server()
+      st.session_state["user"] = ['', '', '', '', '', '', '', '']
+      conn.setLocalStorageVal("user", ['', '', '', '', '', '', '', ''])
+      st.session_state['password'] = None
+      conn.setLocalStorageVal("password", None)
+      st.session_state['expiration_date'] = (today - timedelta(days=10)).isoformat()
+      conn.setLocalStorageVal("expiration_date", (today - timedelta(days=10)).isoformat())
+      st.session_state['verified'] = False
+      conn.setLocalStorageVal("verified", False)
+      pyautogui.hotkey('ctrl', 'r')
 
 logout_page = st.Page(logout, title="My Profile", icon=":material/account_circle:")
 sign_up_page = st.Page("src/auth/signup.py", title="Sign up", icon=":material/person_add:")
 
 # /apps/public
-dashboard = st.Page("src/apps/public/dashboard.py", title="Dashboard", icon=":material/dashboard:")
+dashboard = st.Page("src/apps/public/dashboard.py", title="Home", icon=":material/home:")
 youtubePlaylist = st.Page("src/apps/public/youtubePlaylist.py", title="Jarvis Videos", icon=":material/ondemand_video:")
 
 # /apps/pages/automations
@@ -47,11 +64,11 @@ def load_functions():
     "Models": [chatBotModels, healthCareModels, objectDetectionModels, recommendationModels],
     "Programs": [apiPrograms, games, imagePrograms, simplePrograms, studyPrograms],
   }
-
-  if st.session_state.user["role"] == "Admin" or st.session_state.user["role"] == "Super Admin":
+  user = st.session_state['user'].split(',')
+  if user[4] == "Admin" or user[4] == "Super Admin":
     pages["Admin Tools"] = [contributors, packageUsed]
   
-  if st.session_state.user["role"] == "Super Admin":
+  if user[4] == "Super Admin":
     pages["Super Admin Controls"] = [userData]
 
   return pages
