@@ -1,14 +1,9 @@
-from streamlit_ws_localstorage import injectWebsocketCode
+from database.localStorageServer import server
 from datetime import datetime, timedelta
 from src.auth.profile import profile
 import streamlit as st
-import pyautogui
-import uuid
 
 today = datetime.now()
-
-def server():
-  return injectWebsocketCode(hostPort='wsauthserver.supergroup.ai', uid=str(uuid.uuid1()))
 
 def logout():
   if st.session_state['user'] != []:
@@ -23,13 +18,14 @@ def logout():
       conn.setLocalStorageVal("expiration_date", (today - timedelta(days=10)).isoformat())
       st.session_state['verified'] = False
       conn.setLocalStorageVal("verified", False)
-      pyautogui.hotkey('ctrl', 'r')
+      st.info("Please refresh the page to continue", icon="ℹ️")
+      st.rerun()
 
 logout_page = st.Page(logout, title="My Profile", icon=":material/account_circle:")
 sign_up_page = st.Page("src/auth/signup.py", title="Sign up", icon=":material/person_add:")
 
 # /apps/public
-dashboard = st.Page("src/apps/public/dashboard.py", title="Home", icon=":material/home:")
+home = st.Page("src/apps/public/home.py", title="Home", icon=":material/home:")
 youtubePlaylist = st.Page("src/apps/public/youtubePlaylist.py", title="Jarvis Videos", icon=":material/ondemand_video:")
 
 # /apps/pages/automations
@@ -58,7 +54,7 @@ userData = st.Page("src/apps/pages/superAdminControls/userData.py", title="Users
 
 def load_functions():
   pages = {
-    "": [dashboard, youtubePlaylist],
+    "": [home, youtubePlaylist],
     "Account": [logout_page],
     "Automations": [websites, messenger],
     "Models": [chatBotModels, healthCareModels, objectDetectionModels, recommendationModels],

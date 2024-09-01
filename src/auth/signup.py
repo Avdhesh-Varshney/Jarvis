@@ -3,7 +3,6 @@ from database.encrypt import secure_password
 from database.localStorageServer import server
 from datetime import datetime, timedelta
 import streamlit as st
-import pyautogui
 
 today = datetime.now()
 
@@ -99,6 +98,6 @@ def signup():
 
     st.success("You have successfully created a valid account!", icon="✅")
     st.info("Go to Login Menu to login!", icon="ℹ️")
-    pyautogui.hotkey('ctrl', 'r')
+    st.info("Please refresh the page to continue", icon="ℹ️")
 
 signup()

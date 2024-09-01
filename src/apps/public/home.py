@@ -1,6 +1,6 @@
 import streamlit as st
 
-def dashboard():
+def home():
 	st.title("Welcome to Jarvis - Your Virtual AI Assistant!")
 	st.image('assets/image.gif', caption='Empower Your Digital Life with Jarvis', use_column_width=True)
 
@@ -36,4 +36,4 @@ def dashboard():
 	**Jarvis** is continually evolving with new features and improvements. Stay tuned for updates and feel free to contribute to its development.
 	""")
 
-dashboard()
+home()

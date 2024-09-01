@@ -2,7 +2,6 @@ from database.mongodb import create_connection, login_user
 from database.localStorageServer import server
 from datetime import datetime, timedelta
 import streamlit as st
-import pyautogui
 
 today = datetime.now()
 
@@ -28,17 +27,17 @@ def logged_in():
     conn.setLocalStorageVal("password", password)
     conn.setLocalStorageVal("expiration_date", (today + timedelta(days=(30 if remember_me else 1))).isoformat())
     conn.setLocalStorageVal("verified", True)
-    pyautogui.hotkey('ctrl', 'r')
+    st.info("Please refresh the page to continue", icon="ℹ️")
 
 def application():
   # /apps/public
-  dashboard = st.Page("src/apps/public/dashboard.py", title="Home", icon=":material/home:")
+  home = st.Page("src/apps/public/home.py", title="Home", icon=":material/home:")
   youtubePlaylist = st.Page("src/apps/public/youtubePlaylist.py", title="Jarvis Videos", icon=":material/ondemand_video:")
 
   # /auth
   login_page = st.Page(logged_in, title="Log in", icon=":material/login:")
   sign_up_page = st.Page("src/auth/signup.py", title="Sign up", icon=":material/person_add:")
-  return st.navigation({"": [dashboard, youtubePlaylist], "Account": [login_page, sign_up_page]})
+  return st.navigation({"": [home, youtubePlaylist], "Account": [login_page, sign_up_page]})
 
 if __name__ == "__main__":
   app = application()
