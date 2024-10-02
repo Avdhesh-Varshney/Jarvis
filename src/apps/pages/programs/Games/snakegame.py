@@ -76,7 +76,7 @@ def handle_keypress(key):
         st.session_state.direction = "RIGHT"
 
 # Main Snake Game function
-def snake_game():
+def snake_Game():
     st.title("🐍 Snake Game 🐍")
     
     # Initialize game state if not already done
@@ -106,4 +106,4 @@ def snake_game():
         initialize_game()
 
 # Run the game
-snake_game()
+#snake_Game()
