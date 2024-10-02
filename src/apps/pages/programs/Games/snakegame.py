@@ -1,109 +1,142 @@
 import streamlit as st
 import numpy as np
-import random
 import time
+import streamlit_shortcuts
+import random
 
-# Define grid size and directions
-GRID_SIZE = 20
-directions = {
-    "UP": (-1, 0),
-    "DOWN": (1, 0),
-    "LEFT": (0, -1),
-    "RIGHT": (0, 1),
-}
+# Grid size
+rows = 10
+cols = 10
+update_interval = 0.5  # Update every 0.5 seconds
 
-# Initialize game state
-def initialize_game():
-    st.session_state.snake = [(GRID_SIZE // 2, GRID_SIZE // 2)]
-    st.session_state.food = place_food(st.session_state.snake)
-    st.session_state.direction = "RIGHT"
-    st.session_state.alive = True
-    st.session_state.score = 0
+# Initial State
+if "game_state" not in st.session_state:
+    st.session_state.game_state = {
+        "snake": [(2, 2), (2, 1), (2, 0)],
+        "direction": (0, 1),
+        "food": (5, 5),
+        "score": 0,
+        "game_over": False,
+        "last_update": time.time(),
+        "fruit": "🍐"
+    }
 
-# Place food on the grid
 def place_food(snake):
-    while True:
-        food = (random.randint(0, GRID_SIZE - 1), random.randint(0, GRID_SIZE - 1))
-        if food not in snake:
-            return food
+    empty_cells = [(r, c) for r in range(rows) for c in range(cols) if (r, c) not in snake]
+    return empty_cells[np.random.choice(len(empty_cells))]
 
-# Move the snake and update the game state
-def move_snake():
-    if not st.session_state.alive:
+def set_fruit(fruits):
+    return fruits[random.randint(0, len(fruits)-1)]
+
+def on_button_click():
+    if st.session_state.game_state["game_over"]:
+        st.session_state.game_state = {
+            "snake": [(2, 2), (2, 1), (2, 0)],
+            "direction": (0, 1),
+            "food": place_food(st.session_state.game_state["snake"]),
+            "score": 0,
+            "game_over": False,
+            "last_update": time.time(),
+            "fruit": "🍐"
+        }
+
+def update_snake():
+    snake = st.session_state.game_state["snake"]
+    direction = st.session_state.game_state["direction"]
+    new_head = (snake[0][0] + direction[0], snake[0][1] + direction[1])
+
+    if new_head[0] < 0 or new_head[0] >= rows or new_head[1] < 0 or new_head[1] >= cols or new_head in snake:
+        st.session_state.game_state["game_over"] = True
         return
 
-    # Calculate new head position
-    head_x, head_y = st.session_state.snake[0]
-    dir_x, dir_y = directions[st.session_state.direction]
-    new_head = (head_x + dir_x, head_y + dir_y)
-
-    # Check for collisions
-    if (
-        new_head[0] < 0 or new_head[0] >= GRID_SIZE or
-        new_head[1] < 0 or new_head[1] >= GRID_SIZE or
-        new_head in st.session_state.snake
-    ):
-        st.session_state.alive = False
-        return
-
-    # Move the snake
-    st.session_state.snake = [new_head] + st.session_state.snake[:-1]
-
-    # Check if food is eaten
-    if new_head == st.session_state.food:
-        st.session_state.snake.append(st.session_state.snake[-1])  # Grow the snake
-        st.session_state.food = place_food(st.session_state.snake)
-        st.session_state.score += 1
-
-# Display the game grid
-def display_grid():
-    grid = np.full((GRID_SIZE, GRID_SIZE), " ")
-    for x, y in st.session_state.snake:
-        grid[x, y] = "🟩"
-    food_x, food_y = st.session_state.food
-    grid[food_x, food_y] = "🍎"
-    st.write("\n".join([" ".join(row) for row in grid]))
-
-# Handle key presses for direction
-def handle_keypress(key):
-    if key == "w" and st.session_state.direction != "DOWN":
-        st.session_state.direction = "UP"
-    elif key == "s" and st.session_state.direction != "UP":
-        st.session_state.direction = "DOWN"
-    elif key == "a" and st.session_state.direction != "RIGHT":
-        st.session_state.direction = "LEFT"
-    elif key == "d" and st.session_state.direction != "LEFT":
-        st.session_state.direction = "RIGHT"
-
-# Main Snake Game function
-def snake_Game():
-    st.title("🐍 Snake Game 🐍")
-    
-    # Initialize game state if not already done
-    if "snake" not in st.session_state:
-        initialize_game()
-
-    # Capture keyboard input
-    st.text("Use W (up), A (left), S (down), D (right) keys to control the snake")
-    for key in ["w", "a", "s", "d"]:
-        if st.button(f"{key.upper()}", key=key):
-            handle_keypress(key)
-
-    # Move the snake
-    move_snake()
-
-    # Display the grid
-    display_grid()
-
-    # Display game status
-    if not st.session_state.alive:
-        st.error(f"Game Over! Your Score: {st.session_state.score}")
+    snake.insert(0, new_head)
+    if new_head == st.session_state.game_state["food"]:
+        st.session_state.game_state["food"] = place_food(snake)
+        st.session_state.game_state["fruit"] = set_fruit(["🍎", "🍓", "🍒", "🍊", "🍉"])
+        st.session_state.game_state["score"] += 1
     else:
-        st.success(f"Score: {st.session_state.score}")
+        snake.pop()
 
-    # Restart the game
-    if st.button("Restart Game"):
-        initialize_game()
 
-# Run the game
-#snake_Game()
+
+def render_grid():
+    snake = st.session_state.game_state["snake"]
+    food = st.session_state.game_state["food"]
+    fruit = st.session_state.game_state["fruit"]
+
+    for row in range(rows):
+        columns = st.columns(cols)
+        for col_index, col in enumerate(columns):
+            with col.container():
+                if (row, col_index) == food:
+                    col.button(fruit, key=f"button_{row}_{col_index}")
+                elif (row, col_index) in snake:
+                    col.button("", key=f"button_{row}_{col_index}", type="primary" )
+                else:
+                    col.button("", key=f"button_{row}_{col_index}", disabled=True)
+
+
+def control_snake(key):
+    if st.session_state.game_state["game_over"]:
+        return
+
+    direction_map = {
+        "Up": (-1, 0),
+        "Down": (1, 0),
+        "Left": (0, -1),
+        "Right": (0, 1)
+    }
+
+    current_direction = st.session_state.game_state["direction"]
+    new_direction = direction_map[key]
+    if (current_direction[0] + new_direction[0], current_direction[1] + new_direction[1]) != 0:
+        st.session_state.game_state["direction"] = new_direction
+
+def up_callback():
+   return control_snake("Up")
+def down_callback():
+   return control_snake("Down")
+def left_callback():
+   return control_snake("Left")
+def right_callback():
+   return control_snake("Right")
+
+# Render game controls and grid
+st.title("🐍 Snake Game 🐍")
+st.button("Restart Game", on_click=on_button_click)
+st.text(f"Score: {st.session_state.game_state['score']}")
+
+st.write("Controls:")
+st.write("shift+W > UP | shift+S > DOWN | shift+L > LEFT | shift+R > RIGHT")
+
+# Check the last update time and update snake if the interval has passed.
+current_time = time.time()
+if current_time - st.session_state.game_state["last_update"] >= update_interval:
+    st.session_state.game_state["last_update"] = current_time
+    if not st.session_state.game_state["game_over"]:
+        update_snake()
+    render_grid()
+    st.rerun()
+else:
+    render_grid()
+
+# Control Buttons layout
+with st.container():
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        streamlit_shortcuts.button("Up", on_click=up_callback, shortcut="Shift+W")
+    with col2:
+        streamlit_shortcuts.button("Down", on_click=down_callback, shortcut="Shift+S")
+    with col3:
+        streamlit_shortcuts.button("Left", on_click=left_callback, shortcut="Shift+A")
+    with col4:
+        streamlit_shortcuts.button("Right", on_click=right_callback, shortcut="Shift+D")
+
+if st.session_state.game_state["game_over"]:
+    st.title("Game Over")
+    st.balloons()
+
+# Pause for the update_interval to create a continuous loop effect
+time.sleep(update_interval)
+if not st.session_state.game_state["game_over"]:
+    st.rerun()
