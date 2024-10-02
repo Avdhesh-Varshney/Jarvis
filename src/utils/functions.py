@@ -34,6 +34,7 @@ messenger = st.Page("src/apps/pages/automations/messenger.py", title="Messenger"
 
 # /apps/pages/models
 chatBotModels = st.Page("src/apps/pages/models/chatBotModel.py", title="Chat Bot Models", icon=":material/smart_toy:")
+imageRecognizerModels = st.Page("src/apps/pages/models/imageRecognizerModel.py", title="Image Recognition Models")
 healthCareModels = st.Page("src/apps/pages/models/healthCareModel.py", title="Health Care Models", icon=":material/health_and_safety:")
 objectDetectionModels = st.Page("src/apps/pages/models/objectDetectionModel.py", title="Object Detection Models", icon=":material/camera_alt:")
 recommendationModels = st.Page("src/apps/pages/models/recommendationModel.py", title="Recommendation Models", icon=":material/recommend:")
@@ -57,7 +58,7 @@ def load_functions():
     "": [home, youtubePlaylist],
     "Account": [logout_page],
     "Automations": [websites, messenger],
-    "Models": [chatBotModels, healthCareModels, objectDetectionModels, recommendationModels],
+    "Models": [chatBotModels, imageRecognizerModels, healthCareModels, objectDetectionModels, recommendationModels],
     "Programs": [apiPrograms, games, imagePrograms, simplePrograms, studyPrograms],
   }
   user = st.session_state['user'].split(',')
