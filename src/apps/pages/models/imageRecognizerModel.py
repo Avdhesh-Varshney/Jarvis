@@ -18,7 +18,7 @@ def imageRecognizerModels():
     file_name = module_name[0].lower() + module_name[1:]
     try:
       module = importlib.import_module(f"src.apps.pages.models.{MAIN_DIR}.{module_name}.{file_name}")
-      func = getattr(module, "digitRecognizerModel")
+      func = getattr(module, file_name)
       func()
     except ModuleNotFoundError:
       st.error(f"Module '{file_name}.py' could not be found.")

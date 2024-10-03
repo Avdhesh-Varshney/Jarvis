@@ -5,11 +5,12 @@ from PIL import Image
 
 @st.cache_resource
 def load_model():
-  model = tf.keras.models.load_model("src/apps/pages/models/ImageRecognizerModels/DigitRecognizerModel/model.keras")
+  model = tf.keras.models.load_model("src/apps/pages/models/ImageRecognizerModels/DigitRecognizerModel/model_9.keras")
   return model
 
 def upload_digit_img():
-  img = st.file_uploader("Upload here",type=["jpg","jpeg"])
+  img = st.file_uploader("Upload here",type=["jpg","jpeg","png"])
+  # img will be None at start, therefore it is handled.
   if img is not None: 
     try:
       st.image(img,width=200,caption="Uploaded Img")

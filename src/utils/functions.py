@@ -34,7 +34,7 @@ messenger = st.Page("src/apps/pages/automations/messenger.py", title="Messenger"
 
 # /apps/pages/models
 chatBotModels = st.Page("src/apps/pages/models/chatBotModel.py", title="Chat Bot Models", icon=":material/smart_toy:")
-imageRecognizerModels = st.Page("src/apps/pages/models/imageRecognizerModel.py", title="Image Recognition Models")
+imageRecognizerModels = st.Page("src/apps/pages/models/imageRecognizerModel.py", title="Image Recognition Models", icon=":material/image_search:")
 healthCareModels = st.Page("src/apps/pages/models/healthCareModel.py", title="Health Care Models", icon=":material/health_and_safety:")
 objectDetectionModels = st.Page("src/apps/pages/models/objectDetectionModel.py", title="Object Detection Models", icon=":material/camera_alt:")
 recommendationModels = st.Page("src/apps/pages/models/recommendationModel.py", title="Recommendation Models", icon=":material/recommend:")
