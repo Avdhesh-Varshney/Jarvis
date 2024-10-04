@@ -52,7 +52,11 @@ def displayResults(results, search_type):
             st.write(f"Artist: {track['artists'][0]['name']}")
             st.write(f"Album: {track['album']['name']}")
             st.write(f"Release Date: {track['album']['release_date']}")
-            st.write(f"Preview: [Listen here]({track['preview_url']})")
+            if track['preview_url']:
+                st.write("Preview:")
+                st.audio(track['preview_url'])
+            else:
+                st.write("Preview not available.")
             st.markdown("---")
     elif search_type == 'artist':
         for artist in results:
@@ -83,7 +87,7 @@ def playMusic():
         st.error("Invalid Spotify Client ID or Secret. Please try again.")
         return
 
-    # Music search form
+    # search form
     st.markdown("#### Music Search")
     search_query = st.text_input("Enter artist, album, or track name")
     search_type = st.selectbox("Select search type", ["track", "album", "artist"])
