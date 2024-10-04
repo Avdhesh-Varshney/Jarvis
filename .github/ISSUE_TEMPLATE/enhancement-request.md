@@ -8,9 +8,9 @@ assignees:
 
 ---
 
-:red_circle: **Title** :
-:red_circle: **Enhancement Aim** :
-:red_circle: **Changes** : <!-- Enlist those changes you want to do. -->
+:red_circle: **Title**: 
+:red_circle: **Enhancement Aim**: 
+:red_circle: **Changes**: <!-- Enlist those changes you want to do. -->
 
 
 ### Screenshots 📷
@@ -20,7 +20,7 @@ assignees:
 ***********************************************************************
 :white_check_mark: **To be Mentioned while taking the issue :**
 - Full name : 
-- What is your participant role? (Mention the Open Source Program name. Eg. GSSOC, SSOC, JWOC, etc.)
+- What is your participant role? <!-- (Mention the Open Source Program name. Eg. GSSOC, SSOC, Hacktoberfest, etc.) -->
 
 ***********************************************************************
 Happy Contributing 🚀 

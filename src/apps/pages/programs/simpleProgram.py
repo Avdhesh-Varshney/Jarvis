@@ -1,36 +1,30 @@
+import os
+import importlib
 import streamlit as st
+from src.helpers.getModules import getModules
+
+MAIN_DIR = 'SimplePrograms'
+BASE_DIR = os.path.dirname(__file__)
+COMMON_MODULE_PATH = os.path.join(BASE_DIR, MAIN_DIR)
+MODULES = getModules(COMMON_MODULE_PATH)
 
 def simplePrograms():
   st.title('Simple Programs')
-  choice = st.selectbox('Select a program to execute', [None, 'Timer', 'Password Generator','Caeser Cipher', 'Calculator', 'World Clock', 'Internet Speed Test',"Alarm Program", "To-Do List"])
-
+  choice = st.selectbox('Select a program to execute', [None] + list(MODULES.keys()))
   st.markdown('---')
 
-  if choice == 'Timer':
-    from src.apps.pages.programs.SimplePrograms.timer import timer
-    timer()
-  elif choice == 'Password Generator':
-    from src.apps.pages.programs.SimplePrograms.passwordGenerator import passwordGeneratorApp
-    passwordGeneratorApp()
-  elif choice == 'Caeser Cipher':
-    from src.apps.pages.programs.SimplePrograms.CaeserCipher import caeserCipher
-    caeserCipher()
-  elif choice == 'Calculator':
-    from src.apps.pages.programs.SimplePrograms.calculator import calculator
-    calculator()
-  elif choice == 'World Clock':
-    from src.apps.pages.programs.SimplePrograms.worldClock import display_world_clock
-    display_world_clock()
-  elif choice == 'Internet Speed Test':
-    from src.apps.pages.programs.SimplePrograms.Internet_Speed_Test import Internet_Speed_Test
-    Internet_Speed_Test()
-  elif choice == 'Alarm Program':
-    from src.apps.pages.programs.SimplePrograms.alarm_program import Alarm_App
-    Alarm_App()
-  elif choice == 'To-Do List':
-    from src.apps.pages.programs.SimplePrograms.to_do_list import To_Do_List_App
-    To_Do_List_App()
-    
+  if choice in MODULES:
+    module_name = MODULES[choice]
+    try:
+      module = importlib.import_module(f"src.apps.pages.programs.{MAIN_DIR}.{module_name}")
+      func = getattr(module, module_name)
+      func()
+    except ModuleNotFoundError:
+      st.error(f"Module '{module_name}.py' could not be found.")
+    except AttributeError:
+      st.error(f"Function '{module_name}' could not be found in '{module_name}.py'.")
+    except Exception as e:
+      st.error(f"An error occurred: {e}")
   else:
     st.info("Star this project on [GitHub](https://github.com/Avdhesh-Varshney/Jarvis), if you like it!", icon='⭐')
 

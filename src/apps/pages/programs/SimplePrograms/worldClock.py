@@ -8,7 +8,7 @@ def get_city_time(timezone):
     city_time = datetime.now(tz)
     return city_time.strftime('%H:%M:%S'), city_time.strftime('%A, %Y-%m-%d')
 
-def display_world_clock():
+def worldClock():
     st.title("World Clock")
 
     cities = {

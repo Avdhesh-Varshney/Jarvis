@@ -1,36 +1,30 @@
+import os
+import importlib
 import streamlit as st
+from src.helpers.getModules import getModules
+
+MAIN_DIR = 'ApiPrograms'
+BASE_DIR = os.path.dirname(__file__)
+COMMON_MODULE_PATH = os.path.join(BASE_DIR, MAIN_DIR)
+MODULES = getModules(COMMON_MODULE_PATH)
 
 def apiPrograms():
   st.title('API Programs')
-  choice = st.selectbox('Select a program to execute', [None, "Jokes", "General Facts", "Gemini ChatBot", "Quote of the Day", "Currency Convertor", "Unit Convertor", "Horoscope", "Weather Details"])
-
+  choice = st.selectbox('Select a program to execute', [None] + list(MODULES.keys()))
   st.markdown('---')
 
-  if choice == "Jokes":
-    from src.apps.pages.programs.ApiPrograms.joke import play_joke
-    play_joke()
-  elif choice == "General Facts":
-    from src.apps.pages.programs.ApiPrograms.fact import play_fact
-    play_fact()
-  elif choice == "Gemini ChatBot":
-    from src.apps.pages.programs.ApiPrograms.genAIChatbot import chatBot
-    chatBot()
-  elif choice == "Quote of the Day":
-    from src.apps.pages.programs.ApiPrograms.quotes import show_quote
-    show_quote()
-  elif choice == "Currency Convertor":
-    from src.apps.pages.programs.ApiPrograms.currency import convert
-    convert()
-  elif choice == "Unit Convertor":
-    from src.apps.pages.programs.ApiPrograms.unit_converter import units_convert
-    units_convert()
-  elif choice == "Horoscope":
-    from src.apps.pages.programs.ApiPrograms.horoscope import horoscope
-    horoscope()
-  elif choice == "Weather Details":
-    from src.apps.pages.programs.ApiPrograms.temperature import get_temperature
-    get_temperature()
-
+  if choice in MODULES:
+    module_name = MODULES[choice]
+    try:
+      module = importlib.import_module(f"src.apps.pages.programs.{MAIN_DIR}.{module_name}")
+      func = getattr(module, module_name)
+      func()
+    except ModuleNotFoundError:
+      st.error(f"Module '{module_name}.py' could not be found.")
+    except AttributeError:
+      st.error(f"Function '{module_name}' could not be found in '{module_name}.py'.")
+    except Exception as e:
+      st.error(f"An error occurred: {e}")
   else:
     st.info("Star this project on [GitHub](https://github.com/Avdhesh-Varshney/Jarvis), if you like it!", icon='⭐')
 

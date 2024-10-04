@@ -1,5 +1,5 @@
 import streamlit as st
-from database.sql import create_connection, create_usertable, login_user
+from database.mongodb import create_connection, login_user
 
 def login():
   st.title("🔐 Login")
@@ -9,14 +9,14 @@ def login():
   # Input fields for username/email and password
   user = st.text_input("👤 Username/Email:")
   password = st.text_input("🔑 Password:", type="password")
+  remember_me = st.checkbox("Remember me for 30 days", value=False, key="remember_me_key")
 
-  if st.button("Log in"):
+  if st.button("Log in") and user and password:
     conn = create_connection()
-    create_usertable(conn)
     result = login_user(conn, user, password)
     if result:
-      st.success("Logged in as {}!".format(result[0][3]), icon="✅")
-      return result
+      st.success(f"Credentials Saved for {30 if remember_me else 1} day's!", icon="✅")
+      return result, password, remember_me
     else:
-      st.warning("Incorrect credentials!")
-  return []
+      st.warning("Incorrect credentials!", icon="⚠️")
+  return [], password, remember_me
