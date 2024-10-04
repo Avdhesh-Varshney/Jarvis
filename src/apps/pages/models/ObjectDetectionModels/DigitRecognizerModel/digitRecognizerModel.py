@@ -5,7 +5,7 @@ from PIL import Image
 
 @st.cache_resource
 def load_model():
-  model = tf.keras.models.load_model("src/apps/pages/models/ImageRecognizerModels/DigitRecognizerModel/model_9.keras")
+  model = tf.keras.models.load_model("src/apps/pages/models/ObjectDetectionModels/DigitRecognizerModel/model_9.keras")
   return model
 
 def upload_digit_img():
