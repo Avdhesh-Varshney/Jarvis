@@ -51,6 +51,19 @@
 
 ---
 
+### 💻 **Required Installments**
+- **argon2** 
+```bash 
+   pip install argon2-cffi
+```
+- **pymongo**
+```bash 
+   pip install pymongo
+```
+---
+
+Run the code using : streamlit run Jarvis.py
+
 <div align="center">
   <h3>💙 Like the project? &nbsp;🌟 Star it!</h3>
 </div>
