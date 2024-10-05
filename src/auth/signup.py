@@ -1,3 +1,4 @@
+import re
 from database.mongodb import valid_email, valid_username, create_connection, add_userdata, check_user
 from database.encrypt import secure_password
 from database.localStorageServer import server
@@ -5,6 +6,15 @@ from datetime import datetime, timedelta
 import streamlit as st
 
 today = datetime.now()
+
+def valid_password(password):
+    if len(password) < 8:
+        return False, "Password must be at least 8 characters long!"
+    if not re.search(r"\d", password):
+        return False, "Password must contain at least one digit!"
+    if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+        return False, "Password must contain at least one special character!"
+    return True, ""
 
 def signup():
   st.title("🔐 Signup Form")
@@ -68,8 +78,15 @@ def signup():
     if new_password != new_repeat_password:
       st.warning("Passwords do not match!", icon="⚠️")
       return
+    
+     # Validate password strength
+    is_valid, validation_message = valid_password(new_password)
+    if not is_valid:
+        st.warning(validation_message, icon="⚠️")
+        return
 
     new_password_hashed = secure_password(new_password)
+    
     if not valid_email(new_email):
       st.warning("Invalid email address!", icon="⚠️")
       return
