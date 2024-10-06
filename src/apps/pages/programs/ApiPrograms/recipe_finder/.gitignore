@@ -1,0 +1,14 @@
+# Ignore Python cache files
+__pycache__/
+
+# Ignore .env file for API keys
+.env
+
+# Ignore virtual environment
+venv/
+
+# Ignore log files
+*.log
+
+# Ignore compiled files
+*.pyc
