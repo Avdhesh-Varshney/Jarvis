@@ -35,3 +35,5 @@ streamlit==1.38.0
 streamlit-ws-localstorage==1.0.6
 tensorflow==2.16.1
 websockets==13.0.1
+torch==2.3.0
+ultralytics==8.3.3
