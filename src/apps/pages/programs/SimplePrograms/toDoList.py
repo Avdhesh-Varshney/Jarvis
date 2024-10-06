@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Streamlit app code for a simple to-do list
-def To_Do_List_App():
+def toDoList():
     st.title("📝 To-Do List Application")
     if 'tasks' not in st.session_state:
         st.session_state.tasks = []
