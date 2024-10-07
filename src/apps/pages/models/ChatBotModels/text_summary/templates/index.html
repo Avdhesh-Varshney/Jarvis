@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+    
+    <!-- Import Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Text Summarization Tool</h1>
+
+        <!-- Input Section -->
+        <textarea id="inputText" placeholder="Enter your text here..." rows="10"></textarea>
+        
+        <!-- Button -->
+        <button onclick="summarizeText()">Summarize</button>
+
+        <!-- Spinner (Hidden by default) -->
+        <div id="spinner" class="spinner hidden"></div>
+        
+        <!-- Output Section -->
+        <h3>Summary:</h3>
+        <div id="summaryText" class="summary-box"></div>
+    </div>
+
+    <!-- Link to JavaScript -->
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
