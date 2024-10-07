@@ -96,7 +96,3 @@ def objectDetection():
     
     if not st.session_state.running:
         st.write("Object detection is stopped. Click 'Start' to begin.")
-
-if __name__ == "__main__":
-    st.title("Real-time Object Detection")
-    objectDetection()
