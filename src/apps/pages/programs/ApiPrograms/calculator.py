@@ -74,8 +74,4 @@ def calculator():
             # Display the results
             display_results(result_pods)
         else:
-            st.error("Please enter a valid query!", icon="🚨")
-
-# Run the app
-if __name__ == "__main__":
-    calculator()
+            st.error("Please enter a valid query!", icon="🚨") 
