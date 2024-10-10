@@ -53,6 +53,3 @@ def textToImageGenerator():
             st.error(f"An error occurred: {str(e)}")
     else:
         st.warning("Please enter a prompt first.")
-
-# Call the main function directly
-textToImageGenerator()
