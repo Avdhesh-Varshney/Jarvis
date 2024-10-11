@@ -1,20 +1,15 @@
 import streamlit as st
 import requests
-import os
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Function to fetch recipes
-def fetch_recipes(query):
-    api_key = os.getenv('SPOONACULAR_API_KEY')  # Retrieve API key from environment variable
+# Function to fetch recipes using Streamlit secrets for API key
+def recipeFinder(query):
+    api_key = st.secrets["SPOONACULAR"]["api_key"]  # Retrieve API key from Streamlit secrets
     api_url = f"https://api.spoonacular.com/recipes/complexSearch?query={query}&apiKey={api_key}"
     response = requests.get(api_url)
     return response.json()
-# Streamlit UI
 
-# Add custom CSS
+# Streamlit UI
+# custom CSS
 st.write(
     """
     <style>
@@ -56,7 +51,7 @@ st.write(
     unsafe_allow_html=True,
 )
 
-# Display the title with the custom class
+# Displays the title with the custom class
 st.markdown('<h1 class="title">Recipe Finder</h1>', unsafe_allow_html=True)
 
 # Centered input box with placeholder text
@@ -64,7 +59,7 @@ st.markdown('<div class="input-container">', unsafe_allow_html=True)
 query = st.text_input("Ingredients or a dish name, you name it!", placeholder="Enter")
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Add custom CSS for styling
+# Adds custom CSS for styling
 st.markdown(
     """
     <style>
@@ -111,15 +106,15 @@ st.markdown(
 
 if query:
     # Fetch recipes
-    recipes_data = fetch_recipes(query)
+    recipes_data = recipeFinder(query)
     
     # Extract the results list from the response
     recipes = recipes_data.get('results', [])
     
-    # Create a flex container for the recipes
+    # Creates a flex container for the recipes
     st.markdown('<div class="recipe-container">', unsafe_allow_html=True)
     
-    # Display each recipe with the updated styles
+    # Displays each recipe with the updated styles
     for recipe in recipes:
         recipe_url = f"https://spoonacular.com/recipes/{recipe['title'].replace(' ', '-').lower()}-{recipe['id']}"
         st.markdown(
