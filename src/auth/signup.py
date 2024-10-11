@@ -3,20 +3,8 @@ from database.encrypt import secure_password
 from database.localStorageServer import server
 from datetime import datetime, timedelta
 import streamlit as st
-import re
 
 today = datetime.now()
-
-# Password Strength Validation Function
-def validate_password_strength(password):
-    if len(password) < 8:
-        return "Password must be at least 8 characters long!"
-    if not re.search(r"\d", password):
-        return "Password must contain at least one digit!"
-    if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
-        return "Password must contain at least one special character!"
-    return None
-
 
 def signup():
   st.title("🔐 Signup Form")
