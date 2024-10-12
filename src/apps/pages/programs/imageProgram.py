@@ -24,10 +24,7 @@ def imagePrograms():
     except AttributeError:
       st.error(f"Function '{module_name}' could not be found in '{module_name}.py'.")
     except Exception as e:
-      if "multiple identical forms" in str(e):
-        pass  # Ignore this specific error
-      else:
-        st.error(f"An error occurred: {e}")
+      st.error(f"An error occurred: {e}")
   else:
     st.info("Star this project on [GitHub](https://github.com/Avdhesh-Varshney/Jarvis), if you like it!", icon='⭐')
 
