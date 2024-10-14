@@ -31,13 +31,40 @@ def logged_in():
 
 def application():
   # /apps/public
-  home = st.Page("src/apps/public/home.py", title="Home", icon=":material/home:")
-  youtubePlaylist = st.Page("src/apps/public/youtubePlaylist.py", title="Jarvis Videos", icon=":material/ondemand_video:")
+    video_placeholder = st.empty()
+    
+    # Embed the video with autoplay
+    video_placeholder.video("src/intro.mp4")
+    
+    # JavaScript to remove the video after it finishes playing
+    video_js = """
+    <script>
+    const video = document.querySelector('video');
+    video.addEventListener('ended', () => {
+        video.style.display = 'none';
+        window.parent.postMessage({type: 'video_ended'}, '*');
+    });
+    </script>
+    """
+    components.html(video_js, height=0)
+    
+    # Listen for the video_ended event
+    if st.session_state.get('video_ended', False):
+        video_placeholder.empty()
+        home = st.Page("src/apps/public/home.py", title="Home", icon=":material/home:")
+        youtubePlaylist = st.Page("src/apps/public/youtubePlaylist.py", title="Jarvis Videos", icon=":material/ondemand_video:")
 
   # /auth
-  login_page = st.Page(logged_in, title="Log in", icon=":material/login:")
-  sign_up_page = st.Page("src/auth/signup.py", title="Sign up", icon=":material/person_add:")
-  return st.navigation({"": [home, youtubePlaylist], "Account": [login_page, sign_up_page]})
+    login_page = st.Page(logged_in, title="Log in", icon=":material/login:")
+    sign_up_page = st.Page("src/auth/signup.py", title="Sign up", icon=":material/person_add:")
+    return st.navigation({"": [home, youtubePlaylist], "Account": [login_page, sign_up_page]})
+
+if 'video_ended' not in st.session_state:
+    st.session_state.video_ended = False
+
+# Add this to handle the video_ended event
+if st.session_state.video_ended:
+    st.rerun()
 
 if __name__ == "__main__":
   app = application()
