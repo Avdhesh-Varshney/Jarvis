@@ -17,6 +17,7 @@
 
 ### 🔑 **Core Features**
 - Control devices and execute tasks using natural language commands.
+  
 - Streamline repetitive tasks to save time and effort.
 - Supports multiple user roles (User, Admin, Super Admin) for tailored access.
 - Utilizes MongoDB for secure and efficient data management.
@@ -28,13 +29,13 @@
 - **User Roles:** The application supports multiple roles (User, Admin, Super Admin), each with specific access to services.
 - **Login Credentials:** Ensure you have your ID and password ready for authentication.
 - **For Testing/Developing Purpose:**
-  - **User:**
+  **User:**
     - **ID:** user@user.com
     - **Password:** user_Password
-  - **Admin:**
+   **Admin:**
     - **ID:** admin@admin.com
     - **Password:** admin_Password
-  - **Super Admin:**
+   **Super Admin:**
     - **ID:** superadmin@superadmin.com
     - **Password:** super_admin_Password
 
@@ -50,7 +51,15 @@
 - **Other AI Tools and Technologies**
 
 ---
+## 👀 Our Valuable Contributors 💖✨
 
+<div align="center">
+  <a href="https://github.com/Avdhesh-Varshney/Jarvis/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=Avdhesh-Varshney/Jarvis&max=100" />
+  </a>
+</div>
+
+---
 <div align="center">
   <h3>💙 Like the project? &nbsp;🌟 Star it!!</h3>
 </div>
