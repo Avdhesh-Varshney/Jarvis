@@ -72,7 +72,9 @@
 ---
 
 ## 👥Contributing
-We welcome contributions from the community! Please check our Contributing Guidelines for more details on how you can help improve Jarvis.
+  
+  We welcome contributions from the community! Please check our Contributing Guidelines for more details on how you can help improve Jarvis.
+
 ---
 
 ## 👀 Our Valuable Contributors 💖✨
@@ -84,6 +86,13 @@ We welcome contributions from the community! Please check our Contributing Guide
 </div>
 
 ---
+
+## 📚Documentation
+
+For detailed usage instructions and API references, please refer to our Documentation
+
+--- 
+
 <div align="center">
   <h3>💙 Like the project? &nbsp;🌟 Star it!!</h3>
 </div>
