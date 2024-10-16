@@ -39,4 +39,4 @@ websockets==13.0.1
 torch==2.3.0
 ultralytics==8.3.3
 diffusers==0.30.3
-transformers==4.42.4
+transformers==4.45.2
