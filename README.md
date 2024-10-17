@@ -50,6 +50,15 @@
 - **Other AI Tools and Technologies**
 
 ---
+## 👀 Our Valuable Contributors 💖✨
+
+<div align="center">
+  <a href="https://github.com/Avdhesh-Varshney/Jarvis/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=Avdhesh-Varshney/Jarvis&max=100" />
+  </a>
+</div>
+
+---
 
 <div align="center">
   <h3>💙 Like the project? &nbsp;🌟 Star it!</h3>
