@@ -1,3 +1,4 @@
+import streamlit as st
 import random
 import string
 
@@ -24,55 +25,69 @@ def get_hanging_message(mistakes):
     ]
     return messages[mistakes]
 
-def hangman():
-    words = load_words()
-    word = choose_word(words)
-    word_letters = set(word.replace(" ", ""))  # Remove spaces for checking
-    alphabet = set(string.ascii_lowercase)
-    used_letters = set()
+def initialize_game_state():
+    if 'word' not in st.session_state:
+        st.session_state.word = choose_word(load_words())
+        st.session_state.word_letters = set(st.session_state.word.replace(" ", ""))
+        st.session_state.used_letters = set()
+        st.session_state.lives = 5
+        st.session_state.mistakes = 0
+        st.session_state.hint_given = False
 
-    lives = 5
-    mistakes = 0
+def main():
+    st.title("Technical Hangman Game")
+    st.write("Can you guess the technical term before the man is hanged?")
 
-    print("\nWelcome to the Technical Hangman Game!")
-    print("Can you guess the technical term before the man is hanged?")
-    print(get_hanging_message(mistakes))
+    initialize_game_state()
 
-    while len(word_letters) > 0 and lives > 0:
-        print(f"\nYou have {lives} lives left.")
-        print("Used letters:", " ".join(sorted(used_letters)))
+    # Display game state
+    st.write(f"Lives left: {st.session_state.lives}")
+    st.write("Used letters: " + " ".join(sorted(st.session_state.used_letters)))
+    
+    word_display = " ".join([letter if letter in st.session_state.used_letters or letter == " " else "_" for letter in st.session_state.word])
+    st.write("Current word:", word_display)
 
-        word_list = [letter if letter in used_letters or letter == " " else "_" for letter in word]
-        print("Current word:", " ".join(word_list))
+    st.write(get_hanging_message(st.session_state.mistakes))
 
-        user_letter = input("Guess a letter: ").lower()
-        if len(user_letter) == 1 and user_letter in alphabet - used_letters:
-            used_letters.add(user_letter)
-            if user_letter in word_letters:
-                word_letters.remove(user_letter)
-                print("Good guess!")
+    # Get user input
+    user_letter = st.text_input("Guess a letter:", max_chars=1).lower()
+
+    if st.button("Submit Guess"):
+        if user_letter:
+            if user_letter in string.ascii_lowercase and user_letter not in st.session_state.used_letters:
+                st.session_state.used_letters.add(user_letter)
+                if user_letter in st.session_state.word_letters:
+                    st.session_state.word_letters.remove(user_letter)
+                    st.success("Good guess!")
+                else:
+                    st.session_state.lives -= 1
+                    st.session_state.mistakes += 1
+                    st.error("Wrong guess. You lose a life.")
+            elif user_letter in st.session_state.used_letters:
+                st.warning("You've already guessed that letter. Try again.")
             else:
-                lives -= 1
-                mistakes += 1
-                print("Wrong guess. You lose a life.")
-                print(get_hanging_message(mistakes))
-        elif user_letter in used_letters:
-            print("You've already guessed that letter. Try again.")
-        else:
-            print("Invalid character. Please enter a single letter.")
+                st.warning("Invalid character. Please enter a single letter.")
 
         # Give a hint if the player is struggling
-        if lives == 2 and len(word_letters) > len(word) / 2:
-            hint_letter = random.choice(list(word_letters))
-            print(f"Hint: The word contains the letter '{hint_letter}'")
-            used_letters.add(hint_letter)
-            word_letters.remove(hint_letter)
+        if st.session_state.lives == 2 and len(st.session_state.word_letters) > len(st.session_state.word) / 2 and not st.session_state.hint_given:
+            hint_letter = random.choice(list(st.session_state.word_letters))
+            st.info(f"Hint: The word contains the letter '{hint_letter}'")
+            st.session_state.used_letters.add(hint_letter)
+            st.session_state.word_letters.remove(hint_letter)
+            st.session_state.hint_given = True
 
-    if lives == 0:
-        print(f"\nGame Over! The man is hanged. The word was '{word}'.")
-    else:
-        print(f"\nCongratulations! You guessed the word '{word}'!")
-        print("You saved the man from being hanged!")
+        # Check game end conditions
+        if st.session_state.lives == 0:
+            st.error(f"Game Over! The man is hanged. The word was '{st.session_state.word}'.")
+            if st.button("Play Again"):
+                initialize_game_state()
+                st.experimental_rerun()
+        elif len(st.session_state.word_letters) == 0:
+            st.success(f"Congratulations! You guessed the word '{st.session_state.word}'!")
+            st.balloons()
+            if st.button("Play Again"):
+                initialize_game_state()
+                st.experimental_rerun()
 
 if __name__ == "__main__":
-    hangman()
+    main()
