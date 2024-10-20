@@ -44,6 +44,7 @@ apiPrograms = st.Page("src/apps/pages/programs/apiProgram.py", title="API Progra
 imagePrograms = st.Page("src/apps/pages/programs/imageProgram.py", title="Image Programs", icon=":material/image:")
 games = st.Page("src/apps/pages/programs/games.py",title="Games",icon=":material/casino:")
 studyPrograms = st.Page("src/apps/pages/programs/studyProgram.py", title="Study Programs", icon=":material/school:")
+speechToTextPrograms = st.Page("src/apps/pages/programs/speechToTextProgram.py",title="speech To Text Programs",icon=":material/casino:")
 
 # /apps/pages/adminTools/contributors
 contributors = st.Page("src/apps/pages/adminTools/contributors.py", title="Contributors", icon=":material/people:")
@@ -58,7 +59,7 @@ def load_functions():
     "Account": [logout_page],
     "Automations": [websites, messenger],
     "Models": [chatBotModels, healthCareModels, objectDetectionModels, recommendationModels],
-    "Programs": [apiPrograms, games, imagePrograms, simplePrograms, studyPrograms],
+    "Programs": [apiPrograms, games, imagePrograms, simplePrograms, studyPrograms, speechToTextPrograms],
   }
   user = st.session_state['user'].split(',')
   if user[4] == "Admin" or user[4] == "Super Admin":
