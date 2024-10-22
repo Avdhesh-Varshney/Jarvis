@@ -13,6 +13,16 @@ def get_geolocation(ip):
     else:
         st.error('Invalid IP address')
 
+# fetch dns pointer of IP
+def get_dns_ptr(ip):
+    dns = f'https://get.geojs.io/v1/dns/ptr/{ip}.json'
+    dns_q = requests.get(dns)
+    if dns_q.status_code == 200:
+        dns_d = dns_q.json()
+        return dns_d
+    else:
+        st.error('Invalid IP address')
+
 
 def fetch_ip_address():
     ip_script = f"""
@@ -43,8 +53,8 @@ def fetch_ip_address():
         }});
     </script>
     <div style="border:none; width:300px; display:flex; align-items:center; height: 20px;" >
-        <p style="font-size:19px; color:#FFFFFF; margin-right:5px;">My IP:</p>
-        <p id="ip_display" style="font-size:19px; color:#32ca5b;">Fetching IP...</p>
+        <p style="font-size:18px; color:#FFFFFF; margin-right:5px;">My IP:</p>
+        <p id="ip_display" style="font-size:18px; color:#32ca5b;">Fetching IP...</p>
         <button class="styled-button" id="styled-button" onclick="copyIP()">Copy</button>
     </div>
     <script>
@@ -62,7 +72,7 @@ def fetch_ip_address():
 
 
 def format(data):
-    return f'<span style="font-size:20px; color:#32ca5b;">{data}</span>'
+    return f'<span style="font-size:19px; color:#32ca5b;">{data}</span>'
 
 
 def myLocation():
@@ -74,15 +84,23 @@ def myLocation():
     if ip_address:
         geo = get_geolocation(ip_address)
         if geo:
-            st.markdown(f"""The IP address {format(geo['ip'])} is located in {format(geo['city'])}, 
-                        {format(geo['region'])}, {format(geo['country'])}, with coordinates at latitude 
-                        {format(geo['latitude'])} and longitude {format(geo['longitude'])}.
-                    The associated timezone is {format(geo['timezone'])}.
+            st.markdown(f"""The IP address {format(geo['ip'])} is located in {format(geo.get('city', '-'))}, 
+                        {format(geo.get('region', '-'))}, {format(geo.get('country', '-'))}, continent {format(geo.get('continent_code', '-'))} 
+                        with coordinates at latitude {format(geo.get('latitude', '-'))} and longitude {format(geo.get('longitude', '-'))} 
+                        within a radius of {format(geo.get('accuracy', '-'))} kms.
+                    The associated timezone is {format(geo.get('timezone', '-'))}.
+                     """, unsafe_allow_html=True)
+            st.markdown(f"""The organization this IP is registered to is "{format(geo.get('organization_name', '-'))}". The asn 
+                        (autonomous number system) associated with it is {format(geo.get('asn', '-'))}.
                      """, unsafe_allow_html=True)
 
             if st.button("Show Location"):
-                maps_url = f"https://www.google.com/maps/@?api=1&map_action=map&center={geo['latitude']},{geo['longitude']}"
+                maps_url = f"https://www.google.com/maps/@?api=1&map_action=map&center={geo.get('latitude','-')},{geo.get('longitude', '-')}"
                 try:
                     web.open(maps_url)
                 except:
                     st.error("Website is not opening!!", icon="🚨")
+
+        dns_ptr = get_dns_ptr(ip_address)
+        if dns_ptr and dns_ptr['ptr']!="Failed to get PTR record":
+            st.markdown(f"DNS pointer record this IP is {format(dns_ptr.get('ptr', '-'))}.", unsafe_allow_html=True)
