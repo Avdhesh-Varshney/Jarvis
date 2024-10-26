@@ -113,36 +113,8 @@ def memoryGame():
     with col2:
         st.write(f"**Moves:** {st.session_state.moves}")
 
-    # Add the following function to generate confetti
-    def add_confetti():
-        st.markdown(
-            """
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.4.0/confetti.browser.min.js"></script>
-            <script>
-                var count = 200;
-                var defaults = {
-                    origin: { y: 0.7 }
-                };
-
-                function fire(particleRatio, opts) {
-                    confetti(Object.assign({}, defaults, opts, {
-                        particleCount: Math.floor(count * particleRatio)
-                    }));
-                }
-
-                fire(0.25, { spread: 26, startVelocity: 55 });
-                fire(0.2, { spread: 60 });
-                fire(0.35, { spread: 100, decay: 0.91, scalar: 1.2 });
-                fire(0.15, { spread: 120, startVelocity: 30, decay: 0.92 });
-                fire(0.1, { spread: 180, startVelocity: 50 });
-            </script>
-            """,
-            unsafe_allow_html=True
-        )
-
     # Check if the player has won
     if st.session_state.matches_found == NUM_PAIRS:
-        add_confetti()  # Add confetti effect
         st.markdown("<h1 style='text-align: center; font-size: 48px; color: #4CAF50;'>Congratulations, you won!</h1>", unsafe_allow_html=True)
 
         # Update best score
