@@ -154,6 +154,3 @@ def recipeFinder():
         """,
         unsafe_allow_html=True,
     )
-
-# Call the main function to run the app
-recipeFinder()
