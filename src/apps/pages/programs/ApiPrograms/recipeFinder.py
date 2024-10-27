@@ -79,11 +79,11 @@ def recipeFinder():
         if query:
             # Fetch recipes
             recipes_data = fetchRecipes(query)
-
+            
             if recipes_data and 'results' in recipes_data:
                 # Extract the results list from the response
                 recipes = recipes_data['results']
-
+                
                 # Creates a flex container for the recipes
                 st.markdown('<div class="recipe-container">', unsafe_allow_html=True)
                 
@@ -101,9 +101,10 @@ def recipeFinder():
                         """,
                         unsafe_allow_html=True,
                     )
+                
                 st.markdown('</div>', unsafe_allow_html=True)
             else:
-                st.warning("No recipes found. Please try again with a different query.")
+                st.warning("No recipes found. Please try again with a different query.")  # Notify the user
         else:
             st.warning("Please enter a query before clicking the button.")
 
