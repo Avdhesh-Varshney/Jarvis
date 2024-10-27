@@ -19,45 +19,39 @@ def recipeFinder():
     <style>
         /* Style for the main title */
         .title{
-            flex-direction: column; /* Align the label and input field in a column */
-            font-size: 75px; /* Adjust title size */
-            color: white; /* Title color */
-            position: absolute; /* Positioning the title */
-            top: 30px; /* Distance from the top */
-            text-align: center; /* Center vertically */
-            left: 125px; /* Distance from the left */
-            z-index: 10; /* Ensures the title is on top */
+            flex-direction: column;
+            font-size: 75px;
+            color: white;
+            position: absolute;
+            top: 30px;
+            text-align: center;
+            left: 125px;
+            z-index: 10;
         }
         /* Center the input container and input field */
         .input-container {
             display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            height: 30vh; /* Adjust height to align vertically */
-            flex-direction: column; /* Align the label and input field in a column */
-            font-size: 80px; /* Adjust input text size */
+            justify-content: center;
+            align-items: center;
+            height: 30vh;
+            flex-direction: column;
+            font-size: 80px;
         }
         /* Style for the input field */
         .stTextInput > div > input {
-            text-align: center; /* Center the text in the input field */
-            font-size: 30px; /* Adjust input text size */
-            width: 400px; /* Adjust input width */
-            padding: 10px; /* Padding inside input */
-            margin-bottom: 20px; /* Add space below the input field */
-        }
-        /* Style for the input label */
-        .stTextInput > label {
-            text-align: center; /* Center the label text */
-            font-size: 30px; /* Adjust label text size */
-            display: block;
+            text-align: center;
+            font-size: 30px;
+            width: 400px;
+            padding: 10px;
+            margin-bottom: 20px;
         }
         /* Style for the button */
         .stButton > button {
-            font-size: 24px; /* Button text size */
-            padding: 10px 20px; /* Padding for button */
+            font-size: 24px;
+            padding: 10px 20px;
         }
         .stButton > button:hover {
-            transform: scale(1.05); /* Optional hover effect */
+            transform: scale(1.05);
         }
     </style>
     """,
@@ -75,19 +69,11 @@ def recipeFinder():
 
     # Add button to trigger recipe search
     if st.button("Find Recipes"):
-        # Ensure the query is not empty before fetching recipes
         if query:
-            # Fetch recipes
             recipes_data = fetchRecipes(query)
-            
             if recipes_data and 'results' in recipes_data:
-                # Extract the results list from the response
                 recipes = recipes_data['results']
-                
-                # Creates a flex container for the recipes
                 st.markdown('<div class="recipe-container">', unsafe_allow_html=True)
-                
-                # Displays each recipe with the updated styles
                 for recipe in recipes:
                     recipe_url = f"https://spoonacular.com/recipes/{recipe['title'].replace(' ', '-').lower()}-{recipe['id']}"
                     st.markdown(
@@ -101,10 +87,9 @@ def recipeFinder():
                         """,
                         unsafe_allow_html=True,
                     )
-                
                 st.markdown('</div>', unsafe_allow_html=True)
             else:
-                st.warning("No recipes found. Please try again with a different query.")  # Notify the user
+                st.warning("No recipes found. Please try again with a different query.")
         else:
             st.warning("Please enter a query before clicking the button.")
 
@@ -116,39 +101,39 @@ def recipeFinder():
         <style>
         .recipe-container {
             display: flex;
-            flex-wrap: wrap; /* Allows items to wrap onto multiple lines */
-            justify-content: space-between; /* Adjusts spacing between items */
-            margin-bottom: 25px; /* Space between rows */
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 25px;
         }
         .recipe-item {
-            flex: 0 0 48%; /* Adjusts width of each item */
-            margin-bottom: 10px; /* Space between items */
-            box-shadow: 0 2px 5px rgba(14, 14, 14, 0.2); /* Optional: adds shadow */
-            padding: 15px; /* Padding for inner content */
-            border-radius: 15px; /* Rounds the corners */
-            background: #212121; /* Background color for the item */
-            text-align: center; /* Centering the text */
+            flex: 0 0 48%;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(14, 14, 14, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            background: #212121;
+            text-align: center;
             transition: transform 0.2s ease-in-out;
         }
         .recipe-item:hover {
-            transform: scale(1.05); /* Optional hover effect */
+            transform: scale(1.05);
         }
         .recipe-title {
             margin-top: 10px;
-            font-size: 30px; /* Increase text size */
+            font-size: 30px;
             color: White;
         }
         .recipe-image {
             width: 50%;
-            border-radius: 5px; /* Rounded corners for the image */
+            border-radius: 5px;
         }
         a {
             text-decoration: none;
             color: inherit;
         }
         a:hover {
-            text-decoration: none; /* Removes the underline on hover */
-            color: inherit; /* Ensures no color change on hover */
+            text-decoration: none;
+            color: inherit;
         }
         </style>
         """,
