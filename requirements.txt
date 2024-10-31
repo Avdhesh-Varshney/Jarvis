@@ -19,7 +19,6 @@ pillow==10.3.0
 pint==0.24.2
 plotly==5.23.0
 PyAutoGUI==0.9.54
-pyarrow==0.0.0
 pymongo==4.8.0
 PyPDF2==3.0.1
 pyperclip==1.9.0

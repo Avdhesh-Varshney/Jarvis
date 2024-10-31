@@ -1,5 +1,5 @@
 import streamlit as st
-import time
+
 
 # Set up session state to track if the intro video has been shown
 if 'video_shown' not in st.session_state:
@@ -7,11 +7,9 @@ if 'video_shown' not in st.session_state:
 
 def show_intro_video():
     # Display the intro video
-    st.video("intro.mp4")
+    st.image("assets/intro.gif")
     
-    # Simulate waiting for video duration (adjust this to the actual duration of your video)
-    video_duration = 5 # Example: set to the video duration in seconds
-    time.sleep(video_duration)  # Wait for the video to finish
+
 
     # Update session state
     st.session_state.video_shown = True  # Set to True to show the main content next
