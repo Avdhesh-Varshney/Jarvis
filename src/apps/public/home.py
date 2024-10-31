@@ -1,44 +1,23 @@
 import streamlit as st
+import time
 
-# Initialize session state to track video playback
-if 'video_played' not in st.session_state:
-    st.session_state.video_played = False
+# Set up session state to track if the intro video has been shown
+if 'video_shown' not in st.session_state:
+    st.session_state.video_shown = False
 
-# Function to show the intro video if it hasn't been played yet
 def show_intro_video():
-    st.markdown(
-        """
-        <style>
-        .video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background: black;
-        }
-        </style>
-        <div class="video-container" id="video-container">
-            <video id="intro-video" autoplay muted playsinline style="width: 100%; height: 100%;">
-                <source src="src/intro.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <script>
-            const video = document.getElementById('intro-video');
-            const container = document.getElementById('video-container');
-            video.onended = function() {
-                container.style.display = 'none';
-                fetch('/?video_played=true');  // Make a request to update session state
-            };
-        </script>
-        """,
-        unsafe_allow_html=True
-    )
+    # Display the intro video
+    st.video("intro.mp4")
+    
+    # Simulate waiting for video duration (adjust this to the actual duration of your video)
+    video_duration = 5 # Example: set to the video duration in seconds
+    time.sleep(video_duration)  # Wait for the video to finish
 
-# Display the home page with app details
+    # Update session state
+    st.session_state.video_shown = True  # Set to True to show the main content next
+
 def home():
+    # Main content after video
     st.title("Welcome to Jarvis - Your Virtual AI Assistant!")
     st.image('assets/image.gif', caption='Empower Your Digital Life with Jarvis', use_column_width=True)
     
@@ -74,12 +53,14 @@ def home():
     **Jarvis** is continually evolving with new features and improvements. Stay tuned for updates and feel free to contribute to its development.
     """)
 
-# Main function to control which content displays
 def main():
-    if st.session_state.video_played:
-        home()
+    if not st.session_state.video_shown:
+        show_intro_video()  # Show video if it hasn't been watched
+        # Display continue button after video
+        if st.button("Continue to App"):
+            st.session_state.video_shown = True  # Set to True to show main content next
     else:
-        show_intro_video()
+        home()  # Show main content after video is "watched"
 
-# Run the main function
-main()
+if __name__ == "__main__":
+    main()
