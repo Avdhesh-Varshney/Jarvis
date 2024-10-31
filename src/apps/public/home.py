@@ -2,9 +2,9 @@ import streamlit as st
 
 def home():
 	st.title("Welcome to Jarvis - Your Virtual AI Assistant!")
-	st.image('assets/image.gif', caption='Empower Your Digital Life with Jarvis', use_column_width=True)
+	st.image('assets/intro.gif', caption='Empower Your Digital Life with Jarvis', use_column_width=True)
 
-	st.markdown("""
+    st.markdown("""
 	## What is Jarvis?
 	**Jarvis** is a powerful Python-based AI assistant designed to streamline your daily tasks through simple voice commands. Whether you're navigating the web, managing your media, or automating routine processes, Jarvis is here to help.
 	""")
@@ -19,8 +19,8 @@ def home():
 	- **Email Management**: Send and receive emails directly from the assistant.
 	""")
 
-	st.markdown("## See Jarvis in Action")
-	st.video('https://youtu.be/kjIH9qo8dX4')
+	with st.expander("## See Jarvis in Action"):
+		st.video(f'https://www.youtube.com/watch?v={st.secrets["YOUTUBE_VIDEO_ID"]}', start_time=0)
 
 	st.markdown("""
 	## Learn More and Get Started
