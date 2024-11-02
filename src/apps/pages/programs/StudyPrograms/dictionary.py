@@ -1,20 +1,21 @@
 import streamlit as st
-from pydictionary import Dictionary
+from PyMultiDictionary import MultiDictionary
 
-# TODO: Implement the dictionary function which will take a word as input and display the meaning, synonym and antonym of the word.
 def dictionary():
-  st.write("Tell Me The Problem!")
-  word = st.text_input("Enter the Word")
-  if word:
-    result = Dictionary(word)
-    choice = st.radio("Choose an Option", ['Meaning', 'Synonym', 'Antonym'])
-    match(choice):
-      case 'Meaning':
-        result = result['Noun']
-        st.write(f"The Meaning for {word} is {result}")
-      case 'Synonym':
-        st.write(f"The Synonym for {word} is {result}")
-      case 'Antonym':
-        st.write(f"The Antonym for {word} is {result}")
-  else:
-    st.info("Enter a word to continue...", icon="📝")
+    st.write("Dictionary Lookup")
+    word = st.text_input("Enter the Word:")
+    if word:
+        dictionary = MultiDictionary()
+        choice = st.radio("Choose an Option", ['Meaning', 'Synonym', 'Antonym'])
+
+        if choice == 'Meaning':
+            meaning = dictionary.meaning('en', word)
+            st.write(f"The meaning of '{word}' is: {meaning}")
+        elif choice == 'Synonym':
+            synonyms = dictionary.synonym('en', word)
+            st.write(f"The synonyms of '{word}' are: {synonyms}")
+        elif choice == 'Antonym':
+            antonyms = dictionary.antonym('en', word)
+            st.write(f"The antonyms of '{word}' are: {antonyms}")
+    else:
+        st.info("Enter a word to look up.", icon="📝")
