@@ -27,28 +27,28 @@ def getWeather(api_key, city):
 		return None, str(e)
 
 def API_Exists():
-  if "WEATHER_API_KEY" in st.secrets and st.secrets["WEATHER_API_KEY"]:
-    return True
-  elif "WEATHER_API_KEY" in os.environ and os.environ["WEATHER_API_KEY"]:
-    return True
-  return False
+	if "WEATHER_API_KEY" in st.secrets['api_key'] and st.secrets['api_key']["WEATHER_API_KEY"]:
+		return True
+	elif "WEATHER_API_KEY" in os.environ and os.environ["WEATHER_API_KEY"]:
+		return True
+	return False
 
 def showInstructions():
-  st.markdown("### Weather App")
-  st.markdown("""### How to get your API Key:
-  1. Visit [WeatherAPI.com](https://www.weatherapi.com/).
-  2. Sign up for a free account.
-  3. Generate an API key from your account dashboard.
-  4. Enter the API key in the input field.
-  """)
-  api_key = st.text_input("Enter your WeatherAPI.com API Key")
-  if st.button("Enter") and api_key != "":
-    os.environ["WEATHER_API_KEY"] = api_key
-    st.rerun()
+	st.markdown("### Weather App")
+	st.markdown("""### How to get your API Key:
+	1. Visit [WeatherAPI.com](https://www.weatherapi.com/).
+	2. Sign up for a free account.
+	3. Generate an API key from your account dashboard.
+	4. Enter the API key in the input field.
+	""")
+	api_key = st.text_input("Enter your WeatherAPI.com API Key")
+	if st.button("Enter") and api_key != "":
+		os.environ["WEATHER_API_KEY"] = api_key
+		st.rerun()
 
 def weatherApp():
 	if API_Exists():
-		api_key = (os.environ.get("WEATHER_API_KEY") or st.secrets["WEATHER_API_KEY"])
+		api_key = (os.environ.get("WEATHER_API_KEY") or st.secrets['api_key']["WEATHER_API_KEY"])
 		st.markdown("### Weather App")
 		city = st.text_input("Enter City Name")
 

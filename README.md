@@ -4,7 +4,6 @@
 ![AI Models](https://img.shields.io/badge/AI-Models-007bff?style=flat-square)
 ![Python Programs](https://img.shields.io/badge/Python-Programs-ffc300?style=flat-square)
 ![Admin Tools](https://img.shields.io/badge/Admin-Tools-28a745?style=flat-square)
-![Super Admin Tools](https://img.shields.io/badge/Super%20Admin-Tools-6a1b9a?style=flat-square)
 ![Authentication](https://img.shields.io/badge/Authentication-34495e?style=flat-square)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Database-e67e22?style=flat-square)
 
@@ -18,14 +17,14 @@
 ### 🔑 **Core Features**
 - Control devices and execute tasks using natural language commands.
 - Streamline repetitive tasks to save time and effort.
-- Supports multiple user roles (User, Admin, Super Admin) for tailored access.
+- Supports multiple user roles (User, Admin) for tailored access.
 - Utilizes MongoDB for secure and efficient data management.
 
 --- 
 
 ### 🔒 **Authentication**
 
-- **User Roles:** The application supports multiple roles (User, Admin, Super Admin), each with specific access to services.
+- **User Roles:** The application supports multiple roles (User, Admin), each with specific access to services.
 - **Login Credentials:** Ensure you have your ID and password ready for authentication.
 - **For Testing/Developing Purpose:**
   - **User:**
@@ -34,15 +33,13 @@
   - **Admin:**
     - **ID:** admin@admin.com
     - **Password:** admin_Password
-  - **Super Admin:**
-    - **ID:** superadmin@superadmin.com
-    - **Password:** super_admin_Password
 
 --- 
 
 ### 🛠️ **Tech Stack**
 - **Python 3.8+**
 - **Git/GitHub**
+- **MongoDB**
 - **Streamlit** for web interface
 - **Natural Language Processing**
 - **Machine Learning/ Deep Learning**
