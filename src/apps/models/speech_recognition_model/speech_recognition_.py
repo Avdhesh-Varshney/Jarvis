@@ -7,7 +7,7 @@ import json
 import time
 from datetime import datetime, timedelta
 from googletrans import Translator
-
+from tiktoken.load import load_tiktoken_bpe
 nltk.download("punkt")
 nltk.download("averaged_perceptron_tagger")
 
