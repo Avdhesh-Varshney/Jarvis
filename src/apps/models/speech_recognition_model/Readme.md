@@ -17,7 +17,7 @@ Jarvis is an advanced offline virtual assistant powered by a multilingual NLP mo
 Ensure you have Python 3.11 or later installed. Install the required packages:
 
 ```bash
-pip install SpeechRecognition pocketsphinx nltk transformers pyttsx3 schedule googletrans==4.0.0-rc1
+pip install SpeechRecognition tiktoken torch torchvision torchaudio pocketsphinx nltk transformers pyttsx3 schedule googletrans==4.0.0-rc1
 ```
 ## !!!!!! Don't forgot to install the ```PyAudio-something.whl``` On Windows Terminal. It's very Important !!!!!
 ```bash
