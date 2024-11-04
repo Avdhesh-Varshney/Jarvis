@@ -2,10 +2,12 @@ import tensorflow as tf
 import streamlit as st
 import numpy as np
 from src.utils.english import Speak
+import gdown
 
 @st.cache_resource
 def load_model():
-	model = tf.keras.models.load_model('src/apps/models/HealthCareModels/DiabetesModels/diabetes_test_model.keras')
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['diabetesDetectionModel']['DIABETES_TEST_MODEL']}", 'diabetes_test_model.keras', quiet=False)
+	model = tf.keras.models.load_model('diabetes_test_model.keras')
 	return model
 
 def diabetesTestForm():

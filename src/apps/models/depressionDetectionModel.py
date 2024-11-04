@@ -4,10 +4,12 @@ import numpy as np
 import librosa
 import matplotlib.pyplot as plt
 from src.utils.english import Speak
+import gdown
 
 @st.cache_resource
 def load_model():
-	model = tf.keras.models.load_model("src/apps/models/HealthCareModels/DepressionDetectionModels/DepressionDetect.keras")
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['depressionDetectionModel']['DEPRESSION_DETECT']}", 'DepressionDetect.keras', quiet=False)
+	model = tf.keras.models.load_model("DepressionDetect.keras")
 	return model
 
 def depressionDetectionModel():

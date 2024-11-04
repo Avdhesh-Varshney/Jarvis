@@ -3,10 +3,12 @@ import streamlit as st
 import numpy as np
 from src.utils.english import Speak
 from PIL import Image
+import gdown
 
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model("src/apps/models/HealthCareModels/BrainTumorModels/brain_tumor_test.keras")
+    gdown.download(f"https://drive.google.com/uc?id={st.secrets['brainTumorModel']['BRAIN_TUMOR_TEST']}", 'brain_tumor_test.keras', quiet=False)
+    model = tf.keras.models.load_model("brain_tumor_test.keras")
     return model
 
 def get_mri():

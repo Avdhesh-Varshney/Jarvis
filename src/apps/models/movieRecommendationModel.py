@@ -5,8 +5,8 @@ import gdown
 
 @st.cache_data
 def load_data():
-	gdown.download(f"https://drive.google.com/uc?id={st.secrets['cloud']['movie_recommendation_model']['MOVIES_LIST']}", 'movies_list.pkl', quiet=False)
-	gdown.download(f"https://drive.google.com/uc?id={st.secrets['cloud']['movie_recommendation_model']['SIMILARITY']}", 'similarity.pkl', quiet=False)
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['movieRecommendationModel']['MOVIES_LIST']}", 'movies_list.pkl', quiet=False)
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['movieRecommendationModel']['SIMILARITY']}", 'similarity.pkl', quiet=False)
 	movies_data = pickle.load(open('movies_list.pkl', 'rb'))
 	similarity = pickle.load(open('similarity.pkl', 'rb'))
 	movies_list = movies_data['title'].values

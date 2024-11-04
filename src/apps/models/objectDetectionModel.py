@@ -3,10 +3,13 @@ import cv2
 import time
 from ultralytics import YOLO
 import streamlit as st
+import gdown
 
 @st.cache_resource
 def load_model(model_name):
-	model = YOLO(f'src/apps/models/ObjectDetectionModels/{model_name}.pt')
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['objectDetectionModel']['YOLO11S']}", 'yolo11s.pt', quiet=False)
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['objectDetectionModel']['YOLOV8S']}", 'yolov8s.pt', quiet=False)
+	model = YOLO(f'{model_name}.pt')
 	device = 'cuda' if torch.cuda.is_available() else 'cpu'
 	model.to(device)
 

@@ -4,10 +4,14 @@ import tensorflow as tf
 import streamlit as st
 import numpy as np
 import cv2
+import gdown
 
 @st.cache_resource
 def load_model():
-	model = tf.keras.models.load_model('src/apps/models/MaskDetectionModels/maskcheck.keras')
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['maskDetectionModel']['RES10_300x300_SSD_ITER_140000']}", 'res10_300x300_ssd_iter_140000.caffemodel', quiet=False)
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['maskDetectionModel']['DEPLOY']}", 'deploy.prototxt', quiet=False)
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['maskDetectionModel']['MASKCHECK']}", 'maskcheck.keras', quiet=False)
+	model = tf.keras.models.load_model('maskcheck.keras')
 	return model
 
 def hardware():
@@ -21,8 +25,8 @@ def hardware():
 
 def maskDetectionModel():
 	cnn = load_model()
-	modelFile = "src/apps/models/MaskDetectionModels/res10_300x300_ssd_iter_140000.caffemodel"
-	configFile = "src/apps/models/MaskDetectionModels/deploy.prototxt"
+	modelFile = "res10_300x300_ssd_iter_140000.caffemodel"
+	configFile = "deploy.prototxt"
 	net = cv2.dnn.readNetFromCaffe(configFile, modelFile)
 	flag = False
 	h,flag = hardware()
