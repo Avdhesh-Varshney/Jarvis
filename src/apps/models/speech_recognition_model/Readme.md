@@ -21,7 +21,8 @@ pip install SpeechRecognition pocketsphinx nltk transformers pyttsx3 schedule go
 ```
 ## !!!!!! Don't forgot to install the ```PyAudio-0.2.14-cp311-cp311-win32.whl``` On Windows Prompt. It's very Important !!!!!
 ```bash
-pip install PyAudio-0.2.14-cp311-cp311-win32.whl # For 32bit Windows
+pip install PyAudio-0.2.14-cp311-cp311-win32.whl # For 32bit Windows(python 3.11)
+pip install PyAudio-0.2.14-cp312-cp312-win_amd64.whl # For 64bit Windows(python 3.12)
 ```
 ## How to Use
 1. **Start the Assistant:** Run the assistant by executing the main script. This will initialize PowerfulJarvis and start listening for wake words.
