@@ -14,14 +14,14 @@ Jarvis is an advanced offline virtual assistant powered by a multilingual NLP mo
 
 ## Prerequisites
 
-Ensure you have Python 3.7 or later installed. Install the required packages:
+Ensure you have Python 3.11 or later installed. Install the required packages:
 
 ```bash
 pip install SpeechRecognition pocketsphinx nltk transformers pyttsx3 schedule googletrans==4.0.0-rc1
 ```
 ## !!!!!! Don't forgot to install the ```PyAudio-0.2.14-cp311-cp311-win32.whl``` On Windows Prompt. It's very Important !!!!!
 ```bash
-pip install PyAudio-0.2.14-cp311-cp311-win32.whl
+pip install PyAudio-0.2.14-cp311-cp311-win32.whl # For 32bit Windows
 ```
 ## How to Use
 1. **Start the Assistant:** Run the assistant by executing the main script. This will initialize PowerfulJarvis and start listening for wake words.
