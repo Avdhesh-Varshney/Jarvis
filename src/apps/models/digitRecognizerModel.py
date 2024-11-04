@@ -2,10 +2,13 @@ import tensorflow as tf
 import numpy as np
 import streamlit as st
 from PIL import Image
+import gdown
 
 @st.cache_resource
 def load_model():
-	model = tf.keras.models.load_model("src/apps/models/ObjectDetectionModels/DigitRecognizerModels/model_9.keras")
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['digitRecognizerModel']['MODEL_9']}", 'model_9.keras', quiet=False)
+	gdown.download(f"https://drive.google.com/uc?id={st.secrets['digitRecognizerModel']['MODEL']}", 'model.keras', quiet=False)
+	model = tf.keras.models.load_model("model_9.keras")
 	return model
 
 def upload_digit_img():

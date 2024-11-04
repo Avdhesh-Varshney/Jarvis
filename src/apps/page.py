@@ -49,6 +49,7 @@ def setRoutes(mainPath):
 def application():
 	if st.session_state['verified'] == 'true':
 		categories = getFolders("src/apps")
+		categories.pop("Public")
 		if st.session_state.user.split(',')[4] != 'Admin':
 			categories.pop("Admin Tools")
 		chosenPage = st.sidebar.selectbox("Category", ["Jarvis", "Account"] + list(categories.keys()), key="page")

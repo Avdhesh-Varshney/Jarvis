@@ -41,7 +41,7 @@ def signup():
 	with col1:
 		new_gender = st.radio('⚧ Select your gender:', ['Male', 'Female', 'Other'])
 	with col2:
-		new_roles = st.selectbox("👔 Select your role:", ["User", "Admin", "Super Admin"])
+		new_roles = st.selectbox("👔 Select your role:", ["User", "Admin"])
 
 	# Password Section
 	st.markdown("## Password")

@@ -7,3 +7,14 @@ __pycache__/
 # Virtual environment
 myenv
 /myenv
+
+# Deployed Model files
+*.keras
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+*.prototxt
+*.caffemodel
+*.pt
