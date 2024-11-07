@@ -80,18 +80,20 @@ def run_assistant():
         command = listen_for_command()
 
         if command:
-            if "location" in command or "where am i" in command:
+            if "location" in command or "where am i" in command or "my ip" in command:
                 speak("Fetching your location automatically...")
                 public_ip = get_public_ip()
                 location = get_location_from_ip(public_ip)
 
                 if isinstance(location, dict):
                     location_info = f"Your IP is {location['IP']}. You are in {location['City']}, {location['Region']}, {location['Country']}. Your coordinates are {location['Location (Latitude, Longitude)']}. The postal code is {location['Postal Code']}."
+                    print(location_info)
                     speak(location_info)
+                    
                 else:
                     speak(location)  # Speak the error message if any
 
-            elif "weather" in command:
+            elif "weather" in command or "climate" in command:
                 speak("Fetching your weather automatically...")
                 public_ip = get_public_ip()
                 location = get_location_from_ip(public_ip)
@@ -103,13 +105,16 @@ def run_assistant():
 
                         if weather:
                             weather_info = f"The current weather in {city_name} is {weather}."
+                            print(weather_info)
                             speak(weather_info)
+                            
                         else:
                             speak("Sorry, I couldn't fetch the weather details.")
                     else:
                         speak("Sorry, I couldn't detect your city automatically for the weather.")
+
             
-            elif "exit" in command or "stop" in command:
+            elif "exit" in command or "stop" in command or "bye" in command:
                 speak("Goodbye!")
                 break
             else:
