@@ -14,7 +14,7 @@ This project implements a conversational AI chatbot that uses the [Whisper](http
 1. **Clone the repository to your local machine:**
 
     ```bash
-    git clone 
+    git clone https://github.com/dino65-dev/Jarvis.git
     ```
 
 2. **Navigate to the project directory:**
