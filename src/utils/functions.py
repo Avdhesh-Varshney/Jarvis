@@ -1,27 +1,7 @@
-from database.localStorageServer import server
-from datetime import datetime, timedelta
-from src.auth.profile import profile
 import streamlit as st
 
-today = datetime.now()
-
-def logout():
-  if st.session_state['user'] != []:
-    profile()
-    if st.button("Log out"):
-      conn = server()
-      st.session_state["user"] = ['', '', '', '', '', '', '', '']
-      conn.setLocalStorageVal("user", ['', '', '', '', '', '', '', ''])
-      st.session_state['password'] = None
-      conn.setLocalStorageVal("password", None)
-      st.session_state['expiration_date'] = (today - timedelta(days=10)).isoformat()
-      conn.setLocalStorageVal("expiration_date", (today - timedelta(days=10)).isoformat())
-      st.session_state['verified'] = False
-      conn.setLocalStorageVal("verified", False)
-      st.info("Please refresh the page to continue", icon="ℹ️")
-      st.rerun()
-
-logout_page = st.Page(logout, title="My Profile", icon=":material/account_circle:")
+# /auth
+logout_page = st.Page("src/auth/profile.py", title="My Profile", icon=":material/account_circle:")
 sign_up_page = st.Page("src/auth/signup.py", title="Sign up", icon=":material/person_add:")
 
 # /apps/public

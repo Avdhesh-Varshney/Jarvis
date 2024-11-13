@@ -6,7 +6,6 @@ ALL_GENRES = { "Action": 1, "Adventure": 2, "Comedy": 4, "Drama": 8, "Fantasy": 
 
 def top_animes():
     URL = f"{BASE_URL}/top/anime"
-
     try:
         response = requests.get(URL)
         data = response.json()
@@ -24,10 +23,8 @@ def top_animes():
                 anime_genres = "Genre: " + ', '.join([genre_name['name'] for genre_name in anime_details['genres']])
 
                 col1, col2 = st.columns([1, 2])
-
                 with col1:
                     st.image(image, use_column_width="auto" ,caption=anime_details['title'])
-
                 with col2:
                     st.subheader(f"{anime_details['title']}")
                     st.write(f"{score} &nbsp; | &nbsp;  {year} &nbsp;  |  &nbsp; {season}")
@@ -45,7 +42,6 @@ def top_animes():
 
 def top_characters():
     URL = f"{BASE_URL}/top/characters"
-
     try:
         response = requests.get(URL)
         data = response.json()
@@ -61,10 +57,8 @@ def top_characters():
                 nicknames = ', '.join([name for name in character_details['nicknames']] + [character_details['name_kanji']] if character_details['name_kanji'] else [])
 
                 col1, col2 = st.columns([1, 2])
-
                 with col1:
                     st.image(image_url, use_column_width="auto", caption=character_name)
-
                 with col2:
                     st.subheader(f"{character_name}")
                     st.write(f"{nicknames}")
@@ -83,9 +77,7 @@ def get_animes_by_genres(selected_genres, order, sort):
     all_genres = ALL_GENRES
     genres = ','.join([str(all_genres[genre]) for genre in selected_genres])
     query = f'?genres={genres}&order_by={order}&sort={sort}'
-
     URL = f"{BASE_URL}/anime{query}"
-
     try:
         response = requests.get(URL)
         data = response.json()
@@ -103,10 +95,8 @@ def get_animes_by_genres(selected_genres, order, sort):
                 anime_genres = "Genre: " + ', '.join([genre_name['name'] for genre_name in anime_details['genres']])
 
                 col1, col2 = st.columns([1, 2])
-
                 with col1:
                     st.image(image, use_column_width="auto" ,caption=anime_details['title'])
-
                 with col2:
                     st.subheader(f"{anime_details['title']}")
                     st.write(f"{score} &nbsp; | &nbsp;  {year} &nbsp;  |  &nbsp; {season}")
@@ -124,15 +114,12 @@ def get_animes_by_genres(selected_genres, order, sort):
 
 def anime():
     st.title("Ultimate Anime Picks")
-
     option = st.selectbox("Select an option:", options=[None, "Top Animes", "Top Characters", "Animes by Genres"])
 
     if option == "Top Animes":
         top_animes()
-
     elif option == "Top Characters":
         top_characters()
-
     elif option == "Animes by Genres":
         sort = st.selectbox("Select type" ,options=["desc", "asc"])
         order = st.selectbox("Select order", options=["score", "start_date", "end_date", "episodes", "rank", "popularity", "favorites"])

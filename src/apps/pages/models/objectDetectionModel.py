@@ -1,12 +1,12 @@
 import os
 import importlib
 import streamlit as st
-from src.helpers.getFolders import getFolders
+from src.helpers.getModules import getModules
 
 MAIN_DIR = 'ObjectDetectionModels'
 BASE_DIR = os.path.dirname(__file__)
 COMMON_MODULE_PATH = os.path.join(BASE_DIR, MAIN_DIR)
-MODULES = getFolders(COMMON_MODULE_PATH)
+MODULES = getModules(COMMON_MODULE_PATH)
 
 def ObjectDetectionModels():
   st.title('Object Detection Models')
@@ -15,15 +15,14 @@ def ObjectDetectionModels():
 
   if choice in MODULES:
     module_name = MODULES[choice]
-    file_name = module_name[0].lower() + module_name[1:]
     try:
-      module = importlib.import_module(f"src.apps.pages.models.{MAIN_DIR}.{module_name}.{file_name}")
-      func = getattr(module, file_name)
+      module = importlib.import_module(f"src.apps.pages.models.{MAIN_DIR}.{module_name}")
+      func = getattr(module, module_name)
       func()
     except ModuleNotFoundError:
-      st.error(f"Module '{file_name}.py' could not be found.")
+      st.error(f"Module '{module_name}.py' could not be found.")
     except AttributeError:
-      st.error(f"Function '{file_name}' could not be found in '{file_name}.py'.")
+      st.error(f"Function '{module_name}' could not be found in '{module_name}.py'.")
     except Exception as e:
       st.error(f"An error occurred: {e}")
   else:

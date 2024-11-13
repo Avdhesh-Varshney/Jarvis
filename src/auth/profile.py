@@ -1,5 +1,9 @@
+from database.localStorageServer import server
+from datetime import datetime, timedelta
 import streamlit as st
 from PIL import Image
+
+today = datetime.now()
 
 def profile():
   st.title("👤 Profile Page")
@@ -34,3 +38,17 @@ def profile():
   # Adding some fun elements
   st.markdown("### About Me")
   st.write(user[7:][0])
+  if st.button("Log out"):
+    conn = server()
+    st.session_state["user"] = ['', '', '', '', '', '', '', '']
+    conn.setLocalStorageVal("user", ['', '', '', '', '', '', '', ''])
+    st.session_state['password'] = None
+    conn.setLocalStorageVal("password", None)
+    st.session_state['expiration_date'] = (today - timedelta(days=10)).isoformat()
+    conn.setLocalStorageVal("expiration_date", (today - timedelta(days=10)).isoformat())
+    st.session_state['verified'] = False
+    conn.setLocalStorageVal("verified", False)
+    st.info("Please refresh the page to continue", icon="ℹ️")
+    st.rerun()
+
+profile()

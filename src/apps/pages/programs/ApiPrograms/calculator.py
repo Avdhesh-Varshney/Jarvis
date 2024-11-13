@@ -74,4 +74,4 @@ def calculator():
             # Display the results
             display_results(result_pods)
         else:
-            st.error("Please enter a valid query!", icon="🚨") 
+            st.error("Please enter a valid query!", icon="🚨")

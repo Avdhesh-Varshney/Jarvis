@@ -10,8 +10,6 @@ def readPackages(filePath):
 		return ["requirements.txt not found"]
 
 def packageUsed():
-  st.title("Package Used")
-  packages = readPackages('requirements.txt')
-  st.write(packages)
-
-packageUsed()
+	st.title("Package Used")
+	packages = readPackages('requirements.txt')
+	st.write(packages)
