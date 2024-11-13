@@ -1,12 +1,12 @@
 Closes: 
 
-- **Title**:  
+- **Title**: 
 - **Your Name**: 
-- **Idenitfy yourself**: <!-- Mention your role (like GSOC, GSSOC, SSOC, etc. Contributor) -->
 
 ### Describe the add-ons or changes you've made 📃
 
-Give a clear description of what have you added or modifications made
+> Give a clear description of what have you added or modifications made
+
 
 
 ### Checklist: ☑️
@@ -21,6 +21,6 @@ Example how to mark a checkbox:-
 - [ ] My changes generate no new warnings.
 
 
-### Screenshots 📷
-<!-- Must add the screenshot of the project or your changes for review your pr -->
+### Working Video 📷
+<!-- Must add the working video of the project or your changes for review your pr -->
 
