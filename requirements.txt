@@ -3,6 +3,7 @@ argon2-cffi==23.1.0
 argon2-cffi-bindings==21.2.0
 beautifulsoup4==4.12.3
 deep-translator==1.11.4
+diffusers==0.30.3
 gdown==5.2.0
 google-generativeai==0.7.1
 Jinja2==3.1.3
@@ -35,9 +36,7 @@ speedtest-cli==2.1.3
 streamlit==1.38.0
 streamlit-ws-localstorage==1.0.6
 tensorflow==2.16.1
-websockets==13.0.1
 torch==2.3.0
-ultralytics==8.3.3
-diffusers==0.30.3
 transformers==4.45.2
-PyAudio==0.2.14
+ultralytics==8.3.3
+websockets==13.0.1

@@ -13,41 +13,41 @@
 git clone https://github.com/<your-github-username>/Jarvis.git
 ```
 
-1. Navigate to the project directory.
+4. Navigate to the project directory.
 ```bash
 cd Jarvis
 ```
 
-1. Create a virtual environment.
+5. Create a virtual environment.
 ```bash
 python -m venv myenv
 source myenv/bin/activate  # On Windows, use `myenv\Scripts\activate`
 ```
 
-1. Install the dependencies.
+6. Install the dependencies.
 ```bash
 pip install -r requirements.txt
 ```
 
-1. Create a new branch.
+7. Create a new branch.
 ```bash
 git checkout -b <your_branch_name>
 ```
 
-1. Make changes.
-2. Stage your changes and commit them.
+8. Make changes.
+9. Stage your changes and commit them.
 ```bash
 git add .
 git commit -m "<your_commit_message"
 ```
 
-1.  Push your local commits to the remote repository.
+10.  Push your local commits to the remote repository.
 ```bash
 git push -u origin <your_branch_name>
 ```
 
-1.  Create your Pull Request.
-2.  Congratulations! 🎉 you've made your contribution.
+11.  Create your Pull Request.
+12.  Congratulations! 🎉 you've made your contribution.
 
 ### Running the Application 
 
@@ -64,7 +64,7 @@ streamlit run Jarvis.py
 
 We want your work to be readable by others; therefore, we encourage you to note the following:
 
-1. Directory names should be in `PascalCase` letters (e.g., `BrainTumorModel`, `DiabetesModel`).
+1. Directory/Folder names should be in `PascalCase` letters (e.g., `BrainTumorModel`, `DiabetesModel`).
 2. File names should be in `camelCase` letters (e.g., `movieRecommendationModel`, `latestNews`, `ticTakToe`).
 3. Main function name should be exact name as of fileName.
 4. Don't create more than 3-4 commits until not permitted by Admin and Mentors of the project.
