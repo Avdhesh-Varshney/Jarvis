@@ -13,41 +13,41 @@
 git clone https://github.com/<your-github-username>/Jarvis.git
 ```
 
-1. Navigate to the project directory.
+4. Navigate to the project directory.
 ```bash
 cd Jarvis
 ```
 
-1. Create a virtual environment.
+5. Create a virtual environment.
 ```bash
 python -m venv myenv
 source myenv/bin/activate  # On Windows, use `myenv\Scripts\activate`
 ```
 
-1. Install the dependencies.
+6. Install the dependencies.
 ```bash
 pip install -r requirements.txt
 ```
 
-1. Create a new branch.
+7. Create a new branch.
 ```bash
 git checkout -b <your_branch_name>
 ```
 
-1. Make changes.
-2. Stage your changes and commit them.
+8. Make changes.
+9. Stage your changes and commit them.
 ```bash
 git add .
 git commit -m "<your_commit_message"
 ```
 
-1.  Push your local commits to the remote repository.
+10.  Push your local commits to the remote repository.
 ```bash
 git push -u origin <your_branch_name>
 ```
 
-1.  Create your Pull Request.
-2.  Congratulations! 🎉 you've made your contribution.
+11.  Create your Pull Request.
+12.  Congratulations! 🎉 you've made your contribution.
 
 ### Running the Application 
 
@@ -64,19 +64,20 @@ streamlit run Jarvis.py
 
 We want your work to be readable by others; therefore, we encourage you to note the following:
 
-1. Directory names should be in `PascalCase` letters (e.g., `BrainTumorModel`, `DiabetesModel`).
-2. File names should be in `camelCase` letters (e.g., `movieRecommendationModel`, `latestNews`, `ticTakToe`).
-3. Main function name should be exact name as of fileName.
-4. Don't create more than 3-4 commits until not permitted by Admin and Mentors of the project.
-5. Commit message should be clear. Never write un-necessary things in the commit messages.
+1. Use `PascalCase` for directory/folder names (e.g., `BrainTumorModel`, `DiabetesModel`).
+2. Use `camelCase` for file names (e.g., `movieRecommendationModel`, `latestNews`, `ticTakToe`).
+3. Name the main function exactly the same as the file name.
+4. Limit commits to 3-4 unless given permission by project Admins or Mentors.
+5. Keep commit messages clear and relevant; avoid unnecessary details.
 
 ### Pull Requests Review Criteria 🧲 
 
-1. Please fill the ***PR Template*** properly while making a Pull Request.
-2. Never commit in the `main` branch.
-3. Your work must be original, written by you not copied from other resources.
-4. You must comment on your code where necessary.
-5. For frontend changes, kindly share screenshots and work samples of your work before sending a PR.
+1. Fill out the ***PR template*** properly when submitting a pull request.
+2. Do not commit directly to the `main` branch, or your PR will be instantly rejected.
+3. Ensure all work is original and not copied from other sources.
+4. Add comments to your code wherever necessary for clarity.
+5. Include a working video and show integration with Jarvis as part of your PR.
+6. For frontend updates, share screenshots and work samples before submitting a PR.
 
 --- 
 
