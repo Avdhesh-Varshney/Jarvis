@@ -7,7 +7,7 @@ today = datetime.now()
 
 if "user" not in st.session_state:
   st.session_state['password'] = None
-  st.session_state["user"] = ['', '', '', '', '', '', '', '']
+  st.session_state['user'] = ['', '', '', '', '', '', '', '']
   st.session_state['expiration_date'] = (today - timedelta(days=10)).isoformat()
   st.session_state['verified'] = False
 
@@ -53,6 +53,7 @@ if __name__ == "__main__":
         st.session_state['verified'] = True
         conn = server()
         conn.setLocalStorageVal("verified", True)
+
     if st.session_state['verified']:
       from src.utils.functions import load_functions
       app = st.navigation(pages=load_functions())
