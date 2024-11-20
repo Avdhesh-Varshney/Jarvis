@@ -30,6 +30,7 @@ youtubePlaylist = st.Page("src/apps/public/youtubePlaylist.py", title="Jarvis Vi
 
 # /apps/pages/automations
 websites = st.Page("src/apps/pages/automations/website.py", title="Websites", icon=":material/web:")
+socialMediaApps = st.Page("src/apps/pages/automations/socialMediaApps.py", title="Social Media Apps", icon=":material/share:")
 messenger = st.Page("src/apps/pages/automations/messenger.py", title="Messenger", icon=":material/email:")
 
 # /apps/pages/models
@@ -57,7 +58,7 @@ def application(verified):
     pages = {
       "": [home, youtubePlaylist],
       "Account": [logout_page],
-      "Automations": [websites, messenger],
+      "Automations": [websites, socialMediaApps, messenger],
       "Models": [chatBotModels, healthCareModels, objectDetectionModels, recommendationModels],
       "Programs": [apiPrograms, games, imagePrograms, simplePrograms, studyPrograms],
     }
