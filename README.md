@@ -86,30 +86,8 @@
         <a href="https://discord.gg/tSqtvHUJzE">
           <img src="https://avatars.githubusercontent.com/u/114330097?v=4" width=150px height=150px />
         </a></br> 
-        <h4 style="color:red;"><a href="https://www.youtube.com/@Code_A2Z">Avdhesh Varshney</a></h4>
+        <h4 style="color:red;"><a href="https://github.com/Avdhesh-Varshney/Jarvis/discussions">Avdhesh Varshney</a></h4>
       </td>
-  </table>
-</div>
-
-<h3 align="center">❤️ <b>Mentors</b></h3>
-
-<div align="center">
-
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/Zedoman">
-          <img src="https://avatars.githubusercontent.com/u/91881492?v=4" width=150px height=150px />
-        </a></br> 
-        <h4 style="color:red;"><a href="https://github.com/Avdhesh-Varshney/Jarvis/discussions">Avradeep Nayak</a></h4>
-      </td>
-      <td align="center">
-        <a href="https://github.com/vanshchauhan21">
-          <img src="https://avatars.githubusercontent.com/u/143607775?v=4" width=150px height=150px />
-        </a></br> 
-        <h4 style="color:red;"><a href="https://github.com/Avdhesh-Varshney/Jarvis/discussions">Vansh Chauhan</a></h4>
-      </td>
-    </tr>
   </table>
 </div>
 

@@ -1,6 +1,26 @@
+from datetime import datetime, timedelta
 import streamlit as st
 
+today = datetime.now()
+
+def logged_in():
+  from src.auth.login import login
+  userData, password, remember_me = login()
+
+  if userData != []:
+    from database.localStorageServer import server
+    conn = server()
+    user = [userData['username'], userData['email'], userData['first_name'], userData['last_name'], userData['role'], userData['gender'], userData['age'], userData['about']]
+
+    conn.setLocalStorageVal("user", user)
+    conn.setLocalStorageVal("password", password)
+    conn.setLocalStorageVal("expiration_date", (today + timedelta(days=(30 if remember_me else 1))).isoformat())
+    conn.setLocalStorageVal("verified", True)
+    st.info("Please refresh the page to continue", icon="ℹ️")
+    st.rerun()
+
 # /auth
+login_page = st.Page(logged_in, title="Log in", icon=":material/login:")
 logout_page = st.Page("src/auth/profile.py", title="My Profile", icon=":material/account_circle:")
 sign_up_page = st.Page("src/auth/signup.py", title="Sign up", icon=":material/person_add:")
 
@@ -25,26 +45,28 @@ imagePrograms = st.Page("src/apps/pages/programs/imageProgram.py", title="Image 
 games = st.Page("src/apps/pages/programs/games.py",title="Games",icon=":material/casino:")
 studyPrograms = st.Page("src/apps/pages/programs/studyProgram.py", title="Study Programs", icon=":material/school:")
 
-# /apps/pages/adminTools/contributors
-contributors = st.Page("src/apps/pages/adminTools/contributors.py", title="Contributors", icon=":material/people:")
+# /apps/pages/adminTools
+developers = st.Page("src/apps/pages/adminTools/developers.py", title="Developers", icon=":material/people:")
 packageUsed = st.Page("src/apps/pages/adminTools/packageUsed.py", title="Package Used", icon=":material/extension:")
 
-# /apps/pages/superAdminControls/userData
+# /apps/pages/superAdminControls
 userData = st.Page("src/apps/pages/superAdminControls/userData.py", title="Users Data", icon=":material/data_usage:")
 
-def load_functions():
-  pages = {
-    "": [home, youtubePlaylist],
-    "Account": [logout_page],
-    "Automations": [websites, messenger],
-    "Models": [chatBotModels, healthCareModels, objectDetectionModels, recommendationModels],
-    "Programs": [apiPrograms, games, imagePrograms, simplePrograms, studyPrograms],
-  }
-  user = st.session_state['user'].split(',')
-  if user[4] == "Admin" or user[4] == "Super Admin":
-    pages["Admin Tools"] = [contributors, packageUsed]
-  
-  if user[4] == "Super Admin":
-    pages["Super Admin Controls"] = [userData]
+def application(verified):
+  if verified == "true":
+    pages = {
+      "": [home, youtubePlaylist],
+      "Account": [logout_page],
+      "Automations": [websites, messenger],
+      "Models": [chatBotModels, healthCareModels, objectDetectionModels, recommendationModels],
+      "Programs": [apiPrograms, games, imagePrograms, simplePrograms, studyPrograms],
+    }
+    user = st.session_state['user'].split(',')
+    if user[4] == "Admin" or user[4] == "Super Admin":
+      pages["Admin Tools"] = [developers, packageUsed]
+    
+    if user[4] == "Super Admin":
+      pages["Super Admin Controls"] = [userData]
+    return st.navigation(pages)
 
-  return pages
+  return st.navigation({"": [home, youtubePlaylist], "Account": [login_page, sign_up_page]})
