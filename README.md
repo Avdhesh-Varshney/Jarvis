@@ -53,6 +53,8 @@
 
 --- 
 
+![img](./assets/intro.gif)
+
 ### 🌟 **Overview** 
 **Jarvis** is a powerful virtual AI assistant designed to simplify your daily tasks through voice command integration. With features like automation, device management, and personalized interactions, Jarvis transforms the way you engage with technology. Built using Python and enhanced with AI models, it serves as an efficient tool for both personal and administrative needs, making everyday processes seamless and more productive.
 
