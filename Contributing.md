@@ -69,6 +69,7 @@ We want your work to be readable by others; therefore, we encourage you to note 
 3. Name the main function exactly the same as the file name.
 4. Limit commits to 3-4 unless given permission by project Admins or Mentors.
 5. Keep commit messages clear and relevant; avoid unnecessary details.
+6. **Never commit deployed model files to the repository; upload them to Google Drive, provide a downloadable link in the PR template, and update the `secrets.example.toml` file accordingly.**
 
 ### Pull Requests Review Criteria 🧲 
 
