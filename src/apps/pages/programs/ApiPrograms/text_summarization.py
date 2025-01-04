@@ -20,7 +20,7 @@ def API_Exists():
     return False
 
 # Streamlit app
-def main():
+def text_summarization():
     st.title("Text Summarization using Groq")
     st.markdown("Enter text to generate a concise summary using the Groq LLM.")
 
@@ -75,6 +75,3 @@ def main():
                 st.json(result)
             except Exception as e:
                 st.error(f"Error during summarization: {e}")
-
-if __name__ == "__main__":
-    main()
