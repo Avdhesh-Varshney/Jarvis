@@ -7,12 +7,6 @@ import json
 
 # Function to check if the Groq API key exists
 def API_Exists():
-    """
-    Check if Groq API key exists in Streamlit secrets or environment variables.
-
-    Returns:
-        bool: True if the API key exists, otherwise False.
-    """
     if "GROQ_API_KEY" in st.secrets["api_key"] and st.secrets["api_key"]["GROQ_API_KEY"]:
         return True
     elif "GROQ_API_KEY" in os.environ and os.environ["GROQ_API_KEY"]:
