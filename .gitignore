@@ -18,4 +18,3 @@ myenv
 *.prototxt
 *.caffemodel
 *.pt
-/venv
