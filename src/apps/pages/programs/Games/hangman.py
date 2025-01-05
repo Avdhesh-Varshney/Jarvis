@@ -65,10 +65,9 @@ HANGMAN_FIGURES = [
             |
     =========
     """,
-]  # Hangman figure for every mistake
+] 
 
 def get_new_word():
-    # Selects a random word from a predefined list of words for the game
     words = ["python", "hangman", "programming", "developer",
             "keyboard", "algorithm", "function", "variable",
             "iteration", "debugging", "constant", "indentation",
@@ -79,8 +78,8 @@ def get_new_word():
 def initialize_game_state():
     # Initializes or resets the game state by defining necessary session variables.
     st.session_state.word = get_new_word()
-    st.session_state.guessed_word = ["_"] * len(st.session_state.word)  # Placeholder for guessed letters.
-    st.session_state.guessed_letters = set()  # Tracks guessed letters to avoid repeats.
+    st.session_state.guessed_word = ["_"] * len(st.session_state.word) 
+    st.session_state.guessed_letters = set() 
     st.session_state.attempts = 6
     st.session_state.game_over = False
     st.session_state.message = "Welcome to Hangman Game!"
@@ -98,7 +97,6 @@ def check_guess(guess):
     st.session_state.guessed_letters.add(guess)
 
     if guess in st.session_state.word:
-        # Update the guessed word if the letter is correct.
         for i, letter in enumerate(st.session_state.word):
             if letter == guess:
                 st.session_state.guessed_word[i] = guess
@@ -125,36 +123,30 @@ def hangman():
     if "word" not in st.session_state:
         initialize_game_state()
 
-    st.write(st.session_state.message)  # Displays the current status message.
-    st.write("Word:", " ".join(st.session_state.guessed_word))  # Displays the partially guessed word.
+    st.write(st.session_state.message)
+    st.write("Word:", " ".join(st.session_state.guessed_word))
 
-    st.code(HANGMAN_FIGURES[st.session_state.attempts], language="text")  # Displays the current hangman figure.
+    st.code(HANGMAN_FIGURES[st.session_state.attempts], language="text")
 
     if not st.session_state.game_over:
-        # Text input for guessing a letter.
         st.session_state.guess = st.text_input("Guess a letter:", value=st.session_state.guess, key="guess_input").lower()
 
         if st.button("Submit Guess"):
-            # Process the submitted guess and update the game state.
             st.session_state.message = check_guess(st.session_state.guess)
             st.session_state.guess = ""
 
             if "_" not in st.session_state.guessed_word:
-                # Checks if the entire word has been guessed correctly.
                 st.session_state.message = f"\nCongratulations! You've guessed the word correctly: {st.session_state.word}"
                 st.session_state.game_over = True
             elif st.session_state.attempts == 0:
-                # Ends the game if the player runs out of attempts.
                 st.session_state.message = f"\nYou've run out of attempts! The word was: {st.session_state.word}"
                 st.session_state.game_over = True
 
         if st.button("Get a Hint"):
-            # Provides a hint to the player.
             hint_message = give_hint()
             st.session_state.message = hint_message
 
     if st.session_state.game_over:
-        # Handles the "Play Again" functionality.
         if st.session_state.play_again_triggered or st.button("Play Again"):
             st.session_state.play_again_triggered = True
             initialize_game_state()
