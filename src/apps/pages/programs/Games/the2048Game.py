@@ -9,53 +9,53 @@ def the2048Game():
         empty_cells = [(i, j) for i in range(4) for j in range(4) if board[i][j] == 0]
         if empty_cells:
             i, j = random.choice(empty_cells)
-            board[i][j] = random.choice([2, 2, 2, 4]) 
+            board[i][j] = random.choice([2, 2, 2, 4])  # Randomly assign 2 or 4 to an empty cell
 
-
+    # Initialize the game state if not already present in session
     if 'board' not in st.session_state:
-        st.session_state.board = np.zeros((4, 4), dtype=int)
-        st.session_state.score = 0
+        st.session_state.board = np.zeros((4, 4), dtype=int)  # 4x4 board initialized with zeros
+        st.session_state.score = 0  # Initialize score
 
+        # Add two starting tiles
         for _ in range(2):
             add_new_tile(st.session_state.board)
 
     def merge(row):
-        """Merge tiles in a row"""
-    
-        row = [x for x in row if x != 0]
+        """Merge tiles in a row, merging same-valued adjacent tiles"""
+        row = [x for x in row if x != 0]  # Remove zeros
         i = 0
         while i < len(row)-1:
-            if row[i] == row[i+1]:
-                row[i] *= 2
-                st.session_state.score += row[i] 
-                row.pop(i+1)  
+            if row[i] == row[i+1]:  # If two adjacent tiles are equal
+                row[i] *= 2  # Double the value
+                st.session_state.score += row[i]  # Update score
+                row.pop(i+1)  # Remove the merged tile
             i += 1
 
-        return row + [0] * (4 - len(row))
+        return row + [0] * (4 - len(row))  # Add zeros to the end of the row to maintain size
 
     def move(board, direction):
-        """Move tiles in the specified direction"""
+        """Move tiles in the specified direction (LEFT, RIGHT, UP, DOWN)"""
         if direction in ['LEFT', 'RIGHT']:
             for i in range(4):
-                row = list(board[i, :])
+                row = list(board[i, :])  # Get row
                 if direction == 'RIGHT':
-                    row.reverse()
-                row = merge(row)
+                    row.reverse()  # Reverse row for right movement
+                row = merge(row)  # Merge tiles in the row
                 if direction == 'RIGHT':
-                    row.reverse()
-                board[i, :] = row
-        else:  
+                    row.reverse()  # Reverse back after merging
+                board[i, :] = row  # Update row on the board
+        else:  # Move up/down
             for j in range(4):
-                col = list(board[:, j])
+                col = list(board[:, j])  # Get column
                 if direction == 'DOWN':
-                    col.reverse()
-                col = merge(col)
+                    col.reverse()  # Reverse column for down movement
+                col = merge(col)  # Merge tiles in the column
                 if direction == 'DOWN':
-                    col.reverse()
-                board[:, j] = col
+                    col.reverse()  # Reverse back after merging
+                board[:, j] = col  # Update column on the board
         return board
 
-
+    # Display game title
     st.markdown(
         """
         <h1 style='text-align: center; padding-top: 50px; padding-bottom: 50px; font-size: 100px;'>
@@ -65,6 +65,7 @@ def the2048Game():
         unsafe_allow_html=True
     )
 
+    # Display current score
     st.markdown(f"""
         <div style='
             font-size: 36px;
@@ -82,7 +83,7 @@ def the2048Game():
         </div>
     """, unsafe_allow_html=True)
 
-
+    # Color dictionary for tile values
     color_dict = {
         0: '#CDC1B4',
         2: '#EEE4DA',
@@ -98,12 +99,13 @@ def the2048Game():
         2048: '#EDC22E'
     }
 
+    # Display the game board
     for i in range(4):
         cols = st.columns(4)
         for j in range(4):
             value = st.session_state.board[i][j]
-            bg_color = color_dict.get(value, '#CDC1B4')
-            text_color = '#776E65' if value in [2, 4] else '#F9F6F2'
+            bg_color = color_dict.get(value, '#CDC1B4')  # Get background color for tile
+            text_color = '#776E65' if value in [2, 4] else '#F9F6F2'  # Light text for low values
             cols[j].markdown(
                 f"""
                 <div style='
@@ -124,14 +126,13 @@ def the2048Game():
                 """,
                 unsafe_allow_html=True
             )
-            
 
-
+    # Display New Game button with custom style
     left_space, control_area, right_space = st.columns([2, 1, 2])
 
     st.markdown("""
         <style>
-            /* New Game button style - match score size exactly */
+            /* New Game button style */
             div[data-testid="stButton"] button[kind="primary"] {
                 font-size: 36px !important;
                 font-weight: bold !important;
@@ -149,59 +150,27 @@ def the2048Game():
             div[data-testid="stButton"] button[kind="primary"]:hover {
                 background-color: rgba(255, 255, 255, 0.2) !important;
             }
-
-            /* Arrow buttons style - transparent */
-            div[data-testid="stButton"] button[kind="secondary"] {
-                font-size: 36px !important;
-                font-weight: bold !important;
-                padding: 15px 25px !important;
-                border-radius: 8px !important;
-                background-color: rgba(255, 255, 255, 0.1) !important;
-                color: white !important;
-                border: 2px solid rgba(255, 255, 255, 0.5) !important;
-                margin: 5px !important;
-                width: 70px !important;
-                height: 70px !important;
-                line-height: 40px !important;
-                transition: all 0.3s !important;
-            }
-            div[data-testid="stButton"] button[kind="secondary"]:hover {
-                background-color: rgba(255, 255, 255, 0.2) !important;
-                border-color: rgba(255, 255, 255, 0.8) !important;
-            }
-
-            /* Center content in columns */
-            div[data-testid="column"] {
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
-                padding: 0px !important;
-            }
         </style>
     """, unsafe_allow_html=True)
 
-
     if st.button('New Game', type='primary'):
+        """Reset the game state and start a new game"""
         st.session_state.board = np.zeros((4, 4), dtype=int)
         st.session_state.score = 0
         for _ in range(2):
             add_new_tile(st.session_state.board)
         st.rerun()
 
-
     st.markdown("<div style='height: 20px'></div>", unsafe_allow_html=True)
 
-
+    # Control buttons for the game (arrow keys)
     left_space, control_area, right_space = st.columns([2, 3, 2])
 
     with control_area:
-    
         col1, col2, col3 = st.columns([1.2, 1, 1.2])
         col2.button('↑', key='up', type='secondary', on_click=lambda: move_and_update('UP'))
-        
 
         st.markdown("<div style='height: 10px'></div>", unsafe_allow_html=True)
-        
 
         col1, col2, col3 = st.columns([1, 1, 1])
         with col1:
@@ -216,11 +185,10 @@ def the2048Game():
 
     def is_game_over():
         """Check if there are any valid moves left"""
-
-        if any(0 in row for row in st.session_state.board):
+        if any(0 in row for row in st.session_state.board):  # If there's any empty cell
             return False
         
-
+        # Check if there are any adjacent cells with the same value
         for i in range(4):
             for j in range(3):
                 if st.session_state.board[i][j] == st.session_state.board[i][j + 1]:
@@ -230,6 +198,7 @@ def the2048Game():
         return True
 
     if is_game_over():
+        """Display Game Over message and score"""
         st.markdown("""
             <div style='
                 background-color: rgba(0, 0, 0, 0.7);
@@ -247,7 +216,8 @@ def the2048Game():
         """.format(score=st.session_state.score), unsafe_allow_html=True)
 
     def move_and_update(direction):
+        """Update the board after a move"""
         old_board = st.session_state.board.copy()
-        st.session_state.board = move(st.session_state.board, direction)
-        if not np.array_equal(old_board, st.session_state.board):
-            add_new_tile(st.session_state.board)
+        st.session_state.board = move(st.session_state.board, direction)  # Move the tiles
+        if not np.array_equal(old_board, st.session_state.board):  # Check if the board changed
+            add_new_tile(st.session_state.board)  # Add a new tile if the board changed
