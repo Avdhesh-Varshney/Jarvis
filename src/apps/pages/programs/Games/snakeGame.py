@@ -13,7 +13,8 @@ def snakeGame():
             canvas { 
                 background: black;
                 display: block;
-                margin: 0 auto;
+                margin: auto;
+                border: 2px solid white;
             }
         </style>
     </head>
@@ -191,11 +192,16 @@ def snakeGame():
     """
 
     st.write("### How to Play:")
-    st.write("1. Use WASD keys to control the snake:")
-    st.write("2. Collect red food to grow and increase your score")
-    st.write("3. Avoid hitting the walls and yourself")
-    st.write("4. Press Space to restart after game over or increase your speed")
-
+    st.markdown("""
+        - **WASD** keys to move the snake:
+          - `W`: Up
+          - `A`: Left
+          - `S`: Down
+          - `D`: Right
+        - **Red squares** are food. Eat them to grow!
+        - **Avoid collisions** with the walls and yourself.
+        - Press **Space** to restart after a game over or to increase speed.
+        """)
     components.html(game_html, height=650)
 
     st.markdown("""
