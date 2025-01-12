@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import random
+import sqlite3
 
 # Function to check rows for a winner
 def checkRows(board):
@@ -49,6 +50,28 @@ def jarvis_move():
             else:
                 st.session_state.current_turn = "player"
                 st.session_state.next_player = st.session_state.player_symbol
+
+def init_db():
+    conn = sqlite3.connect('ticTacToeleaderboard.db')
+    c = conn.cursor()
+    c.execute('CREATE TABLE IF NOT EXISTS ticTacToeleaderboard (player TEXT, result TEXT, date TEXT)')
+    conn.commit()
+    conn.close()
+
+def save_game_result(player, result):
+    conn = sqlite3.connect('ticTacToeleaderboard.db')
+    c = conn.cursor()
+    c.execute('INSERT INTO ticTacToeleaderboard VALUES (?, ?, DATE())', (player, result))
+    conn.commit()
+    conn.close()
+
+def display_leaderboard():
+    conn = sqlite3.connect('ticTacToeleaderboard.db')
+    c = conn.cursor()
+    results = c.execute('SELECT * FROM ticTacToeleaderboard ORDER BY date DESC LIMIT 10').fetchall()
+    conn.close()
+    st.table(results)
+
 
 # Main Tic Tac Toe game function
 def ticTacToe():
@@ -136,3 +159,5 @@ def ticTacToe():
     # button to restart the game
     if st.button("Restart Game"):
         initialize_game()
+
+
