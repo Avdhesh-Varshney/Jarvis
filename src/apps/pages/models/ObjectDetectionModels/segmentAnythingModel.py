@@ -206,6 +206,3 @@ def segmentAnythingModel():
         except Exception as e:
             st.error(f"An error occurred: {str(e)}")
             st.info("Please try again with a different input.")
-
-if __name__ == "__main__":
-    segmentAnythingModel()
