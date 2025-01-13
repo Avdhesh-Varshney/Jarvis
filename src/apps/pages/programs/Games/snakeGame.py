@@ -189,13 +189,7 @@ def snakeGame():
     </body>
     </html>
     """
-
-    st.write("### How to Play:")
-    st.write("1. Use WASD keys to control the snake:")
-    st.write("2. Collect red food to grow and increase your score")
-    st.write("3. Avoid hitting the walls and yourself")
-    st.write("4. Press Space to restart after game over or increase your speed")
-
+    
     components.html(game_html, height=650)
 
     st.markdown("""
