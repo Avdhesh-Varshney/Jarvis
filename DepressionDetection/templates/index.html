@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depression Detection</title>
+</head>
+<body style="background-color:#f4f4f4; padding:20px; font-family: Arial, sans-serif;">
+    <h2 style="text-align:center;">Depression Detection System</h2>
+
+    <!-- Form for file upload -->
+    <form action="/submit" method="post" enctype="multipart/form-data">
+        <div style="text-align:center; margin-bottom:20px;">
+            <label for="chat_file">Upload Chat File:</label><br>
+            <input type="file" name="chat_file" id="chat_file" accept=".txt, .csv"><br>
+        </div>
+        
+        <div style="text-align:center; margin-bottom:20px;">
+            <label for="image_file">Upload Image (for Face Emotion Detection):</label><br>
+            <input type="file" name="image_file" id="image_file" accept="image/*"><br>
+        </div>
+
+        <div style="text-align:center; margin-top:20px;">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</body>
+</html>
