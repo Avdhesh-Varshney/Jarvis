@@ -32,23 +32,73 @@ def checkDraw(board):
 # Function to randomly decide who starts the game
 def decide_start():
     return random.choice(["player", "jarvis"])
-
 # Function for Jarvis to make a move
+def check_winning_move(board, symbol):
+    for i in range(3):
+        for j in range(3):
+            if board[i, j] == ".":
+                # Try the move
+                board[i, j] = symbol
+                if checkWin(board):
+                    # Undo the move and return position
+                    board[i, j] = "."
+                    return (i, j)
+                # Undo the move
+                board[i, j] = "."
+    return None
+
+
+def get_corner_move(board):
+    corners = [(0, 0), (0, 2), (2, 0), (2, 2)]
+    empty_corners = [pos for pos in corners if board[pos[0], pos[1]] == "."]
+    return random.choice(empty_corners) if empty_corners else None
+
+
+def get_edge_move(board):
+    edges = [(0, 1), (1, 0), (1, 2), (2, 1)]
+    empty_edges = [pos for pos in edges if board[pos[0], pos[1]] == "."]
+    return random.choice(empty_edges) if empty_edges else None
+
+
 def jarvis_move():
     if not st.session_state.winner and not st.session_state.draw:
-        # Simulate Jarvis's move
-        empty_cells = [(i, j) for i in range(3) for j in range(3) if st.session_state.board[i, j] == "."]
-        if empty_cells:
-            i, j = random.choice(empty_cells)
+        board = st.session_state.board
+        jarvis_symbol = st.session_state.jarvis_symbol
+        player_symbol = st.session_state.player_symbol
+        jarvis_moves = sum(1 for row in board for cell in row if cell == jarvis_symbol)
+        winning_move = check_winning_move(board, jarvis_symbol)
+        if winning_move:
+            i, j = winning_move
             st.session_state.board[i, j] = st.session_state.jarvis_symbol
-            winner = checkWin(st.session_state.board)
-            if winner:
-                st.session_state.winner = winner
-            elif checkDraw(st.session_state.board):
-                st.session_state.draw = True
-            else:
-                st.session_state.current_turn = "player"
-                st.session_state.next_player = st.session_state.player_symbol
+        else:
+            blocking_move = check_winning_move(board, player_symbol)
+            if blocking_move:
+                i, j = blocking_move
+                st.session_state.board[i, j] = st.session_state.jarvis_symbol
+
+            elif board[1, 1] == ".":
+                st.session_state.board[1, 1] = jarvis_symbol
+            elif jarvis_moves == 1:
+                edge_move = get_edge_move(board)
+                i, j = edge_move
+                st.session_state.board[i, j] = jarvis_symbol
+
+            elif corner_move := get_corner_move(board):
+                i, j = corner_move
+                st.session_state.board[i, j] = jarvis_symbol
+
+            elif edge_move := get_edge_move(board):
+                i, j = edge_move
+                st.session_state.board[i, j] = jarvis_symbol
+
+        winner = checkWin(board)
+        if winner:
+            st.session_state.winner = winner
+        elif checkDraw(board):
+            st.session_state.draw = True
+        else:
+            st.session_state.current_turn = "player"
+            st.session_state.next_player = st.session_state.player_symbol
 
 # Main Tic Tac Toe game function
 def ticTacToe():
