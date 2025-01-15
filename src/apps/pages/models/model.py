@@ -4,6 +4,14 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import classification_report
 import pickle
 from utils.preprocess import Preprocessor
+import os
+
+# Create dataset folder if it doesn't exist
+if not os.path.exists("dataset"):
+    os.makedirs("dataset")
+    print("Dataset folder created. Please place spam.csv in the dataset folder.")
+    exit()
+
 
 # Load dataset
 df = pd.read_csv("dataset/spam.csv", encoding="latin-1")[["v1", "v2"]]
