@@ -2,7 +2,7 @@ import streamlit as st
 import math
 
 # Define the scientific calculator function
-def scientific_calculator():
+def scientificCalculator():
     # Initialize session state for the expression
     if "expression" not in st.session_state:
         st.session_state.expression = ""
@@ -69,5 +69,3 @@ def scientific_calculator():
         - **Hyperbolic Functions**: `sinh(x)`, `cosh(x)`, `tanh(x)`
         - **Constants**: `pi`, `e`
         """)
-
-scientific_calculator()
