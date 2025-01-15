@@ -1,0 +1,1 @@
+model.save('assets/emotion_model.h5')  # Save the trained model to 'assets' folder
