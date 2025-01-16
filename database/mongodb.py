@@ -103,6 +103,14 @@ def login_user(conn, text, password):
         logging.error(f"Login failed: {e}")
         return None
 
+def check_user(conn, text):
+	users_collection = conn['users_records']
+	if valid_email(text):
+		user = users_collection.find_one({"email": text})
+	elif valid_username(text):
+		user = users_collection.find_one({"username": text})
+	return user
+
 def view_all_users(conn):
     try:
         users_collection = conn['users_records']
