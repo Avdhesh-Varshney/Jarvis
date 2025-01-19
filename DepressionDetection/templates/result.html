@@ -6,7 +6,16 @@
     <title>Upload Result</title>
 </head>
 <body>
-    <h1>{{ message }}</h1>
+    <h1>Analysis Results</h1>
+
+    {% if text_score is not none %}
+        <h2>Depression Probability (from chat): {{ text_score | round(2) }}</h2>
+    {% endif %}
+
+    {% if face_result %}
+        <h2>Face Analysis Result: {{ face_result }}</h2>
+    {% endif %}
+
     <a href="/">Go Back</a>
 </body>
 </html>
