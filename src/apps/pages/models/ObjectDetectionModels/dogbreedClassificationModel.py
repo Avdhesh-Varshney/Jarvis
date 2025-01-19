@@ -10,7 +10,7 @@ def load_model():
     """Recreate the model architecture and load weights"""
 
     try:
-        gdown.download(f"https://drive.google.com/uc?id={st.secrets['DogBreedClassificationModel']['MODEL']}", 'Model.h5', quiet=False)
+        gdown.download(f"https://drive.google.com/uc?id={st.secrets['dogbreedClassificationModel']['MODEL']}", 'Model.h5', quiet=False)
         # Create base model
         base_model = tf.keras.applications.MobileNetV2(
             input_shape=(224, 224, 3),
@@ -87,7 +87,7 @@ def predict_breed(x, breed_labels):
         st.error(f"Error making prediction: {e}")
         return None, 0
 
-def DogBreedClassificationModel():
+def dogbreedClassificationModel():
     st.title("Dog Breed Classifier")
     st.write("Upload a photo of a dog to identify its breed")
     
