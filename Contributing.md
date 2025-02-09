@@ -60,28 +60,6 @@ streamlit run Jarvis.py
 
 --- 
 
-### Important Points to remember while submitting your work 📍 
-
-We want your work to be readable by others; therefore, we encourage you to note the following:
-
-1. Use `PascalCase` for directory/folder names (e.g., `BrainTumorModel`, `DiabetesModel`).
-2. Use `camelCase` for file names (e.g., `movieRecommendationModel`, `latestNews`, `ticTakToe`).
-3. Name the main function exactly the same as the file name.
-4. Limit commits to 3-4 unless given permission by project Admins or Mentors.
-5. Keep commit messages clear and relevant; avoid unnecessary details.
-6. **Never commit deployed model files to the repository; upload them to Google Drive, provide a downloadable link in the PR template, and update the `secrets.example.toml` file accordingly.**
-
-### Pull Requests Review Criteria 🧲 
-
-1. Fill out the ***PR template*** properly when submitting a pull request.
-2. Do not commit directly to the `main` branch, or your PR will be instantly rejected.
-3. Ensure all work is original and not copied from other sources.
-4. Add comments to your code wherever necessary for clarity.
-5. Include a working video and show integration with Jarvis as part of your PR.
-6. For frontend updates, share screenshots and work samples before submitting a PR.
-
---- 
-
 ### Communication and Support 💬
 - Join the project's communication channels to interact with other contributors and seek assistance.
 - If you have any questions or need help, don't hesitate to ask in the project's communication channels or comment on the relevant issue.
