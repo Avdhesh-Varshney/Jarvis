@@ -8,7 +8,7 @@ def load_summarizer():
     # Groq API endpoint and headers (replace with actual API details)
     api_url = "https://api.groq.com/summarize"  
     headers = {
-        "Authorization": "Bearer YOUR_GROQ_API_KEY",
+        "Authorization": "Bearer groq_api_key",
         "Content-Type": "application/json"
     }
     return api_url, headers
