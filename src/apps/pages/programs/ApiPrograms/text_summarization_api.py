@@ -3,7 +3,7 @@ import streamlit as st
 
 # Groq API details
 API_URL = "https://api.groq.com/summarize"
-API_KEY = "YOUR_GROQ_API_KEY"
+API_KEY = "YOUR_GROQ_API_KEY" #Place your API key here
 
 def summarize_text(text):
     headers = {
