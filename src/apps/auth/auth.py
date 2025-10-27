@@ -4,7 +4,7 @@ from time import sleep
 import pytz
 import streamlit as st
 
-from src.utils.greeting import GreetUser
+from src.utils.greeting import GetRandomWelcomeMessage, GreetUser
 
 
 def unix_to_ist(timestamp):
@@ -22,7 +22,7 @@ def auth():
 
   else:
     st.title(f"🙏 {GreetUser(st.user.given_name)}")
-    st.success("Welcome to Jarvis AI Assistant!", icon="🤝")
+    st.success(GetRandomWelcomeMessage(), icon="🤝")
     st.image(st.user.picture, caption=st.user.name)
     st.write("Email:", st.user.email)
 
