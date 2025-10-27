@@ -68,6 +68,57 @@
 - Supports multiple user roles (User, Admin) for tailored access.
 - Utilizes Streamlit built-in auth system for google authentication.
 
+#### 📁 Project Structure
+
+```
+jarvis/
+├── .github/                 # GitHub configurations
+│   ├── ISSUE_TEMPLATE/      # Issue templates for bug reports, feature requests
+│   ├── workflows/           # GitHub Actions CI/CD workflows
+│   └── PULL_REQUEST_TEMPLATE.md  # PR template for contributors
+├── .streamlit/              # Streamlit configuration files
+├── assets/                  # Images, GIFs, and media assets
+├── src/                     # Source code directory
+│   ├── apps/                # Main application modules
+│   │   ├── auth/            # Authentication system
+│   │   ├── public/          # Public pages (home, YouTube playlist)
+│   │   └── pages/           # Application pages organized by category
+│   │       ├── automations/ # Automation tools
+│   │       │   ├── Coding/        # Code-related automations
+│   │       │   ├── Messenger/     # Email and messaging tools
+│   │       │   ├── SocialMediaApps/ # Social media integrations
+│   │       │   └── Websites/      # Website automation tools
+│   │       ├── models/      # AI/ML model implementations
+│   │       │   ├── ImageProcessing/ # Image processing models
+│   │       │   ├── ObjectDetection/ # Object detection models
+│   │       │   ├── Recommendation/  # Recommendation systems
+│   │       │   └── Utility/         # Utility models
+│   │       └── programs/    # Various programs and tools
+│   │           ├── API/           # API integrations
+│   │           ├── Games/         # Interactive games
+│   │           ├── ImageGenerators/ # Image generation tools
+│   │           ├── Simple/        # Simple utility programs
+│   │           └── Study/         # Educational tools
+│   ├── helpers/             # Helper functions and utilities
+│   └── utils/               # Utility functions
+├── Jarvis.py                # Main application entry point
+├── requirements.txt         # Python dependencies
+├── pyproject.toml           # Project configuration
+├── uv.lock                  # Dependency lock file
+├── SETUP.md                 # Setup instructions
+├── Contributing.md          # Contribution guidelines
+├── CODE_OF_CONDUCT.md       # Code of conduct
+└── README.md                # Project documentation
+```
+
+The project follows a modular structure where each feature is implemented as a separate module within the appropriate category. The `src/apps/pages/` directory contains the main functionality organized by type:
+
+- **Automations**: Tools for automating repetitive tasks
+- **Models**: AI/ML implementations for various use cases
+- **Programs**: Interactive applications and utilities
+
+Each module is designed to be self-contained and follows the naming conventions specified in the contribution guidelines.
+
 <details>
 <summary><h4>:zap: Important Points to remember while submitting your work 📍</h4></summary>
 
