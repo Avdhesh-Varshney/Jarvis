@@ -47,7 +47,7 @@
 
 ![intro](./assets/intro.gif)
 
-## 🚀 About Jarvis
+## :zap: About Jarvis 🚀 
 
 **Jarvis** is an AI-powered virtual assistant designed to simplify daily tasks using **voice and text-based commands**.  
 It integrates **automation, authentication, admin tools, and AI/ML models** into a single, extensible system.
@@ -56,7 +56,7 @@ Jarvis is built with **Python** and **Streamlit**, making it easy to prototype, 
 
 ---
 
-## ✨ Core Features
+## :zap: Core Features ✨
 
 - 🎙️ Voice & text command execution  
 - ⚙️ Automation of repetitive tasks  
@@ -108,9 +108,7 @@ cp secrets.example.toml secrets.toml
 streamlit run main.py
 ```
 
----
-
-## 🧪 Example Use Cases
+#### :zap: Example Use Cases 🧪
 - “Open YouTube”
 - “Run my automation script”
 - “Show admin dashboard”
@@ -120,17 +118,21 @@ Both **voice and text-based commands** are supported.
 
 ---
 
-## 🤝 Contribution Guidelines
+#### :zap: Contribution Guidelines 🤝 
+
 We ❤️ contributors! Please read carefully before submitting PRs.
 
-<details> <summary><h4>📌 Coding Standards</h4></summary>
+<details> <summary><h4> :zap: Coding Standards 📌</h4></summary>
+  
 1. Use PascalCase for folders
 2. Use camelCase for files
 3. Main function name must match file name
 4. Keep commits limited (3–4 max unless approved)
 5. Never commit trained model files
 6. Upload models to Google Drive and link in PR
+  
 </details> <details> <summary><h4>🧲 Pull Request Review Criteria</h4></summary> 
+  
 - Fill PR template completely
 - Do not push directly to main
 - Original work only
